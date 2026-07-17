@@ -148,6 +148,12 @@ authorize this" before anything loops. Full protocol, including how an
 interrupted bootstrap resumes without getting lost:
 [`BOOTSTRAP.md`](BOOTSTRAP.md).
 
+Skipped the paste and just described your project in chat? Also fine: the
+copied `CLAUDE.md`/`AGENTS.md` route any agent that auto-reads them (Claude
+Code, Codex, Cursor, …) to `BOOTSTRAP.md` whenever the repo still carries
+`TEMPLATE:` markers. The paste is just the guaranteed route on tools that
+don't auto-read either file.
+
 ### Manual path — fill the files yourself
 
 1. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —

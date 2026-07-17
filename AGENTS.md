@@ -42,6 +42,14 @@ data is sensitive enough to require extra care when touched. -->
 
 ## Agent Operating Notes
 
+**Not initialized yet?** If this repo's files still carry `TEMPLATE:`
+markers (`./scripts/check-templates.sh` lists them), don't improvise and
+don't try to loop — follow the agent procedure in
+[`BOOTSTRAP.md`](BOOTSTRAP.md), treating anything the human has already
+said about their project in chat as the intake. If a bootstrap was
+already underway, use that file's "Locating yourself" table. The notes
+below apply once init is complete.
+
 Before changing behavior, read [`INBOX.md`](INBOX.md) (process pending human
 input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
 [`ROADMAP.md`](ROADMAP.md),

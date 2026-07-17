@@ -134,6 +134,11 @@ Agent 會一批問完問題、起草下面的每一份檔案,然後只為一件�
 bootstrap 被中斷後怎麼不迷路地接續)見
 [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md)。
 
+沒貼提示、只是直接在聊天裡描述了你的專案?也可以:複製進來的
+`CLAUDE.md`/`AGENTS.md` 會在 repo 還帶著 `TEMPLATE:` 標記時,把任何會自動讀
+這兩個檔案的 agent(Claude Code、Codex、Cursor……)導向 `BOOTSTRAP.md`。
+貼提示只是在「不會自動讀這兩個檔案的工具」上也保證有效的那條路。
+
 ### 手動路線——自己填檔案
 
 1. **照順序走完 [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md)**——

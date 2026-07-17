@@ -19,6 +19,14 @@ it. -->
 
 ## Before you change anything
 
+**Not initialized yet?** If the files below still carry `TEMPLATE:`
+markers (`./scripts/check-templates.sh` lists them), there is nothing to
+loop on — this project hasn't been through init. Don't improvise: follow
+the agent procedure in [`BOOTSTRAP.md`](BOOTSTRAP.md); if the human has
+already described their project in chat, that's your intake — start from
+it. If a bootstrap was already underway, use that file's "Locating
+yourself" table. Everything below applies once init is complete.
+
 Read, in this order, if you haven't already this session:
 
 1. [`INBOX.md`](INBOX.md) — pending human input; process it per that file's

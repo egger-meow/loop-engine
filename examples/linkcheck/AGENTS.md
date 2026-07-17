@@ -53,6 +53,12 @@ links point at.
 
 ## Agent Operating Notes
 
+**Not initialized yet?** If this repo's files still carry `TEMPLATE:`
+markers (`./scripts/check-templates.sh` lists them), don't improvise and
+don't try to loop — follow the agent procedure in `../../BOOTSTRAP.md`.
+(Inert here: linkcheck finished init long ago; the paragraph stays as
+part of the standard entry-point shape.)
+
 Before changing behavior, read [`INBOX.md`](INBOX.md) (process pending human
 input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
 [`ROADMAP.md`](ROADMAP.md),

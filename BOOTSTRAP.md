@@ -43,6 +43,13 @@ steer.
 
 ## Agent procedure
 
+You may arrive here two ways: the human pasted the prompt above, or your
+entry-point file (`CLAUDE.md` / `AGENTS.md`) routed you here because the
+repo still carries `TEMPLATE:` markers. The procedure is identical either
+way — and if the human already described their project in chat, that
+description **is** the Stage 1 idea dump; don't ask them to restate it in
+any particular format.
+
 Follow the stages in order; each names its exit condition, and no stage
 starts before the previous one's exit condition holds. If you enter a repo
 mid-bootstrap (dead session, human walked away), don't guess where you are
