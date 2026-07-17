@@ -1,98 +1,148 @@
+<div align="center">
+
 # loop-engine
 
-**An init scaffold that lets an AI coding agent work on a project loop after
-loop without the human rubber-stamping every step.**
+**Stop rubber-stamping your AI coding agent. Authorize it once — in writing.**
 
-Direction, current state, and priority get written down once, in specific
-files with specific shapes. From then on, the agent reads those files
-instead of asking "should I do X?" — because the answer was already decided
-and recorded. The human's attention is spent on the decisions that are
-actually theirs to make, not on approving things that were already implied
-by an earlier decision.
+[English](README.md) · [繁體中文](README.zh-TW.md)
 
-This repo is the scaffold itself: a set of templates you copy into a project
-and fill in, plus the concept guide explaining why the templates are shaped
-the way they are.
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![Stack](https://img.shields.io/badge/stack-agnostic-informational.svg)
+![Agent](https://img.shields.io/badge/agent-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20any-8A2BE2.svg)
+
+</div>
+
+loop-engine is an init scaffold — a set of Markdown templates plus a written
+operating procedure — that turns "agent proposes, human types *ok*, repeat"
+into "human authorizes in writing once, agent loops until the roadmap runs
+out." Direction, current state, priority, and history each get exactly one
+canonical file with a defined shape and update cadence. The agent reads
+those files instead of asking; you steer a running loop by dropping a note
+in a mailbox file instead of babysitting a chat window.
+
+No CLI, no runtime, no lock-in to one agent tool: it's files and discipline.
+Copy it into any repo — Python daemon, TypeScript CLI, Rust service — and
+fill in the blanks.
 
 - **New here?** Read [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md) — the full
-  concept, in depth. This README is the practical "what do I do" companion
-  to it, not a replacement for it.
+  concept, in depth. This README is the practical companion, not a
+  replacement.
 - **Want to see it filled in?** [`examples/linkcheck/`](examples/linkcheck/)
-  is a complete worked example — every template, filled in for real, for a
-  small hypothetical CLI tool.
+  is a complete worked example — every template, filled in for real.
 - **Ready to adopt it?** Jump to [Quick start](#quick-start).
 
 ---
 
 ## The problem
 
-The default way of working with an AI coding agent looks like this: the
-agent proposes something, the human says "yes" or "ok," the agent does it,
-repeat. Most of those "yes/ok" exchanges carry no information — the human is
-rubber-stamping because re-explaining full context every time costs more
-than just approving. As a project grows this gets worse: more surface area,
-more decisions, more chances the agent drifts from what was actually
-intended, more human attention spent just keeping the agent pointed the
-right way. A fresh agent session (or a different agent tool entirely)
-starts from zero and has to be re-briefed from scratch.
+The default way of working with an AI coding agent: the agent proposes
+something, the human says "yes" or "ok," the agent does it, repeat. Most of
+those exchanges carry no information — the human is rubber-stamping because
+re-explaining full context every time costs more than approving. As the
+project grows it gets worse: more surface area, more decisions, more drift,
+and every fresh agent session starts from zero and has to be re-briefed.
 
-## The idea
+The fix is not a smarter agent. It's moving the human's judgment from
+*interactive approval* to *written authorization* — spent once, on direction
+and priority, in files with defined shapes — so execution never has to stop
+and ask for what was already decided.
 
-Split what a project "knows" into four kinds of truth, each with exactly one
-canonical home, each updated at its own natural cadence:
+## How it works
+
+### Four kinds of truth, one home each
 
 | Kind of truth | Question it answers | Lives in | Changes |
 | --- | --- | --- | --- |
-| **Direction** | Where is this going, what must never break? | `docs/project-charter.md`, `docs/domain-model.md`, `docs/system-direction.md` | Rarely — only when a human decides the goal changes |
+| **Direction** | Where is this going, what must never break? | `docs/project-charter.md`, `docs/domain-model.md`, `docs/system-direction.md` | Rarely — only when a human changes the goal |
 | **Current state** | What actually exists and works right now? | `docs/status.md`, `docs/build-status.md` | Every loop that changes behavior |
-| **Priority** | What is the agent authorized to work on next? | `PRIORITIES.md` | Every loop — items removed when done, reordered when danger changes |
+| **Priority** | What is the agent authorized to work on next? | `ROADMAP.md` (phase-sized), `PRIORITIES.md` (task-sized) | Every loop — items removed when done |
 | **History** | What happened, when, with what evidence? | `CHANGELOG.md`, `docs/audits/`, git | Append-only |
 
-An agent working in the project reads a bounded set of these files, takes
-the top authorized item, does the work, proves it's done, updates current
-state, and moves on — without asking permission for work that was already
-authorized in writing. Full mechanics, including exactly when the agent
-*should* stop and ask a human: [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md).
+Plus one file that is deliberately *not* truth: [`INBOX.md`](INBOX.md), the
+human-input mailbox — items live there only until translated into one of the
+four homes above.
+
+### Two nested loops
+
+The **task loop** executes one authorized task at a time. The **phase loop**
+wraps it: it activates the next pre-authorized phase from `ROADMAP.md`,
+decomposes it into the task queue, and closes each finished phase with
+end-to-end evidence. An empty task queue is no longer a human interrupt —
+it's just the signal to go back up one level.
 
 ```mermaid
-flowchart LR
-    A[Orient:\nCLAUDE.md / AGENTS.md] --> B[Check current truth:\nstatus.md, build-status.md]
-    B --> C[Take the top item:\nPRIORITIES.md]
-    C --> D[Do the work]
-    D --> E[Prove it:\nrun the verification gate]
-    E --> F[Update current truth]
-    F --> G[Retire the priority item]
-    G --> H[Record history:\nCHANGELOG.md / audits]
-    H -->|queue has authorized work| C
-    H -->|queue is empty or ambiguous| I[Stop — ask a human]
+flowchart TB
+    subgraph P["PHASE LOOP — plans within authorization"]
+        P1["1 · Process INBOX.md"] --> P2{"2 · ROADMAP.md<br>exhausted?"}
+        P2 -- yes --> P3(["Wait for human"])
+        P2 -- no --> P4["3 · Close finished phase:<br>phase gate → audit → retire"]
+        P4 --> P5["4 · Activate next authorized phase,<br>decompose into PRIORITIES.md"]
+    end
+    subgraph T["TASK LOOP — executes what's authorized"]
+        T1["a · Check INBOX.md"] --> T2["b · Take top PRIORITIES.md item"]
+        T2 --> T3["c · Do the work"]
+        T3 --> T4["d · Prove it — task gate"]
+        T4 --> T5["e · Update status docs,<br>retire item, record history"]
+        T5 -- queue has items --> T1
+    end
+    P5 --> T1
+    T5 -- queue empty --> P1
+    T1 -. direction-level input .-> P1
 ```
+
+**The authorization boundary:** the phase loop plans *within* authorization
+— it may activate the next phase a human already wrote into `ROADMAP.md` and
+decompose it into tasks. It may never invent a phase, reorder phases, or
+promote a proposal to authorized. Those are human moves, made in writing.
+
+### The human checkpoint: `INBOX.md`
+
+Steer a running loop without interrupting it. Drop a note — a correction, a
+new requirement, "wrong approach" — into `INBOX.md` at any time. The agent
+checks it at every loop boundary and:
+
+1. classifies each item (task-level → queue edit; direction-level → back to
+   the phase loop; factual correction → fix the status docs);
+2. **translates it into its canonical home and deletes it in the same
+   commit** — the diff is your receipt for how your note was understood;
+3. deletes only what it processed, never the whole file.
+
+The file stays tracked in git and empty at rest: git history is the archive,
+so the mailbox never accumulates token-burning backlog.
+
+### Two verification gates
+
+- **Task gate** — fast (lint + typecheck + tests + build), runs every task.
+- **Phase gate** — expensive (integration/E2E/manual walkthrough), runs only
+  when a phase closes; its evidence goes into a written audit in
+  `docs/audits/`.
+
+One gate can't do both jobs: fast-enough-per-task is too shallow to prove a
+phase; thorough-enough-per-phase is too slow to run per task and would get
+skipped.
 
 ## Quick start
 
-1. Copy this repo's contents into your project root — **except this
-   `README.md`**, which describes loop-engine itself, not your project.
-   Your project needs its own README; loop-engine doesn't template that,
-   because a project README isn't loop-engineering-specific. Everything
-   else (`LOOP_ENGINEERING.md`, `INIT_CHECKLIST.md`, `CLAUDE.md`,
-   `AGENTS.md`, `PRIORITIES.md`, `CHANGELOG.md`, `docs/`, `scripts/`) copies
-   over as-is and becomes part of your project. `examples/` and
-   `CONTRIBUTING.md` are optional to keep — they're about maintaining this
-   scaffold's structure, not your project; delete them once you no longer
-   need the worked example as a reference.
-2. Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order — the
-   order matters, because later templates assume earlier ones are real.
-3. As you fill in each file, delete its `TEMPLATE:` guidance comments. Run
-   `scripts/check-templates.sh` (or `.ps1` on Windows) any time to find what
-   you've missed:
+1. **Copy the repo's contents into your project root** — except `README.md`
+   and `README.zh-TW.md`, which describe loop-engine, not your project.
+   `examples/` and `CONTRIBUTING.md` are optional to keep.
+2. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —
+   charter → domain model → system direction → roadmap → status docs →
+   agent entry points → priorities. Order matters; later files assume
+   earlier ones are real. Keep `examples/linkcheck/` open as a filled-in
+   model for every step.
+3. **Delete `TEMPLATE:` markers as you fill things in**, and let the checker
+   tell you what's left:
    ```bash
-   ./scripts/check-templates.sh
+   ./scripts/check-templates.sh        # or scripts/check-templates.ps1
    ```
-4. Once `docs/project-charter.md`, `docs/domain-model.md`, and
-   `PRIORITIES.md` have real content, your agent has enough written
-   authorization to start looping on the items in `PRIORITIES.md` without
-   per-step confirmation.
-5. Do one real loop end to end before trusting the framework for
-   unsupervised work — `INIT_CHECKLIST.md` step 10 explains why.
+4. **Do one real loop end to end** (checklist step 11) before trusting the
+   framework with unsupervised work — including dropping a note in
+   `INBOX.md` mid-loop to confirm the steering channel works.
+5. From then on: the agent loops, `ROADMAP.md` is where you spend
+   authorization, `INBOX.md` is how you steer, and commit diffs are how you
+   audit.
 
 ## File map
 
@@ -100,116 +150,115 @@ flowchart LR
 LOOP_ENGINEERING.md    concept guide — read this first
 INIT_CHECKLIST.md      fill-in order for a new project
 CLAUDE.md / AGENTS.md  agent entry points (keep in sync; different tools read different files)
-PRIORITIES.md          the ordered, rule-governed work queue
+ROADMAP.md             pre-authorized phase queue — the phase loop plans from this
+PRIORITIES.md          ordered, rule-governed task queue — the task loop executes from this
+INBOX.md               human checkpoint mailbox — empty at rest, ships ready to use
 CHANGELOG.md           history
 CONTRIBUTING.md        how to propose changes to this scaffold itself
 LICENSE                MIT
 
 docs/
-  README.md            index of the docs below, one line each
-  project-charter.md    mission, core areas, guardrails, documentation contract
-  domain-model.md       shared vocabulary — names for the things this project has
-  system-direction.md   target architecture and refactor priorities
-  status.md              what currently works, right now, in detail, plus the verification gate
-  build-status.md        coarse Built/Partial/Planned/Blocked map + dated evidence log
-  release.md              versioning scheme and release checklist
-  audits/
-    README.md             when and how to write a phase-completion audit
-    TEMPLATE.md            copy this to start a new audit
+  README.md            index of the docs below
+  project-charter.md   mission, core areas, guardrails, documentation contract
+  domain-model.md      shared vocabulary — names for the things this project has
+  system-direction.md  target architecture and refactor priorities
+  status.md            current behavior in detail + both verification gates
+  build-status.md      coarse Built/Partial/Planned/Blocked map + dated evidence log
+  release.md           versioning scheme and release checklist
+  audits/              phase-completion evidence; TEMPLATE.md stays blank forever
 
 scripts/
   check-templates.sh|.ps1  finds leftover TEMPLATE: markers; exit 1 if any remain
 
 examples/
-  README.md                what the worked example is and isn't
-  linkcheck/                a complete, fully-filled-in instance of every template above
+  linkcheck/           a complete, fully-filled-in instance of every template above
 ```
 
-| File / folder | Purpose | Who fills it in | How often it changes |
+| File | Purpose | Who writes it | Cadence |
 | --- | --- | --- | --- |
-| `docs/project-charter.md` | Mission, core areas, non-negotiable guardrails | Human, with agent drafting help | Rarely |
-| `docs/domain-model.md` | One canonical name per concept | Human + agent together, early | Rarely, grows with new concepts |
+| `docs/project-charter.md` | Mission, guardrails | Human (agent drafts) | Rarely |
+| `docs/domain-model.md` | One canonical name per concept | Human + agent, early | Grows with new concepts |
 | `docs/system-direction.md` | Target architecture vs. current fit | Human + agent | Occasionally |
-| `docs/status.md` | Exact current behavior + the verification gate command | Agent, every loop | Every loop |
-| `docs/build-status.md` | Coarse status table + dated proof log | Agent, at milestones | At milestones |
-| `PRIORITIES.md` | The one ordered, rule-governed backlog | Human authorizes; agent executes and retires items | Every loop |
-| `docs/audits/*` | Evidence a whole phase is actually done | Agent, at phase completion | Once per completed phase, append-only |
-| `CHANGELOG.md` | Release-visible history | Agent, per change; human at release | Every loop / every release |
+| `ROADMAP.md` | Pre-authorized phase queue | **Human authorizes**; agent activates & retires | Per phase |
+| `PRIORITIES.md` | Ordered task queue | Agent decomposes; human can insert | Every loop |
+| `INBOX.md` | Human → running loop channel | Human writes; agent translates & clears | Any time; empty at rest |
+| `docs/status.md` | Exact current behavior + gates | Agent | Every loop |
+| `docs/build-status.md` | Coarse status + dated proof log | Agent | At milestones |
+| `docs/audits/*` | Evidence a phase is actually done | Agent, at phase close | Once per phase, append-only |
+| `CHANGELOG.md` | Release-visible history | Agent; human at release | Every loop / release |
 
 ## Design principles
 
 - **Evidence over assertion.** "It should work" is never sufficient. A
-  passing verification gate, a specific manual test result, or a dated audit
-  entry is what "done" means here — see `LOOP_ENGINEERING.md` step 5.
-- **One canonical home per fact.** If a fact could live in two docs, it will
-  eventually disagree with itself in one of them. Pick one, link from the
-  other.
-- **Order is a decision, not a suggestion.** `PRIORITIES.md` is a strictly
-  ordered queue precisely so "what's next" never needs to be asked — see
-  that file's own Priority Rules for how reordering works and who's allowed
-  to do it.
-- **Human judgment where it's actually needed.** Not "human approves every
-  step," but "human decides direction and danger-order; agent executes
-  everything already authorized by that decision." See `LOOP_ENGINEERING.md`,
-  "When the agent must stop and ask a human," for the specific triggers.
+  passing gate, a specific manual result, or a dated audit entry is what
+  "done" means here.
+- **One canonical home per fact.** A fact that lives in two docs will
+  eventually disagree with itself in one of them.
+- **Order is a decision, not a suggestion.** Both queues are strictly
+  ordered so "what's next" never needs to be asked.
+- **Plans within authorization, never creates it.** The agent's planning
+  power is bounded by what a human already wrote into `ROADMAP.md`.
+- **Steering is a file, not a conversation.** `INBOX.md` decouples the
+  human's availability from the loop's progress — and the
+  translate-then-clear-in-one-commit rule makes every instruction auditable.
 - **Stack-agnostic by design.** Every template describes a *shape*, not
-  framework-specific content — this works the same for a Python daemon, a
-  TypeScript CLI, or a Rust service.
+  framework-specific content.
 
 ## FAQ
 
 **Do I need every one of these files for a small project?**
-Keep the shape even if a section is short — an empty-but-present
-`docs/system-direction.md` costs nothing and is there when the project grows
-into needing it. What you shouldn't skip: `docs/project-charter.md`,
-`docs/domain-model.md`, and `PRIORITIES.md` — those three are what make
-autonomous looping possible at all.
+Keep the shape even when a section is short. The four you must not skip:
+`docs/project-charter.md`, `docs/domain-model.md`, `ROADMAP.md`, and
+`PRIORITIES.md` — those are what make autonomous looping possible at all.
 
-**What if `PRIORITIES.md` runs empty?**
-That's a valid, expected state — it means there's no more pre-authorized
-work, and it's the correct signal for the agent to stop and ask a human for
-the next direction-level decision, not to invent work. See
-`LOOP_ENGINEERING.md`.
+**What happens when `PRIORITIES.md` runs empty?**
+The agent returns to the phase loop: close the finished phase (phase gate +
+audit), activate the next authorized one, refill the queue. It only stops
+and waits for you when `ROADMAP.md` itself is exhausted — that's the real
+"wait for human" condition, and it's a success state, not a failure.
+
+**How do I redirect the agent mid-run?**
+Write to `INBOX.md`. Task-level notes get folded into the queue without
+breaking stride; direction-level notes bounce the agent back to the phase
+loop to re-plan. Either way the commit that clears your note contains the
+edits it turned into, so you can verify it was understood.
+
+**What stops the agent from authorizing its own work?**
+The write rules on `ROADMAP.md`: the agent may activate the next phase and
+retire completed ones, but adding, reordering, or promoting phases is
+human-only. It can *propose* (under "Proposed — Not Yet Authorized"); it
+cannot approve.
 
 **Does this work with any AI coding agent, not just Claude Code?**
 Yes — `CLAUDE.md` and `AGENTS.md` are kept in sync on purpose because
-different tools look for different filenames. The actual mechanism (docs as
-an authorization contract) isn't tool-specific.
-
-**Isn't this just a project-management tool in disguise?**
-A backlog tool tracks *what* to do. This is about *why an agent can act on
-that backlog without asking first* — the charter and domain model exist so
-the agent's judgment calls, not just its task list, are pre-authorized. A
-Jira board doesn't tell an agent whether a given implementation choice
-matches the product's intent; `docs/project-charter.md` does.
+different tools read different filenames. The mechanism (docs as an
+authorization contract) isn't tool-specific.
 
 **How do I know the docs haven't gone stale?**
-`docs/status.md` explicitly says "if this doc and the running code disagree,
-the code wins — fix the doc as part of whatever change you're making." A
-doc an agent trusts but that's actually wrong is worse than no doc; treat
-drift as a bug, not a documentation nice-to-have.
+`docs/status.md` says it explicitly: if the doc and the code disagree, the
+code wins — fix the doc as part of whatever change you're making. Drift is a
+bug, not a nice-to-have.
 
-**Can I change the templates themselves?**
-Yes — see [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to evolve the
-scaffold's structure without breaking the separation of concerns it depends
-on.
+**Isn't this just a project-management tool in disguise?**
+A backlog tracks *what* to do. This is about *why an agent can act without
+asking first* — the charter and domain model pre-authorize its judgment
+calls, not just its task list.
 
 ## Non-goals
 
-- **Not a project generator or CLI.** There's no `loop-engine init` command.
-  Copy the files, fill them in.
-- **Not a substitute for tests, CI, or code review.** `docs/status.md`'s
-  verification gate is how an agent proves a change is done; it doesn't
-  replace your project's own quality bar.
-- **Not a way to remove the human from the loop.** It relocates human
-  judgment to where it's actually needed — see "When the agent must stop and
-  ask a human" in `LOOP_ENGINEERING.md`.
+- **Not a project generator or CLI.** There's no `loop-engine init`. Copy
+  the files, fill them in.
+- **Not a substitute for tests, CI, or code review.** The gates are how an
+  agent proves work is done; they don't replace your quality bar.
+- **Not a way to remove the human.** It relocates human judgment to where
+  it's actually needed: direction, authorization, and danger calls.
 
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) — it covers changes to this
-scaffold's structure specifically (as opposed to filling in your own copy's
-templates, which is what `INIT_CHECKLIST.md` is for).
+Improvements to the scaffold itself are welcome — see
+[`CONTRIBUTING.md`](CONTRIBUTING.md). The bar: a change must keep the four
+kinds of truth separable, keep `examples/linkcheck/` in sync, and keep both
+READMEs in agreement.
 
 ## License
 

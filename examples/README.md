@@ -17,6 +17,12 @@ invented specifically to have interesting-enough guardrails, a real blocker
 definition, and one completed build phase worth auditing, without needing a
 proprietary or unrelated real codebase as the example.
 
+Two files are shown in states worth noticing: `linkcheck/INBOX.md` is
+empty — that *is* its filled-in state (the inbox is a mailbox, empty at
+rest) — and `linkcheck/ROADMAP.md` shows all three sections populated at
+once (an active phase, an authorized next phase, and unauthorized
+proposals), which is what a mid-flight project looks like.
+
 Do not copy `linkcheck/`'s *content* into your project — copy its *shape*.
 Your charter, domain model, and priorities should reflect your actual
 project, not a docs-link-checker's.

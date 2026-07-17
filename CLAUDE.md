@@ -21,15 +21,21 @@ it. -->
 
 Read, in this order, if you haven't already this session:
 
-1. [`PRIORITIES.md`](PRIORITIES.md) — what you're authorized to work on next.
-2. [`docs/project-charter.md`](docs/project-charter.md) — mission, safety
+1. [`INBOX.md`](INBOX.md) — pending human input; process it per that file's
+   protocol before taking new work.
+2. [`PRIORITIES.md`](PRIORITIES.md) — the task you're authorized to work on
+   next.
+3. [`ROADMAP.md`](ROADMAP.md) — which phase that task belongs to, and what
+   phase comes next when the queue drains.
+4. [`docs/project-charter.md`](docs/project-charter.md) — mission, safety
    principles, and the documentation contract.
-3. [`docs/domain-model.md`](docs/domain-model.md) — shared names; don't
+5. [`docs/domain-model.md`](docs/domain-model.md) — shared names; don't
    invent new vocabulary for concepts that already have one.
-4. [`docs/status.md`](docs/status.md) and
+6. [`docs/status.md`](docs/status.md) and
    [`docs/build-status.md`](docs/build-status.md) — what currently exists.
 
-Full procedure: [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md).
+Full procedure (the two loops, the inbox protocol, both verification gates):
+[`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md).
 
 ## Commands
 
@@ -43,7 +49,7 @@ this project, e.g.:
 <lint/typecheck command>
 ```
 
-If there's a single bundled "verification gate" command (recommended — see
+If there's a single bundled task-gate command (recommended — see
 docs/status.md), call it out explicitly here as the thing to run before
 calling any change done. -->
 
@@ -63,5 +69,9 @@ sufficient. -->
   commit conventions).
 - [`PRIORITIES.md`](PRIORITIES.md) — the active, ordered priority contract.
   Treat it as authorization, not a backlog to reorder at will.
+- [`ROADMAP.md`](ROADMAP.md) — the pre-authorized phase queue. The agent
+  activates and removes phases; only a human adds or reorders them.
+- [`INBOX.md`](INBOX.md) — the human checkpoint. Check at every loop
+  boundary; translate-then-clear in the same commit.
 - [`docs/README.md`](docs/README.md) — index of all canonical docs.
 - [`docs/status.md`](docs/status.md) — source of truth for current behavior.

@@ -42,7 +42,9 @@ adding a new file or section, check:
    [`examples/linkcheck/`](examples/linkcheck/) so it stays a faithful,
    fully-filled-in instance of the current templates — a drifted example is
    actively misleading.
-4. Run the template-completeness check against `examples/linkcheck/` (it
+4. If the change affects `README.md`, mirror it in `README.zh-TW.md` — the
+   two are translations of each other and must make the same claims.
+5. Run the template-completeness check against `examples/linkcheck/` (it
    should report clean — that directory has no unfilled `TEMPLATE:`
    markers by design) and against the root scaffold (it should report
    everything still templated, since the root scaffold is meant to stay
@@ -50,13 +52,12 @@ adding a new file or section, check:
    ```bash
    ./scripts/check-templates.sh examples/linkcheck
    ```
-5. Update `CHANGELOG.md` under `[Unreleased]`.
+6. Update `CHANGELOG.md` under `[Unreleased]`.
 
 ## Style
 
-- Keep template comments (`<!-- TEMPLATE: ... -->`) actionable: say what to
-  write and, where useful, give a model/shape to adapt — not just "fill this
-  in."
+- Keep `TEMPLATE:` guidance comments actionable: say what to write and,
+  where useful, give a model/shape to adapt — not just "fill this in."
 - Prefer linking between docs over duplicating content across them; a fact
   stated in two places will eventually disagree with itself.
 - Keep the scaffold stack-agnostic. If a change only makes sense for one

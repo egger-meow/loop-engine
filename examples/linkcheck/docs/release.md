@@ -17,7 +17,8 @@ This document defines the release path for linkcheck.
 2. Update the version in `package.json`.
 3. Update `CHANGELOG.md` with the release date, included changes, and any
    Autofix behavior changes called out explicitly under their own heading.
-4. Run the verification gate:
+4. Run the task gate (and the phase gate from `status.md`, if this release
+   closes a `../ROADMAP.md` phase):
    ```bash
    npm run verify
    ```

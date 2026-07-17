@@ -4,19 +4,20 @@ file itself — it stays a blank template. -->
 
 # `<Phase Name>` — Completion Audit
 
-**Phase activated:** `<date, and where/how — e.g. link to the PRIORITIES.md
-entry or the human request that authorized it>`
+**Phase authorized:** `<date, and where/how — e.g. link to the ROADMAP.md
+phase entry (or its git history, once removed) that authorized it>`
 **Audit written:** `<date>`
 **Status:** `<Complete | Complete with noted exceptions>`
 
 ## Original Acceptance Gates
 
-<!-- List the gates exactly as originally written when the phase was
-activated. Don't rephrase them to make them easier to check off — if a gate
-was ambiguous, note that explicitly rather than silently resolving the
+<!-- List the phase's exit condition exactly as originally written in
+ROADMAP.md (pull it from git history if the phase has already been removed).
+Don't rephrase gates to make them easier to check off — if a gate was
+ambiguous, note that explicitly rather than silently resolving the
 ambiguity in the audit. -->
 
-1. `<gate 1, verbatim from activation>`
+1. `<gate 1, verbatim from ROADMAP.md>`
 2. `<gate 2>`
 
 ## Evidence, Gate by Gate
@@ -37,12 +38,13 @@ a passing test file, a dated log entry from build-status.md. -->
 
 <!-- Anything that shipped differently than originally scoped, anything
 explicitly descoped, anything left for follow-up work (link the follow-up's
-new PRIORITIES.md item or Non-Blocking / Later entry if one exists). Say
+new PRIORITIES.md item, Non-Blocking / Later entry, or ROADMAP.md proposal
+if one exists). Say
 "none" explicitly rather than omitting this section. -->
 
 ## Follow-Up
 
-<!-- Any new PRIORITIES.md items or Non-Blocking / Later items that came out
-of finishing this phase — e.g. a deferred optional expansion. Link them; do
-not describe unstarted work here as if it were part of this audit's
-evidence. -->
+<!-- Any new PRIORITIES.md items, Non-Blocking / Later items, or ROADMAP.md
+phases/proposals that came out of finishing this phase — e.g. a deferred
+optional expansion. Link them; do not describe unstarted work here as if it
+were part of this audit's evidence. -->

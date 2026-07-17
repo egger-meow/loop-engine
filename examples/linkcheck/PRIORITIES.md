@@ -4,6 +4,10 @@ This file is the active, ordered priority contract for linkcheck. An agent
 picks the **first** item under "Current Priorities" as its next unit of
 work — not the most interesting one, not the easiest one.
 
+The items below are the decomposition of the active `ROADMAP.md` phase
+(Validation Hardening); a human can also insert items directly (usually via
+`INBOX.md`). Either way, being written here is what authorizes the work.
+
 ## What Counts as a Blocker
 
 An item is necessary only if leaving it unfixed could cause one or more of:
@@ -22,8 +26,9 @@ Everything else that's real work but doesn't meet this bar belongs under
 ## Priority Rules
 
 1. Add an item only if it is a concrete correctness, safety, or
-   user/operator-control blocker per the definition above, or a human
-   explicitly activates a major build phase with written acceptance gates.
+   user/operator-control blocker per the definition above, or it belongs to
+   the decomposition of the active `ROADMAP.md` phase — a phase a human
+   already authorized with a written exit condition.
 2. Do not add general cleanup, speculative features, refactors, or
    nice-to-have work here — that goes under "Non-Blocking / Later."
 3. If a new item is more dangerous/urgent than an existing item, explicitly
@@ -31,8 +36,9 @@ Everything else that's real work but doesn't meet this bar belongs under
 4. Keep priority items in strict order from most urgent to least urgent.
 5. Remove an item when it is completed **and verified**. Do not
    automatically add a replacement item.
-6. If an item is neither necessary nor an explicitly activated build phase
-   with written acceptance gates, it goes under "Non-Blocking / Later."
+6. If an item is neither necessary nor part of the active `ROADMAP.md`
+   phase, it goes under "Non-Blocking / Later" (or, if it's phase-sized,
+   under `ROADMAP.md` "Proposed — Not Yet Authorized").
 7. Treat every checklist here as a shrinking queue — remove steps as they're
    verified instead of narrating progress in place.
 8. Keep historical implementation evidence in `CHANGELOG.md`, git commits,
@@ -58,11 +64,9 @@ Everything else that's real work but doesn't meet this bar belongs under
 
 ## Non-Blocking / Later
 
-- Fixture-replay regression test harness for Autofix (currently verified by
-  manual diff per change — see `docs/audits/autofix-phase-1-audit.md`
-  Follow-Up). Valuable, not urgent: current manual process hasn't missed
-  anything yet.
 - HTML `<a href>` parsing inside Markdown files.
 - `--watch` mode for local editing.
-- A VS Code extension surfacing broken links inline. Requires its own
-  explicitly activated phase before it becomes a priority.
+
+Phase-sized work lives in `ROADMAP.md` instead: the Autofix fixture-replay
+harness is the next authorized phase there, and the VS Code extension sits
+under "Proposed — Not Yet Authorized."

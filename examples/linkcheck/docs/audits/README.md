@@ -1,8 +1,9 @@
 # Phase Audits
 
-An audit is written when a major build phase — the kind of thing that got
-explicitly activated per `../../PRIORITIES.md`'s priority rules, with its own
-written acceptance gates — is completely finished.
+An audit is written when a major build phase — the kind of thing a human
+authorized in `../../ROADMAP.md` with a written exit condition — passes the
+phase gate (see `../status.md`) and is completely finished. The audit is
+what licenses removing the phase from `../../ROADMAP.md`.
 
 ## Index
 

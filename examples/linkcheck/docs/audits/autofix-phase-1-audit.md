@@ -1,8 +1,9 @@
 # Autofix Phase 1 — Completion Audit
 
-**Phase activated:** 2026-02-18, `PRIORITIES.md` (activated by project owner
-after three consecutive weekly doc-health reports showed the same two break
-categories accounting for 80%+ of reported breaks).
+**Phase authorized:** 2026-02-18, `ROADMAP.md` (authorized by the project
+owner after three consecutive weekly doc-health reports showed the same two
+break categories accounting for 80%+ of reported breaks; removed from the
+roadmap on completion — see git history for the original entry).
 **Audit written:** 2026-03-02
 **Status:** Complete
 
@@ -69,7 +70,8 @@ during implementation.
 
 - No automated fixture-replay test exists yet for Autofix — this phase's
   evidence is manual-diff-based (see gates above), which doesn't scale as a
-  regression guard for future changes. Tracked as a `PRIORITIES.md` item
+  regression guard for future changes. Tracked as the next authorized
+  `ROADMAP.md` phase
   (not a blocker on this phase, since it doesn't affect correctness of what
   shipped — see `docs/status.md` Known Limits).
 - General "guess the intended file" autofix was considered and explicitly

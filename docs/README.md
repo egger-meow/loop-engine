@@ -37,9 +37,9 @@ than no doc, because agents will trust and act on stale content. -->
 ## Phase Audits
 
 [`audits/`](audits/README.md) holds one file per completed major build
-phase: requirement-by-requirement evidence that the phase's written
-acceptance gates were actually met. Write one when a phase tracked in
-`../PRIORITIES.md` closes out completely — see `audits/README.md`.
+phase: requirement-by-requirement evidence that the phase's written exit
+condition was actually met. Write one when a `../ROADMAP.md` phase passes
+the phase gate and closes out completely — see `audits/README.md`.
 
 ## Raw / Historical Notes
 

@@ -8,10 +8,14 @@ Usage:
   pwsh scripts/check-templates.ps1            # scan whole repo
   pwsh scripts/check-templates.ps1 -Path docs # scan a subfolder
 
-This is what INIT_CHECKLIST.md step 9 asks you to do by hand; run this
+This is what INIT_CHECKLIST.md step 10 asks you to do by hand; run this
 instead once you believe every template is filled in. It's also the natural
 gate to wire into CI once this project has one, so a doc can't quietly merge
 half-templated.
+
+Matches only real marker forms -- the HTML guidance comment (<!-- TEMPLATE:)
+and inline placeholders (`TEMPLATE: <...>`) -- so docs that merely mention
+TEMPLATE: markers in prose don't flag forever.
 #>
 param(
     [string]$Path = "."
@@ -31,7 +35,7 @@ foreach ($file in $files) {
     $lineNum = 0
     foreach ($line in Get-Content -LiteralPath $file.FullName) {
         $lineNum++
-        if ($line -match 'TEMPLATE:') {
+        if ($line -match '<!-- TEMPLATE:|`TEMPLATE: ') {
             $hits += [PSCustomObject]@{
                 File = (Resolve-Path -Relative $file.FullName)
                 Line = $lineNum

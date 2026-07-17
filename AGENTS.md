@@ -42,7 +42,9 @@ data is sensitive enough to require extra care when touched. -->
 
 ## Agent Operating Notes
 
-Before changing behavior, read [`PRIORITIES.md`](PRIORITIES.md),
+Before changing behavior, read [`INBOX.md`](INBOX.md) (process pending human
+input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
+[`ROADMAP.md`](ROADMAP.md),
 [`docs/project-charter.md`](docs/project-charter.md),
 [`docs/domain-model.md`](docs/domain-model.md),
 [`docs/system-direction.md`](docs/system-direction.md),
@@ -53,7 +55,15 @@ touching that subsystem, e.g. "also read docs/api-spec.md for API work." -->
 
 Keep [`PRIORITIES.md`](PRIORITIES.md) current per its own internal rules.
 When you complete or deprioritize an item, follow that file's removal rule
-instead of leaving it struck through or annotated in place.
+instead of leaving it struck through or annotated in place. The same
+shrinking-queue rule applies to completed phases in [`ROADMAP.md`](ROADMAP.md)
+— close them per the phase-loop procedure in `LOOP_ENGINEERING.md` (phase
+gate, then audit, then removal), never by annotation.
+
+Check [`INBOX.md`](INBOX.md) at every loop boundary. Translate each item
+into its canonical home and delete it **in the same commit** — the diff is
+the human's receipt. Never truncate the whole file; delete only what you
+processed.
 
 <!-- TEMPLATE: Add any project-specific standing rule here, in the same
 spirit as this example from a prior project:

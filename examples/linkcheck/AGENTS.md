@@ -35,8 +35,8 @@ Vitest, `test/**/*.test.ts`. Every Validation reason (`file-not-found`,
 `anchor-not-found`, `external-4xx`, `external-5xx`, `external-timeout`,
 `ambiguous`) needs at least one fixture-backed test. Autofix changes
 currently also require a manual diff review against `test/fixtures/` per
-`docs/status.md` — there's no automated fixture-replay harness yet
-(`PRIORITIES.md` Non-Blocking / Later).
+`docs/status.md` — there's no automated fixture-replay harness yet (it's the
+next authorized `ROADMAP.md` phase).
 
 ## Commit & Pull Request Guidelines
 
@@ -53,7 +53,9 @@ links point at.
 
 ## Agent Operating Notes
 
-Before changing behavior, read [`PRIORITIES.md`](PRIORITIES.md),
+Before changing behavior, read [`INBOX.md`](INBOX.md) (process pending human
+input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
+[`ROADMAP.md`](ROADMAP.md),
 [`docs/project-charter.md`](docs/project-charter.md),
 [`docs/domain-model.md`](docs/domain-model.md),
 [`docs/system-direction.md`](docs/system-direction.md),
@@ -62,13 +64,21 @@ Before changing behavior, read [`PRIORITIES.md`](PRIORITIES.md),
 
 Keep [`PRIORITIES.md`](PRIORITIES.md) current per its own internal rules.
 When you complete or deprioritize an item, follow that file's removal rule
-instead of leaving it struck through or annotated in place.
+instead of leaving it struck through or annotated in place. The same
+shrinking-queue rule applies to completed phases in [`ROADMAP.md`](ROADMAP.md)
+— close them per the phase-loop procedure (phase gate, then audit, then
+removal), never by annotation.
 
-Do not add a new Autofix fix pattern without an explicitly activated phase
-(see `docs/build-status.md`'s Blocked row and
-`docs/project-charter.md`'s Guardrails) — Autofix expansion is deliberately
-gated higher than normal feature work because a wrong autofix silently
-corrupts a user's docs.
+Check [`INBOX.md`](INBOX.md) at every loop boundary. Translate each item
+into its canonical home and delete it **in the same commit** — the diff is
+the human's receipt. Never truncate the whole file; delete only what you
+processed.
+
+Do not add a new Autofix fix pattern without its own authorized
+[`ROADMAP.md`](ROADMAP.md) phase (see `docs/build-status.md`'s Blocked row
+and `docs/project-charter.md`'s Guardrails) — Autofix expansion is
+deliberately gated higher than normal feature work because a wrong autofix
+silently corrupts a user's docs.
 
 Full procedure for how priority, current-state, and direction docs relate to
 each other, and when to stop and ask a human instead of proceeding: see

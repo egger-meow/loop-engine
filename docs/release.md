@@ -30,7 +30,8 @@ project — replace the specifics:
    ```bash
    <command>
    ```
-5. Run the verification gate (see `status.md`):
+5. Run the task gate (see `status.md`) — and the phase gate too, if this
+   release closes a `ROADMAP.md` phase:
    ```bash
    <command>
    ```

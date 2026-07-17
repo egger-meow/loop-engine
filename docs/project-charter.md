@@ -54,7 +54,10 @@ memory of a past session as the record of what was decided.
 - [`status.md`](status.md): current behavior and system-specific notes.
 - [`build-status.md`](build-status.md): coarse build status and verification
   evidence.
+- [`../ROADMAP.md`](../ROADMAP.md): the pre-authorized phase queue.
 - [`../PRIORITIES.md`](../PRIORITIES.md): active engineering priorities.
+- [`../INBOX.md`](../INBOX.md): pending human input (transient — items are
+  translated into the docs above, then cleared).
 <!-- TEMPLATE: add any project-specific canonical docs listed in
 docs/README.md, e.g. api-spec.md, ui-direction.md. -->
 

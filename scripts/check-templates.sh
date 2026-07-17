@@ -7,20 +7,25 @@
 #   ./scripts/check-templates.sh            # scan whole repo
 #   ./scripts/check-templates.sh docs        # scan a subfolder
 #
-# This is what INIT_CHECKLIST.md step 9 asks you to do by hand; run this
+# This is what INIT_CHECKLIST.md step 10 asks you to do by hand; run this
 # instead once you believe every template is filled in. It's also the
 # natural gate to wire into CI once this project has one, so a doc can't
 # quietly merge half-templated.
+#
+# Matches only real marker forms — the HTML guidance comment (<!-- TEMPLATE:)
+# and inline placeholders (`TEMPLATE: <...>`) — so docs that merely *mention*
+# TEMPLATE: markers in prose (README, LOOP_ENGINEERING.md, this checklist's
+# own instructions) don't flag forever.
 
 set -euo pipefail
 
 scan_path="${1:-.}"
 
-matches=$(grep -rn --include='*.md' \
+matches=$(grep -rnE --include='*.md' \
     --exclude-dir=.git --exclude-dir=node_modules \
     --exclude-dir=.venv --exclude-dir=venv --exclude-dir=__pycache__ \
     --exclude='TEMPLATE.md' \
-    'TEMPLATE:' "$scan_path" || true)
+    '<!-- TEMPLATE:|`TEMPLATE: ' "$scan_path" || true)
 
 if [ -z "$matches" ]; then
     echo "OK: no TEMPLATE: markers found under '$scan_path'."

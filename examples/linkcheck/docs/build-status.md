@@ -30,9 +30,10 @@ commit. For fine-grained current behavior, see `status.md`.
 Autofix Phase 1 (case-mismatch + redirect-manifest fixes) is complete and
 audited. No further Autofix expansion is currently authorized — the false-
 negative-is-worse-than-false-positive guardrail means new fix patterns need
-their own explicitly activated phase with acceptance gates, not incremental
-addition. Current work is hardening Validation (anchor disambiguation,
-external-check caching) rather than expanding Autofix.
+their own explicitly authorized `../ROADMAP.md` phase with a written exit
+condition, not incremental addition. The active phase is Validation
+Hardening (anchor disambiguation, external-check caching); the Autofix
+regression harness is the next authorized phase — see `../ROADMAP.md`.
 
 ## Verification Evidence
 

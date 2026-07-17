@@ -5,7 +5,9 @@ the running code disagree, the code wins and this doc is out of date — fix
 the doc as part of whatever change you're making, don't leave the drift for
 later.
 
-## Verification Gate
+## Verification Gates
+
+### Task Gate
 
 ```bash
 npm run lint
@@ -15,9 +17,24 @@ npm run build
 ```
 
 Bundled as `npm run verify`, which runs all four in order and stops at the
-first failure. Nothing is "done" until `npm run verify` passes and, for
-Autofix changes specifically, a manual run against `test/fixtures/` has been
-diffed by hand (see Known Limits — Autofix has no fixture-replay test yet).
+first failure — this runs on every task-loop iteration. Nothing is "done"
+until `npm run verify` passes and, for Autofix changes specifically, a
+manual run against `test/fixtures/` has been diffed by hand (see Known
+Limits — Autofix has no fixture-replay test yet).
+
+### Phase Gate
+
+Runs only when a `ROADMAP.md` phase closes; results are recorded as evidence
+in the phase audit (`audits/`):
+
+1. `npm run verify` green on a fresh clone (not just the working tree).
+2. Full autofix walkthrough: `linkcheck test/fixtures/broken-tree --fix` in
+   a scratch git worktree, hand-diffed — every applied fix correct, every
+   unfixable break reported, zero unintended content changes.
+3. `--check-external` run against the real `docs/` tree completing without
+   timeout truncation, with any timeout reported rather than dropped.
+4. Exit-code spot check: nonzero exit with remaining breaks, zero exit on a
+   clean tree (CI-safety).
 
 ## Current Behavior
 
@@ -65,7 +82,7 @@ refuses to run on a dirty git tree without `--force` (see Guardrails in
   large doc tree is slow on every CI run, not just the first.
 - No fixture-replay test harness for Autofix yet — Autofix correctness is
   currently verified by manual diff review per change, not by an automated
-  regression suite. This is itself a `../PRIORITIES.md` item.
+  regression suite. Building it is the next authorized `../ROADMAP.md` phase.
 
 ## Configuration / Environment Notes
 
