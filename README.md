@@ -128,6 +128,29 @@ One gate can't do both jobs: fast-enough-per-task is too shallow to prove a
 phase; thorough-enough-per-phase is too slow to run per task and would get
 skipped.
 
+## What it costs
+
+The overhead is a fixed orientation read at the start of each agent
+session: the entry point plus the current-truth files — roughly **8k
+tokens** on a realistically filled-in project (measured on
+`examples/linkcheck/`), plus ~5k more the first time a session opens
+`LOOP_ENGINEERING.md`. That cost is capped by design: history files
+(`CHANGELOG.md`, `docs/audits/`, `FRAMEWORK_FEEDBACK.md`) are excluded
+from routine reads no matter how large they grow, and the current-truth
+files have to stay small precisely because they're re-read every loop.
+
+The empty-dir alternative isn't free — it moves the cost from a fixed,
+capped read to an unbounded one. Every session the agent re-derives
+project state from `git log` and the code, a per-session spend with high
+variance; and a single instance of getting lost — redoing finished work,
+re-litigating a settled decision, wandering out of scope — burns more
+than a week of orientation reads.
+
+**Skip this framework if your project fits in one or two sessions**, or
+if a human reviews every turn anyway. The overhead pays for itself only
+when the loop runs long and unsupervised — which is exactly the case it's
+built for.
+
 ## Quick start
 
 Step one is the same either way: **copy the repo's contents into your
