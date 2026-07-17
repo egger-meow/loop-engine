@@ -63,8 +63,9 @@ carry a shrinking-queue rule: a file that gets re-read constantly has to
 stay small, or every loop pays a growing token cost for zero new
 information.
 
-**History files — `CHANGELOG.md`, `docs/audits/`, git — are the opposite:
-written to constantly (append-only), read rarely, on demand.** Neither the
+**History files — `CHANGELOG.md`, `docs/audits/`, `FRAMEWORK_FEEDBACK.md`,
+git — are the opposite: written to constantly (append-only), read rarely,
+on demand.** Neither the
 task loop nor the phase loop below includes them in routine orientation.
 Open one only for a specific reason — adding a new entry (a write, not a
 full read), preparing a release, or checking whether a specific past claim
@@ -216,6 +217,31 @@ lives in the file itself; the load-bearing rules are:
   it); its commit history is the permanent record of what came through and
   what each item became.
 
+## Framework feedback: the flight recorder
+
+[`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) is the inbox's mirror
+image: the inbox carries human input *into* the project; this file carries
+defect reports *out of* it, back to the scaffold the project was copied
+from. When the framework itself fails you mid-loop — you got lost despite
+the docs, a rule forced token waste, two rules contradicted each other, a
+gate didn't fit, the human had to step in where autonomy was promised —
+append a short entry (the file's header gives the format and a ~6-line
+cap) and keep working.
+
+Three rules keep it near-free, all inherited from patterns above:
+
+- **It's history-class.** Append-only, write-only during loops, never part
+  of routine orientation — "Reading discipline" applies in full. Appending
+  a few lines costs almost nothing; the token cost this design avoids is
+  re-reading the file, so don't.
+- **Nothing in it licenses work.** It's a flight recorder, not a second
+  inbox or a backlog. Record and move on; an entry is never a reason to
+  "fix the framework" in this repo mid-loop.
+- **Harvest is human-triggered, at phase close.** The audit's Follow-Up
+  step reminds the human when the file gained entries; the agent drafts
+  the upstream issue text, the human files it. Each harvest appends a
+  receipt line — entries themselves are never edited.
+
 ## Two verification gates
 
 Both are defined per-project in [`docs/status.md`](docs/status.md):
@@ -300,6 +326,10 @@ context" a non-event, because the context was never only in its head.
 - [`INBOX.md`](INBOX.md) — the human checkpoint mailbox. Ships ready to use
   (no `TEMPLATE:` markers); just leave it empty until you have something to
   say to a running loop.
+- [`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) — append-only flight
+  recorder for defects in the framework itself, harvested upstream to
+  loop-engine at phase close. Ships ready to use; empty is its normal
+  state.
 - [`CHANGELOG.md`](CHANGELOG.md) — history.
 - [`docs/`](docs/README.md) — canonical direction and current-state docs, plus
   `docs/audits/` for phase-completion evidence.

@@ -78,3 +78,6 @@ during implementation.
   rejected during phase scoping — see `docs/project-charter.md` Guardrails
   and `docs/build-status.md`'s Blocked row for that capability. Not a gap;
   an intentional non-goal.
+- `FRAMEWORK_FEEDBACK.md` gained one entry during this phase (audit
+  evidence granularity); flagged to the human at phase close and since
+  harvested upstream — see that file's receipt line.

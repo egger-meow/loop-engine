@@ -186,6 +186,7 @@ ROADMAP.md             pre-authorized phase queue — the phase loop plans from 
 PRIORITIES.md          ordered, rule-governed task queue — the task loop executes from this
 INBOX.md               human checkpoint mailbox — empty at rest, ships ready to use
 CHANGELOG.md           history
+FRAMEWORK_FEEDBACK.md  append-only flight recorder for defects in the framework itself — harvested upstream to loop-engine
 CONTRIBUTING.md        how to propose changes to this scaffold itself
 LICENSE                MIT
 
@@ -218,6 +219,7 @@ examples/
 | `docs/build-status.md` | Coarse status + dated proof log | Agent | At milestones |
 | `docs/audits/*` | Evidence a phase is actually done | Agent, at phase close | Once per phase, append-only |
 | `CHANGELOG.md` | Release-visible history | Agent; human at release | Every loop / release |
+| `FRAMEWORK_FEEDBACK.md` | Defects found in the framework itself | Agent appends; human harvests upstream | On friction; append-only |
 
 ## Design principles
 

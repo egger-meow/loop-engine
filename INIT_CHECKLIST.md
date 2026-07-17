@@ -25,7 +25,9 @@ abstract template.
 `README.zh-TW.md`) into your project, replace them with your project's
 actual README — they describe loop-engine, not your project, and don't get
 templated like the files below. `INBOX.md` is the opposite case: it ships
-ready to use with nothing to fill in — leave it as-is (and empty).
+ready to use with nothing to fill in — leave it as-is (and empty). So does
+`FRAMEWORK_FEEDBACK.md` — empty until the framework itself gives you
+something to report.
 
 - [ ] **1. `docs/project-charter.md`** — Mission, core areas, guardrails.
       This is the highest-authority doc; everything else should trace back

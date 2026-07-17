@@ -47,4 +47,7 @@ if one exists). Say
 <!-- Any new PRIORITIES.md items, Non-Blocking / Later items, or ROADMAP.md
 phases/proposals that came out of finishing this phase — e.g. a deferred
 optional expansion. Link them; do not describe unstarted work here as if it
-were part of this audit's evidence. -->
+were part of this audit's evidence.
+Also check FRAMEWORK_FEEDBACK.md: if it gained entries during this phase,
+note that here and remind the human it's ready to harvest upstream (see
+that file's header for the harvest protocol). -->

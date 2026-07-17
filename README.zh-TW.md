@@ -169,6 +169,7 @@ ROADMAP.md             預先授權的 phase 佇列——phase loop 據此規劃
 PRIORITIES.md          有序、有規則的任務佇列——task loop 據此執行
 INBOX.md               人類中繼點信箱——平時是空的,開箱即用
 CHANGELOG.md           歷史
+FRAMEWORK_FEEDBACK.md  框架本身缺陷的飛行記錄器——只增不改,回收到上游 loop-engine
 CONTRIBUTING.md        如何對腳手架本身提出修改
 LICENSE                MIT
 
@@ -201,6 +202,7 @@ examples/
 | `docs/build-status.md` | 粗粒度狀態 + 有日期的證據 | agent | 每個里程碑 |
 | `docs/audits/*` | phase 真的完成的證據 | agent,phase 收尾時 | 每 phase 一次,只增不改 |
 | `CHANGELOG.md` | 對外可見的歷史 | agent;發佈時人類 | 每迭代/每發佈 |
+| `FRAMEWORK_FEEDBACK.md` | 框架本身的缺陷紀錄 | agent 追加;人類回收到上游 | 遇到摩擦時;只增不改 |
 
 ## 設計原則
 

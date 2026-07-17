@@ -35,11 +35,14 @@ Read, in this order, if you haven't already this session:
 6. [`docs/status.md`](docs/status.md) and
    [`docs/build-status.md`](docs/build-status.md) — what currently exists.
 
-Do **not** add `CHANGELOG.md` or `docs/audits/` to this routine orientation
-read. They're append-only history — read on demand only (a specific audit
-via its index, the `[Unreleased]` section when adding an entry), never as a
-blanket read for context. See `../../LOOP_ENGINEERING.md`, "Reading
-discipline."
+Do **not** add `CHANGELOG.md`, `docs/audits/`, or `FRAMEWORK_FEEDBACK.md`
+to this routine orientation read. They're append-only history — read on
+demand only (a specific audit via its index, the `[Unreleased]` section
+when adding an entry), never as a blanket read for context. See
+`../../LOOP_ENGINEERING.md`, "Reading discipline."
+`FRAMEWORK_FEEDBACK.md` is write-only during loops: when the framework
+itself misleads you or wastes tokens, append a short entry per that file's
+header and move on — nothing in it licenses work.
 
 Full procedure (the two loops, the inbox protocol, both verification gates):
 `../../LOOP_ENGINEERING.md`.

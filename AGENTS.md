@@ -61,11 +61,14 @@ input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
 <!-- TEMPLATE: add any subsystem-specific docs an agent must read before
 touching that subsystem, e.g. "also read docs/api-spec.md for API work." -->
 
-Do **not** add `CHANGELOG.md` or `docs/audits/` to that routine read.
-They're append-only history — open one only for a specific reason (adding
-an entry, preparing a release, checking a specific past claim), and read
-narrowly even then (the relevant audit via its index, not the whole
-folder). See `LOOP_ENGINEERING.md`, "Reading discipline."
+Do **not** add `CHANGELOG.md`, `docs/audits/`, or `FRAMEWORK_FEEDBACK.md`
+to that routine read. They're append-only history — open one only for a
+specific reason (adding an entry, preparing a release, checking a specific
+past claim), and read narrowly even then (the relevant audit via its
+index, not the whole folder). See `LOOP_ENGINEERING.md`, "Reading
+discipline." `FRAMEWORK_FEEDBACK.md` is write-only during loops: when the
+framework itself misleads you or wastes tokens, append a short entry per
+that file's header and move on — nothing in it licenses work.
 
 Keep [`PRIORITIES.md`](PRIORITIES.md) current per its own internal rules.
 When you complete or deprioritize an item, follow that file's removal rule
