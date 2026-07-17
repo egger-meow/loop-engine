@@ -288,6 +288,10 @@ context" a non-event, because the context was never only in its head.
 - [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) /
   [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md) — the order to fill in
   the templates when bootstrapping a new project from this scaffold.
+- [`BOOTSTRAP.md`](BOOTSTRAP.md) / [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md)
+  — the interview alternative to the checklist: an agent asks what it can't
+  infer from your pasted idea, drafts every canonical file, and waits for
+  one explicit written authorization before any loop starts.
 - [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — agent entry points.
   Keep both in sync; different tools read different files.
 - [`ROADMAP.md`](ROADMAP.md) — the pre-authorized phase queue the phase loop

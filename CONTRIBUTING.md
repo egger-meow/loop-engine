@@ -44,9 +44,10 @@ adding a new file or section, check:
    actively misleading.
 4. If the change affects `README.md`, mirror it in `README.zh-TW.md` — the
    two are translations of each other and must make the same claims. The
-   same applies to the other three files with a `.zh-TW.md` sibling —
-   `LOOP_ENGINEERING.md`, `INIT_CHECKLIST.md`, and `examples/README.md` (this
-   file, `CONTRIBUTING.md`, is itself one of the four). Everything else
+   same applies to the other four files with a `.zh-TW.md` sibling —
+   `LOOP_ENGINEERING.md`, `INIT_CHECKLIST.md`, `BOOTSTRAP.md`, and
+   `examples/README.md` (this
+   file, `CONTRIBUTING.md`, is itself one of the five). Everything else
    deliberately does **not** get a `.zh-TW.md` sibling — see README.md's FAQ
    "Why do only some files have a Traditional Chinese version?" for why
    (functionally load-bearing filenames + mutable live content don't mix

@@ -248,6 +248,9 @@ phase loop 開始時檢查它。完整協議寫在檔案本身裡;這裡是承�
 - [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) /
   [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md) ——從這套腳手架啟動
   新專案時,填寫模板的順序。
+- [`BOOTSTRAP.md`](BOOTSTRAP.md) / [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md)
+  ——清單的訪談版替代路線:agent 問出它從你貼上的想法推斷不出的東西、起草
+  每一份正典檔案,並在任何迴圈開始前,等待一次明確的書面授權。
 - [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) —— agent 入口點。保持
   兩者同步;不同工具讀不同檔案。
 - [`ROADMAP.md`](ROADMAP.md) —— phase loop 據以規劃的、預先授權的 phase 佇

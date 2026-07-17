@@ -30,7 +30,8 @@ fill in the blanks.
   replacement.
 - **Want to see it filled in?** [`examples/linkcheck/`](examples/linkcheck/)
   is a complete worked example — every template, filled in for real.
-- **Ready to adopt it?** Jump to [Quick start](#quick-start).
+- **Ready to adopt it?** Jump to [Quick start](#quick-start) — there's an
+  interview path (an agent fills everything in) and a manual path.
 
 ---
 
@@ -129,32 +130,51 @@ skipped.
 
 ## Quick start
 
-1. **Copy the repo's contents into your project root** — except `README.md`
-   and `README.zh-TW.md`, which describe loop-engine, not your project.
-   `examples/`, `CONTRIBUTING.md`, and every `.zh-TW.md` sibling are optional
-   to keep.
-2. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —
+Step one is the same either way: **copy the repo's contents into your
+project root** — except `README.md` and `README.zh-TW.md`, which describe
+loop-engine, not your project. `examples/`, `CONTRIBUTING.md`, and every
+`.zh-TW.md` sibling are optional to keep.
+
+### Interview path — paste your idea, answer questions, authorize once
+
+Open your agent inside the new repo and paste:
+
+> Read `BOOTSTRAP.md` and follow its agent procedure. My project idea:
+> *(a paragraph or a page — messy is fine, any language)*
+
+The agent asks one batch of questions, drafts every file below, and stops
+for exactly one approval: you read a five-sentence summary and say "I
+authorize this" before anything loops. Full protocol, including how an
+interrupted bootstrap resumes without getting lost:
+[`BOOTSTRAP.md`](BOOTSTRAP.md).
+
+### Manual path — fill the files yourself
+
+1. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —
    charter → domain model → system direction → roadmap → status docs →
    agent entry points → priorities. Order matters; later files assume
    earlier ones are real. Keep `examples/linkcheck/` open as a filled-in
    model for every step.
-3. **Delete `TEMPLATE:` markers as you fill things in**, and let the checker
+2. **Delete `TEMPLATE:` markers as you fill things in**, and let the checker
    tell you what's left:
    ```bash
    ./scripts/check-templates.sh        # or scripts/check-templates.ps1
    ```
-4. **Do one real loop end to end** (checklist step 11) before trusting the
+3. **Do one real loop end to end** (checklist step 11) before trusting the
    framework with unsupervised work — including dropping a note in
    `INBOX.md` mid-loop to confirm the steering channel works.
-5. From then on: the agent loops, `ROADMAP.md` is where you spend
-   authorization, `INBOX.md` is how you steer, and commit diffs are how you
-   audit.
+
+### Either way, from then on
+
+The agent loops, `ROADMAP.md` is where you spend authorization, `INBOX.md`
+is how you steer, and commit diffs are how you audit.
 
 ## File map
 
 ```
 LOOP_ENGINEERING.md    concept guide — read this first
 INIT_CHECKLIST.md      fill-in order for a new project
+BOOTSTRAP.md           the same checklist run as an agent-led interview — paste your idea, answer one batch of questions, authorize once
 CLAUDE.md / AGENTS.md  agent entry points (keep in sync; different tools read different files)
 ROADMAP.md             pre-authorized phase queue — the phase loop plans from this
 PRIORITIES.md          ordered, rule-governed task queue — the task loop executes from this
@@ -251,8 +271,9 @@ asking first* — the charter and domain model pre-authorize its judgment
 calls, not just its task list.
 
 **Why do only some files have a Traditional Chinese version?**
-Only four purely-reference docs — `LOOP_ENGINEERING.md`,
-`INIT_CHECKLIST.md`, `CONTRIBUTING.md`, `examples/README.md` — have
+Only five purely-reference docs — `LOOP_ENGINEERING.md`,
+`INIT_CHECKLIST.md`, `BOOTSTRAP.md`, `CONTRIBUTING.md`,
+`examples/README.md` — have
 `.zh-TW.md` siblings, because they never get filled in with project-specific
 content, so they can safely stay bilingual forever. `CLAUDE.md`/`AGENTS.md`/
 `PRIORITIES.md`/`ROADMAP.md`/`INBOX.md`/`docs/*.md` deliberately do **not**
@@ -267,7 +288,9 @@ content in is entirely your call; the scaffold doesn't prescribe it.
 ## Non-goals
 
 - **Not a project generator or CLI.** There's no `loop-engine init`. Copy
-  the files, fill them in.
+  the files, then fill them in — by hand (`INIT_CHECKLIST.md`) or via the
+  agent-led interview (`BOOTSTRAP.md`); either way it's files and
+  discipline, not tooling.
 - **Not a substitute for tests, CI, or code review.** The gates are how an
   agent proves work is done; they don't replace your quality bar.
 - **Not a way to remove the human.** It relocates human judgment to where

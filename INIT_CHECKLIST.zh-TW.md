@@ -5,6 +5,11 @@
 [`LOOP_ENGINEERING.zh-TW.md`](LOOP_ENGINEERING.zh-TW.md)——這份清單只是機械
 式的執行順序;那份文件解釋了為什麼順序要這樣排。
 
+**不想手動走完這份清單?** [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md) 把同
+一份清單變成 agent 主導的訪談:你貼上專案想法、一批回答完問題、讀一份簡短的
+授權摘要——其他全部由 agent 打字。無論走哪條路,這份清單都仍然是規格;
+bootstrap 是一步一步照著它走,不是繞過它。
+
 跟擁有這個專案的人類一起走完這份清單——步驟 1-4 需要他們的判斷,不是 agent
 的猜測。Agent 可以起草,但要由人類確認過後,才能被當作已授權。
 
@@ -59,7 +64,9 @@
       `TEMPLATE:` 標記的檔案和行號,有殘留就非零結束。一份文件裡還留著
       `TEMPLATE:` 註解,就代表它還不是正典來源——在註解消失之前,把它當成
       「還沒寫」。(`docs/audits/TEMPLATE.md` 本身故意被排除在掃描之外——它
-      本來就該永遠是一份空白模板;見 `docs/audits/README.md`。)
+      本來就該永遠是一份空白模板;見 `docs/audits/README.md`。`BOOTSTRAP.md`
+      和它的 `.zh-TW` 版本也被排除,因為它們以指令的形式逐字引用了
+      bootstrap 授權標記。)
 - [ ] **11. 真的跑一次迴圈。** 挑 `PRIORITIES.md` 的第一項,走完
       `LOOP_ENGINEERING.zh-TW.md` 裡完整的 task loop——實作、用
       `docs/status.md` 的 task gate 驗證、更新現況文件、移除該優先項目、記

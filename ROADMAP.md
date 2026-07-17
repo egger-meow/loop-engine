@@ -17,7 +17,11 @@ task queue drains.
 - Only a human adds a phase, reorders phases, or promotes a phase out of
   "Proposed." Writing a phase here **is** the authorization — that's the
   point: authorize once, in writing, instead of being asked phase by phase
-  later.
+  later. (One exception, at project start only: during bootstrap an agent
+  may draft the initial phases from the human's interview answers, under
+  the explicit awaiting-authorization marker `BOOTSTRAP.md` prescribes —
+  and nothing here licenses any work until the human approves and that
+  marker is removed.)
 - The agent may do exactly two things to this file: **activate** the next
   phase in order (move it to "Active Phase" and decompose it into
   `PRIORITIES.md` items), and **remove** a completed phase — but only after

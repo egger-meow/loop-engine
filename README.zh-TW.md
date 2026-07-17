@@ -26,7 +26,8 @@ loop-engine 是一套初始化腳手架——一組 Markdown 模板加上一份�
   ——完整的概念說明。這份 README 是實作指南,不是它的替代品。
 - **想看填好的樣子?** [`examples/linkcheck/`](examples/linkcheck/) 是一份
   完整的實例——每個模板都真實填寫完畢。
-- **準備採用?** 直接跳到 [快速開始](#快速開始)。
+- **準備採用?** 直接跳到 [快速開始](#快速開始)——有訪談路線(agent 幫你
+  填完一切)和手動路線兩條路。
 
 ---
 
@@ -116,29 +117,48 @@ phase、或把提案升格為已授權。那些是人類的動作,以書面完�
 
 ## 快速開始
 
-1. **把整個 repo 的內容複製進你的專案根目錄**——除了 `README.md` 和
-   `README.zh-TW.md`(它們描述的是 loop-engine,不是你的專案)。
-   `examples/`、`CONTRIBUTING.md`,以及這幾個檔案的 `.zh-TW.md` 版本都可留
-   可刪。
-2. **照順序走完 [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md)**——
+無論走哪條路,第一步都一樣:**把整個 repo 的內容複製進你的專案根目錄**——
+除了 `README.md` 和 `README.zh-TW.md`(它們描述的是 loop-engine,不是你的
+專案)。`examples/`、`CONTRIBUTING.md`,以及這幾個檔案的 `.zh-TW.md` 版本
+都可留可刪。
+
+### 訪談路線——貼上想法、回答問題、授權一次
+
+在新 repo 裡開啟你的 agent,貼上:
+
+> 讀 `BOOTSTRAP.md` 並照它的 agent 程序執行。我的專案想法:
+> *(一段話或一整頁——寫得亂沒關係,任何語言都可以)*
+
+Agent 會一批問完問題、起草下面的每一份檔案,然後只為一件事停下來:你讀完一
+份五句話的摘要,說「我授權這份內容」,任何迴圈才會開始。完整協議(包括
+bootstrap 被中斷後怎麼不迷路地接續)見
+[`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md)。
+
+### 手動路線——自己填檔案
+
+1. **照順序走完 [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md)**——
    charter → domain model → system direction → roadmap → 現況文件 →
    agent 入口 → priorities。順序有意義:後面的檔案假設前面的已經是真的。過
    程中把 `examples/linkcheck/` 開在旁邊當每一步的填寫範本(這個範例只有英
    文版)。
-3. **邊填邊刪 `TEMPLATE:` 標記**,用檢查腳本找漏網之魚:
+2. **邊填邊刪 `TEMPLATE:` 標記**,用檢查腳本找漏網之魚:
    ```bash
    ./scripts/check-templates.sh        # Windows 用 scripts/check-templates.ps1
    ```
-4. **完整跑一次真實迴圈**(checklist 第 11 步)再把無人監督的工作交給它——
+3. **完整跑一次真實迴圈**(checklist 第 11 步)再把無人監督的工作交給它——
    包括中途往 `INBOX.md` 丟一句話,確認轉向通道真的有效。
-5. 之後:agent 自己迴圈,`ROADMAP.md` 是你花授權的地方,`INBOX.md` 是你
-   轉向的地方,commit diff 是你稽核的地方。
+
+### 無論哪條路,之後都是
+
+Agent 自己迴圈,`ROADMAP.md` 是你花授權的地方,`INBOX.md` 是你轉向的地方,
+commit diff 是你稽核的地方。
 
 ## 檔案地圖
 
 ```
 LOOP_ENGINEERING.md    概念指南——先讀這個
 INIT_CHECKLIST.md      新專案的填寫順序
+BOOTSTRAP.md           同一份清單的訪談版——貼上想法、一批回答、授權一次
 CLAUDE.md / AGENTS.md  agent 入口(保持同步;不同工具讀不同檔名)
 ROADMAP.md             預先授權的 phase 佇列——phase loop 據此規劃
 PRIORITIES.md          有序、有規則的任務佇列——task loop 據此執行
@@ -226,9 +246,9 @@ Backlog 工具追蹤*要做什麼*。這裡解決的是*為什麼 agent 可以�
 charter 和 domain model 預先授權的是它的判斷,不只是它的任務清單。
 
 **為什麼只有部分檔案有繁體中文版?**
-只有四份純參考文件——`LOOP_ENGINEERING.md`、`INIT_CHECKLIST.md`、
-`CONTRIBUTING.md`、`examples/README.md`——有 `.zh-TW.md` 版本,因為它們永
-遠不會被填入專案專屬內容,可以安全地永久保持雙語。`CLAUDE.md`/`AGENTS.md`/
+只有五份純參考文件——`LOOP_ENGINEERING.md`、`INIT_CHECKLIST.md`、
+`BOOTSTRAP.md`、`CONTRIBUTING.md`、`examples/README.md`——有 `.zh-TW.md`
+版本,因為它們永遠不會被填入專案專屬內容,可以安全地永久保持雙語。`CLAUDE.md`/`AGENTS.md`/
 `PRIORITIES.md`/`ROADMAP.md`/`INBOX.md`/`docs/*.md` 這些**沒有**繁中版
 ——它們的檔名本身是功能性的(Claude Code 認 `CLAUDE.md`、loop 程序寫死要讀
 `PRIORITIES.md` 這些確切檔名),而且一旦專案開始運作就會被填入真實、會變動的
@@ -238,7 +258,9 @@ charter 和 domain model 預先授權的是它的判斷,不只是它的任務清
 
 ## 非目標
 
-- **不是產生器也不是 CLI。**沒有 `loop-engine init`。複製檔案,填進去。
+- **不是產生器也不是 CLI。**沒有 `loop-engine init`。複製檔案,然後填進去
+  ——自己填(`INIT_CHECKLIST.md`)或讓 agent 訪談你之後幫你填
+  (`BOOTSTRAP.md`);無論哪種,都是檔案加紀律,不是工具鏈。
 - **不取代測試、CI 或 code review。**關卡是 agent 舉證的方式,不是你品質
   標準的替代品。
 - **不是把人類移出迴圈。**是把人類的判斷搬到真正需要它的地方:方向、授權、

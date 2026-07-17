@@ -8,7 +8,11 @@ The pre-authorized phase queue for linkcheck. Where `PRIORITIES.md` answers
 ## How This File Works
 
 - Only a human adds a phase, reorders phases, or promotes a phase out of
-  "Proposed." Writing a phase here **is** the authorization.
+  "Proposed." Writing a phase here **is** the authorization. (One
+  exception, at project start only: during bootstrap an agent may draft
+  the initial phases under the explicit awaiting-authorization marker
+  `../../BOOTSTRAP.md` prescribes — removed here long ago, once the human
+  approved.)
 - The agent may do exactly two things to this file: **activate** the next
   phase in order (move it to "Active Phase" and decompose it into
   `PRIORITIES.md` items), and **remove** a completed phase — but only after

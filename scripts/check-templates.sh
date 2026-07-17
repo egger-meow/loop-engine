@@ -16,6 +16,11 @@
 # and inline placeholders (`TEMPLATE: <...>`) — so docs that merely *mention*
 # TEMPLATE: markers in prose (README, LOOP_ENGINEERING.md, this checklist's
 # own instructions) don't flag forever.
+#
+# Excluded by design: docs/audits/TEMPLATE.md (meant to stay a blank template
+# forever) and BOOTSTRAP.md/.zh-TW.md (they quote the bootstrap
+# awaiting-authorization marker verbatim as an instruction, and would
+# otherwise flag forever — their exit-0 state detection depends on this).
 
 set -euo pipefail
 
@@ -25,6 +30,7 @@ matches=$(grep -rnE --include='*.md' \
     --exclude-dir=.git --exclude-dir=node_modules \
     --exclude-dir=.venv --exclude-dir=venv --exclude-dir=__pycache__ \
     --exclude='TEMPLATE.md' \
+    --exclude='BOOTSTRAP.md' --exclude='BOOTSTRAP.zh-TW.md' \
     '<!-- TEMPLATE:|`TEMPLATE: ' "$scan_path" || true)
 
 if [ -z "$matches" ]; then

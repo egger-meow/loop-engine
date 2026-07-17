@@ -6,6 +6,12 @@ template placeholders) before it can be filled in honestly. Read
 checklist is just the mechanical sequence; that doc is why the sequence is
 this way.
 
+**Don't want to walk this by hand?** [`BOOTSTRAP.md`](BOOTSTRAP.md) runs
+this same checklist as an agent-led interview: you paste your project idea,
+answer one batch of questions, and read one short authorization summary —
+the agent types everything else. This checklist remains the spec either
+way; bootstrap follows it step by step rather than bypassing it.
+
 Work through this with the human who owns the project — steps 1-4 require
 their judgment, not an agent's guess. An agent can draft them, but a human
 should confirm before they're treated as authorized.
@@ -68,8 +74,10 @@ ready to use with nothing to fill in — leave it as-is (and empty).
       carrying a `TEMPLATE:` marker and exits nonzero if any remain. A doc
       with a `TEMPLATE:` comment still in it is not yet a source of truth —
       treat it as "not written" until the comment is gone. (`docs/audits/
-      TEMPLATE.md` itself is excluded from the scan on purpose — it's meant
-      to stay a blank template forever; see `docs/audits/README.md`.)
+      TEMPLATE.md` is excluded from the scan on purpose — it's meant to
+      stay a blank template forever; see `docs/audits/README.md`. So are
+      `BOOTSTRAP.md` and its `.zh-TW` sibling, which quote the bootstrap
+      authorization marker verbatim as an instruction.)
 - [ ] **11. Do one real loop.** Take the first `PRIORITIES.md` item through
       the full task loop in `LOOP_ENGINEERING.md` — implement, verify via
       the task gate from `docs/status.md`, update status docs, retire the

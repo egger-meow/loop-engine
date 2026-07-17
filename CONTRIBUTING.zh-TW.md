@@ -38,8 +38,9 @@ loop-engine,想知道怎麼填寫*你自己的*模板,請改看
 4. 如果這個改動影響了 `README.md`,把它同步到 `README.zh-TW.md`——兩者互為
    翻譯,必須傳達相同的內容。同樣地,如果改動影響了
    [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)、
-   [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md)、`CONTRIBUTING.md`,或
-   [`examples/README.md`](examples/README.md)(這四份是唯一有繁體中文版本
+   [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md)、[`BOOTSTRAP.md`](BOOTSTRAP.md)、
+   `CONTRIBUTING.md`,或
+   [`examples/README.md`](examples/README.md)(這五份是唯一有繁體中文版本
    的檔案),同步更新它們各自的 `.zh-TW.md` 版本。
 5. 針對 `examples/linkcheck/`(應回報乾淨——那個目錄依設計不該有未填的
    `TEMPLATE:` 標記)以及根目錄腳手架(應回報一切仍是模板狀態,因為根目錄腳
