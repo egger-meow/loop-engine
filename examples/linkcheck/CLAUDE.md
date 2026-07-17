@@ -29,6 +29,12 @@ Read, in this order, if you haven't already this session:
 6. [`docs/status.md`](docs/status.md) and
    [`docs/build-status.md`](docs/build-status.md) — what currently exists.
 
+Do **not** add `CHANGELOG.md` or `docs/audits/` to this routine orientation
+read. They're append-only history — read on demand only (a specific audit
+via its index, the `[Unreleased]` section when adding an entry), never as a
+blanket read for context. See `../../LOOP_ENGINEERING.md`, "Reading
+discipline."
+
 Full procedure (the two loops, the inbox protocol, both verification gates):
 `../../LOOP_ENGINEERING.md`.
 

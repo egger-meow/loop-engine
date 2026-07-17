@@ -53,6 +53,28 @@ instruction only until the agent translates it into one of the four homes
 above, then that item is deleted. It is a mailbox, not a document — see
 "The inbox" below.
 
+## Reading discipline: write often, read on demand
+
+Not every file gets read every loop, and that split is deliberate, not an
+oversight. The **current-truth** files — `docs/status.md`,
+`docs/build-status.md`, `PRIORITIES.md`, `ROADMAP.md` — are read at every
+task-loop and phase-loop boundary (see below), which is exactly why they
+carry a shrinking-queue rule: a file that gets re-read constantly has to
+stay small, or every loop pays a growing token cost for zero new
+information.
+
+**History files — `CHANGELOG.md`, `docs/audits/`, git — are the opposite:
+written to constantly (append-only), read rarely, on demand.** Neither the
+task loop nor the phase loop below includes them in routine orientation.
+Open one only for a specific reason — adding a new entry (a write, not a
+full read), preparing a release, or checking whether a specific past claim
+still holds — and even then, read narrowly: the `[Unreleased]` section of
+`CHANGELOG.md`, not its full history; the one audit file
+[`docs/audits/README.md`](docs/audits/README.md)'s index points you to, not
+every file in that folder. "Let me read the whole CHANGELOG for context" or
+"let me skim all the audits" is a mistake, not thoroughness — it's exactly
+the token cost append-only history exists to avoid paying every loop.
+
 ## The two loops
 
 Work happens in two nested loops.

@@ -63,6 +63,11 @@ Plus one file that is deliberately *not* truth: [`INBOX.md`](INBOX.md), the
 human-input mailbox — items live there only until translated into one of the
 four homes above.
 
+Append-only doesn't mean read-every-loop: History files are written to
+constantly but read on demand only, unlike the current-truth files above,
+which are re-read at every loop boundary and therefore have to stay small.
+See `LOOP_ENGINEERING.md`, "Reading discipline," for the full split.
+
 ### Two nested loops
 
 The **task loop** executes one authorized task at a time. The **phase loop**

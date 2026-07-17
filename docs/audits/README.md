@@ -16,6 +16,11 @@ features or bug fixes — `docs/build-status.md`'s Verification Evidence log
 covers those. An audit is for the bigger unit: the thing that was worth a
 human explicitly authorizing as a phase in the first place.
 
+This folder is append-only history, not routine reading — see
+`../../LOOP_ENGINEERING.md`, "Reading discipline." When you need evidence
+for a specific phase, open only that phase's file via the Index below;
+don't read every audit in this folder to "get context."
+
 ## How to write one
 
 Copy [`TEMPLATE.md`](TEMPLATE.md) to `<phase-name>-audit.md` in this folder

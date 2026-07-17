@@ -62,6 +62,12 @@ input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
 [`docs/status.md`](docs/status.md), and
 [`docs/build-status.md`](docs/build-status.md).
 
+Do **not** add `CHANGELOG.md` or `docs/audits/` to that routine read.
+They're append-only history — open one only for a specific reason (adding
+an entry, preparing a release, checking a specific past claim), and read
+narrowly even then (the relevant audit via its index, not the whole
+folder). See `../../LOOP_ENGINEERING.md`, "Reading discipline."
+
 Keep [`PRIORITIES.md`](PRIORITIES.md) current per its own internal rules.
 When you complete or deprioritize an item, follow that file's removal rule
 instead of leaving it struck through or annotated in place. The same
