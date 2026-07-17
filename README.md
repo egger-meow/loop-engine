@@ -126,7 +126,8 @@ skipped.
 
 1. **Copy the repo's contents into your project root** — except `README.md`
    and `README.zh-TW.md`, which describe loop-engine, not your project.
-   `examples/` and `CONTRIBUTING.md` are optional to keep.
+   `examples/`, `CONTRIBUTING.md`, and every `.zh-TW.md` sibling are optional
+   to keep.
 2. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —
    charter → domain model → system direction → roadmap → status docs →
    agent entry points → priorities. Order matters; later files assume
@@ -244,6 +245,20 @@ A backlog tracks *what* to do. This is about *why an agent can act without
 asking first* — the charter and domain model pre-authorize its judgment
 calls, not just its task list.
 
+**Why do only some files have a Traditional Chinese version?**
+Only four purely-reference docs — `LOOP_ENGINEERING.md`,
+`INIT_CHECKLIST.md`, `CONTRIBUTING.md`, `examples/README.md` — have
+`.zh-TW.md` siblings, because they never get filled in with project-specific
+content, so they can safely stay bilingual forever. `CLAUDE.md`/`AGENTS.md`/
+`PRIORITIES.md`/`ROADMAP.md`/`INBOX.md`/`docs/*.md` deliberately do **not**
+— their filenames are functionally load-bearing (Claude Code looks for the
+exact name `CLAUDE.md`, the loop procedure reads `PRIORITIES.md` by exact
+path) and they get filled with real, live-mutating content once a project
+starts. Maintaining two live language copies of a mutable source of truth
+would produce two canonical homes fighting each other — a direct violation
+of "one canonical home per fact." What language your team writes the real
+content in is entirely your call; the scaffold doesn't prescribe it.
+
 ## Non-goals
 
 - **Not a project generator or CLI.** There's no `loop-engine init`. Copy
@@ -257,8 +272,8 @@ calls, not just its task list.
 
 Improvements to the scaffold itself are welcome — see
 [`CONTRIBUTING.md`](CONTRIBUTING.md). The bar: a change must keep the four
-kinds of truth separable, keep `examples/linkcheck/` in sync, and keep both
-READMEs in agreement.
+kinds of truth separable, keep `examples/linkcheck/` in sync, and keep every
+bilingual file pair in agreement.
 
 ## License
 

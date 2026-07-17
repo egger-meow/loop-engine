@@ -263,8 +263,9 @@ context" a non-event, because the context was never only in its head.
 
 - [`README.md`](README.md) / [`README.zh-TW.md`](README.zh-TW.md) — what this
   repo is and how to adopt it into a new project (English / 繁體中文).
-- [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) — the order to fill in the
-  templates when bootstrapping a new project from this scaffold.
+- [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) /
+  [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md) — the order to fill in
+  the templates when bootstrapping a new project from this scaffold.
 - [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — agent entry points.
   Keep both in sync; different tools read different files.
 - [`ROADMAP.md`](ROADMAP.md) — the pre-authorized phase queue the phase loop

@@ -43,7 +43,14 @@ adding a new file or section, check:
    fully-filled-in instance of the current templates — a drifted example is
    actively misleading.
 4. If the change affects `README.md`, mirror it in `README.zh-TW.md` — the
-   two are translations of each other and must make the same claims.
+   two are translations of each other and must make the same claims. The
+   same applies to the other three files with a `.zh-TW.md` sibling —
+   `LOOP_ENGINEERING.md`, `INIT_CHECKLIST.md`, and `examples/README.md` (this
+   file, `CONTRIBUTING.md`, is itself one of the four). Everything else
+   deliberately does **not** get a `.zh-TW.md` sibling — see README.md's FAQ
+   "Why do only some files have a Traditional Chinese version?" for why
+   (functionally load-bearing filenames + mutable live content don't mix
+   with permanent bilingual twins).
 5. Run the template-completeness check against `examples/linkcheck/` (it
    should report clean — that directory has no unfilled `TEMPLATE:`
    markers by design) and against the root scaffold (it should report

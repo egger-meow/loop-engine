@@ -22,8 +22,8 @@ loop-engine 是一套初始化腳手架——一組 Markdown 模板加上一份�
 沒有 CLI、沒有 runtime、不綁定任何一家 agent 工具:它就是檔案加紀律。複製進
 任何 repo——Python daemon、TypeScript CLI、Rust service——把空格填上即可。
 
-- **第一次來?** 先讀 [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)——完整的
-  概念說明。這份 README 是實作指南,不是它的替代品。
+- **第一次來?** 先讀 [`LOOP_ENGINEERING.zh-TW.md`](LOOP_ENGINEERING.zh-TW.md)
+  ——完整的概念說明。這份 README 是實作指南,不是它的替代品。
 - **想看填好的樣子?** [`examples/linkcheck/`](examples/linkcheck/) 是一份
   完整的實例——每個模板都真實填寫完畢。
 - **準備採用?** 直接跳到 [快速開始](#快速開始)。
@@ -114,11 +114,13 @@ phase、或把提案升格為已授權。那些是人類的動作,以書面完�
 
 1. **把整個 repo 的內容複製進你的專案根目錄**——除了 `README.md` 和
    `README.zh-TW.md`(它們描述的是 loop-engine,不是你的專案)。
-   `examples/` 和 `CONTRIBUTING.md` 可留可刪。
-2. **照順序走完 [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md)**——charter →
-   domain model → system direction → roadmap → 現況文件 → agent 入口 →
-   priorities。順序有意義:後面的檔案假設前面的已經是真的。過程中把
-   `examples/linkcheck/` 開在旁邊當每一步的填寫範本。
+   `examples/`、`CONTRIBUTING.md`,以及這幾個檔案的 `.zh-TW.md` 版本都可留
+   可刪。
+2. **照順序走完 [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md)**——
+   charter → domain model → system direction → roadmap → 現況文件 →
+   agent 入口 → priorities。順序有意義:後面的檔案假設前面的已經是真的。過
+   程中把 `examples/linkcheck/` 開在旁邊當每一步的填寫範本(這個範例只有英
+   文版)。
 3. **邊填邊刪 `TEMPLATE:` 標記**,用檢查腳本找漏網之魚:
    ```bash
    ./scripts/check-templates.sh        # Windows 用 scripts/check-templates.ps1
@@ -219,6 +221,17 @@ Yet Authorized」),不能批准。
 Backlog 工具追蹤*要做什麼*。這裡解決的是*為什麼 agent 可以不先問就動手*——
 charter 和 domain model 預先授權的是它的判斷,不只是它的任務清單。
 
+**為什麼只有部分檔案有繁體中文版?**
+只有四份純參考文件——`LOOP_ENGINEERING.md`、`INIT_CHECKLIST.md`、
+`CONTRIBUTING.md`、`examples/README.md`——有 `.zh-TW.md` 版本,因為它們永
+遠不會被填入專案專屬內容,可以安全地永久保持雙語。`CLAUDE.md`/`AGENTS.md`/
+`PRIORITIES.md`/`ROADMAP.md`/`INBOX.md`/`docs/*.md` 這些**沒有**繁中版
+——它們的檔名本身是功能性的(Claude Code 認 `CLAUDE.md`、loop 程序寫死要讀
+`PRIORITIES.md` 這些確切檔名),而且一旦專案開始運作就會被填入真實、會變動的
+內容。同時維護兩份語言的活文件,只會製造出兩個互相打架的正典來源——直接違反
+「每個事實只有一個正典的家」這條設計原則。你的團隊要用什麼語言寫這些活文件的
+實際內容,完全由你們自己決定;框架本身不規定。
+
 ## 非目標
 
 - **不是產生器也不是 CLI。**沒有 `loop-engine init`。複製檔案,填進去。
@@ -229,9 +242,9 @@ charter 和 domain model 預先授權的是它的判斷,不只是它的任務清
 
 ## 貢獻
 
-歡迎改進腳手架本身——見 [`CONTRIBUTING.md`](CONTRIBUTING.md)。門檻:修改必須
-維持四種真相可分離、讓 `examples/linkcheck/` 保持同步、讓兩份 README 內容
-一致。
+歡迎改進腳手架本身——見 [`CONTRIBUTING.zh-TW.md`](CONTRIBUTING.zh-TW.md)
+(或英文版 [`CONTRIBUTING.md`](CONTRIBUTING.md))。門檻:修改必須維持四種真
+相可分離、讓 `examples/linkcheck/` 保持同步、讓每一組雙語文件內容一致。
 
 ## 授權條款
 
