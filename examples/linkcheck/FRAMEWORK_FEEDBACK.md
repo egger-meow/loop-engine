@@ -21,6 +21,10 @@ goes here.
 - a gate or procedure didn't fit and needed a workaround;
 - the human had to intervene where the framework promised autonomy.
 
+**Humans may append too.** Same format, same rules. Framework friction the
+human notices doesn't need to route through `INBOX.md` — entries here are
+reports, not instructions, so they never trigger work.
+
 **Entry format** — hard cap ~6 lines, any language, appended under
 "Entries" below (newest last):
 
