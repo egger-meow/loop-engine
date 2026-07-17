@@ -2,7 +2,7 @@
 
 # loop-engine
 
-**別再對 AI coding agent 蓋章說「ok」了。用白紙黑字,一次授權到位。**
+**打造可靠的 AI 迴圈，不是一團 prompt 義大利麵。**
 
 [English](README.md) · [繁體中文](README.zh-TW.md)
 

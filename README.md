@@ -2,7 +2,7 @@
 
 # loop-engine
 
-**Stop rubber-stamping your AI coding agent. Authorize it once — in writing.**
+**Build reliable AI loops, not prompt spaghetti.**
 
 [English](README.md) · [繁體中文](README.zh-TW.md)
 
