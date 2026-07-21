@@ -24,10 +24,14 @@ abstract template.
 **Before step 1:** if you copied loop-engine's own `README.md` (or
 `README.zh-TW.md`) into your project, replace them with your project's
 actual README — they describe loop-engine, not your project, and don't get
-templated like the files below. `INBOX.md` is the opposite case: it ships
-ready to use with nothing to fill in — leave it as-is (and empty). So does
-`FRAMEWORK_FEEDBACK.md` — empty until the framework itself gives you
-something to report.
+templated like the files below. A real README needs, at minimum: a
+one-line description of what the project does, the tech stack, and a
+Getting Started section with actual install/run commands — *then* the
+Status paragraph with links into the canonical docs below. A page that's
+only a Status paragraph and doc links, with no way to actually run the
+thing, is not a README. `FRAMEWORK_FEEDBACK.md` is the opposite case: it
+ships ready to use with nothing to fill in — leave it as-is, empty until
+the framework itself gives you something to report.
 
 - [ ] **1. `docs/project-charter.md`** — Mission, core areas, guardrails.
       This is the highest-authority doc; everything else should trace back
