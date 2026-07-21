@@ -42,6 +42,19 @@ new PRIORITIES.md item, Non-Blocking / Later entry, or ROADMAP.md proposal
 if one exists). Say
 "none" explicitly rather than omitting this section. -->
 
+## Try It Yourself
+
+<!-- Concrete steps for a human to verify this phase matches what they
+actually wanted — not more proof it works (that's the Evidence section
+above), but an invitation to judge fit. Write real commands and real
+things to look at, e.g. "run `npm run dev`, create a Book, drag to
+reorder its priority, confirm the Weekly View updates with no duplicate
+slot." If this phase has no user-observable surface (an internal
+refactor, a data-layer-only change nobody would look at directly), say so
+explicitly: "N/A — no user-observable surface this phase." Never omit
+this section silently — omission reads as forgetting, not as
+"not applicable." -->
+
 ## Follow-Up
 
 <!-- Any new PRIORITIES.md items, Non-Blocking / Later items, or ROADMAP.md

@@ -66,6 +66,16 @@ build all green).
 None. All six gates were met as originally written with no scope changes
 during implementation.
 
+## Try It Yourself
+
+Run `npx linkcheck test/fixtures/broken-tree --fix` on a clean git tree
+and confirm by eye: the case-mismatch and redirect-mapped links get
+corrected, everything else (anchor breaks, external 404s, unmapped moves)
+is still reported and left untouched, and `git diff` shows only the link
+target strings changed — no reformatting anywhere. Then dirty the tree
+(edit any unrelated file, don't commit) and re-run without `--force`;
+confirm it refuses with `E_DIRTY_TREE` and writes nothing.
+
 ## Follow-Up
 
 - No automated fixture-replay test exists yet for Autofix — this phase's

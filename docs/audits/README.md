@@ -31,6 +31,12 @@ evidence: a command and its result, a manual verification with what was
 checked, a link to a test. "It should work" is not evidence; re-read
 `LOOP_ENGINEERING.md`, "Two verification gates," if that's tempting.
 
+Also fill in "Try It Yourself" — concrete steps for the *human* to confirm
+the phase matches what they actually wanted, distinct from the Evidence
+section's proof that it works. The phase gate proves the agent didn't
+misrepresent what it built; it doesn't prove a human likes the result.
+`LOOP_ENGINEERING.md`, "Human acceptance," covers where this surfaces.
+
 Audits are append-only history, like `CHANGELOG.md` — once written, don't
 edit an audit to reflect later changes. If something the audit certified
 later breaks or turns out incomplete, that's a new `PRIORITIES.md` item and,

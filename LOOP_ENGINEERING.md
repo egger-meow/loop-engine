@@ -174,8 +174,10 @@ This is the outer procedure:
    a human can make) before planning anything else on top of stale direction.
 2. **Check the overall goal.** Read the charter and [`ROADMAP.md`](ROADMAP.md).
    If there is no active phase and no authorized phase remaining, everything
-   pre-authorized is done: **stop and wait for a human.** This — not an empty
-   task queue — is the real "wait for human" condition.
+   pre-authorized is done: **stop and wait for a human** — see "Human
+   acceptance" below for what that stop actually needs to say, not just
+   that the queue is empty. This — not an empty task queue — is the real
+   "wait for human" condition.
 3. **Close out a finished phase.** If the active phase's exit condition
    appears met: run the **phase gate** (see "Two verification gates" below),
    write the audit in `docs/audits/` per
@@ -258,6 +260,27 @@ task is too shallow to prove a whole phase works end to end, and a gate
 thorough enough to prove a phase is too slow to run per-task — it would get
 skipped, and a gate that gets skipped protects nothing.
 
+## Human acceptance
+
+The phase gate proves the agent didn't misrepresent what it built — it
+does not prove a human actually likes the result. Those are different
+questions. Left unaddressed, a phase can reach "Complete" on agent-run
+tests and an agent-driven walkthrough alone, with no human ever having
+touched the running system — technically verified, never actually seen.
+
+Every phase audit closes with a "Try It Yourself" section (see
+[`docs/audits/TEMPLATE.md`](docs/audits/TEMPLATE.md)): concrete steps for
+a human to try, or an explicit "N/A" when the phase has no
+user-observable surface. Writing it is part of closing the phase, same as
+the rest of the audit — it does **not** block the phase gate or delay
+activating the next phase. This is deliberately an invitation, not a
+checkpoint the agent waits on; making it blocking would recreate the
+"wait for approval before proceeding" bottleneck this repo exists to
+avoid.
+
+An invitation nobody sees isn't one. The moment it has to actually land is
+roadmap exhaustion, below.
+
 ## When the agent must stop and wait for a human
 
 Loop engineering does not mean the agent never talks to the human — it means
@@ -266,7 +289,12 @@ Stop and wait when:
 
 - **The roadmap is exhausted.** No active phase, nothing under "Authorized
   Phases" in `ROADMAP.md`. (An empty *task queue* alone is not this — that
-  just returns to the phase loop.)
+  just returns to the phase loop.) Don't just report that the queue is
+  empty: gather the "Try It Yourself" sections from the audits written
+  since the roadmap was last exhausted and present them as what they are
+  — an invitation to check the built work actually matches what was
+  wanted, not only proof that it runs — then ask for either confirmation
+  or the next phase's goal and exit condition.
 - **A chat instruction needs a human decision** — it proposes a new phase,
   a danger-based reordering, or a direction change the written docs can't
   settle.

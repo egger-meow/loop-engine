@@ -126,6 +126,14 @@ One gate can't do both jobs: fast-enough-per-task is too shallow to prove a
 phase; thorough-enough-per-phase is too slow to run per task and would get
 skipped.
 
+Passing the phase gate proves the agent didn't misrepresent what it
+built — it doesn't prove a human actually likes the result. Every audit
+also closes with a "Try It Yourself" section (concrete steps, or an
+explicit "N/A") and roadmap exhaustion surfaces those as an invitation to
+check fit, not just a report that the queue is empty. See
+`LOOP_ENGINEERING.md`, "Human acceptance." This never blocks the loop —
+it's an invitation, not a second gate.
+
 ## What it costs
 
 The overhead is a fixed orientation read at the start of each agent
