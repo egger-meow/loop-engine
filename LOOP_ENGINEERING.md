@@ -100,9 +100,10 @@ PHASE LOOP
   2. goal + roadmap check ───────────── roadmap exhausted → WAIT FOR HUMAN
   3. active phase's exit condition met?
        yes → run PHASE GATE → write audit → remove phase from ROADMAP.md
-  4. activate next authorized phase → decompose into PRIORITIES.md
-  5. ↓ run the task loop
-  6. ↑ back to 1
+  4. first-ever non-N/A "Try It Yourself"? ── yes → WAIT FOR HUMAN (once)
+  5. activate next authorized phase → decompose into PRIORITIES.md
+  6. ↓ run the task loop
+  7. ↑ back to 1
 
 TASK LOOP  (inside step 5, repeats while the queue has items)
   a. fold in chat input ──────────── direction-level input → exit to phase loop
@@ -185,13 +186,19 @@ This is the outer procedure:
    entry, and remove the phase from `ROADMAP.md` per that file's rules. If
    the phase gate fails, the gap goes into `PRIORITIES.md` and the phase
    stays active.
-4. **Activate the next authorized phase.** Take the first phase under
+4. **First-look check.** See "Human acceptance" below for the full rule —
+   in short, if the audit just written is the first one in this project
+   with a real (non-"N/A") "Try It Yourself" section, stop here and wait
+   for the human instead of continuing to step 5. This fires at most once
+   per project; once any phase has cleared it, skip straight to step 5
+   from here on.
+5. **Activate the next authorized phase.** Take the first phase under
    "Authorized Phases" in `ROADMAP.md`, mark it active, and decompose it into
    concrete `PRIORITIES.md` items — each with a stated "done means" that the
    task gate can verify. This decomposition is mechanical planning within
    what the human already authorized, so it does not need per-item sign-off.
-5. **Run the task loop** until an exit trigger fires.
-6. **Return to step 1.**
+6. **Run the task loop** until an exit trigger fires.
+7. **Return to step 1.**
 
 ## Human steering
 
@@ -278,8 +285,35 @@ checkpoint the agent waits on; making it blocking would recreate the
 "wait for approval before proceeding" bottleneck this repo exists to
 avoid.
 
-An invitation nobody sees isn't one. The moment it has to actually land is
-roadmap exhaustion, below.
+**One exception: the first real invitation blocks, once.** Everything
+before a phase closes was authorized on paper — the charter, the domain
+model, the phase's own exit condition, all approved as *descriptions*
+before anything existed to look at. The first phase whose "Try It
+Yourself" is non-"N/A" is the first point where "approved in writing" and
+"actually wanted" can be checked against a real artifact instead of a
+description of one, and it's the cheapest point to catch a mismatch —
+before more phases build on the same foundation, not after. So: before
+activating the next phase, check whether any earlier audit in
+`docs/audits/` already has a non-"N/A" "Try It Yourself" section. If none
+does and the phase that just closed does, stop — don't activate the next
+phase yet, even if more are already authorized in `ROADMAP.md` — and
+present that section to the human as a direct question: does this
+actually match what was wanted? Wait for a reply before continuing. (If
+most phases have no observable surface yet, this check simply carries to
+the next phase's close instead of firing — the same on-demand exception
+"Reading discipline" already allows for checking a specific past claim,
+not a routine full read of `docs/audits/`.)
+
+This is a one-time cost, not a new per-phase gate: once any phase has
+cleared this check, every later phase reverts to the non-blocking default
+above — direction-fit was empirically confirmed once, and re-confirming
+it every phase would recreate the per-step approval bottleneck this repo
+exists to avoid. (If the roadmap also happens to be exhausted at this
+point, follow the roadmap-exhaustion stop below instead — it already
+covers this as a subset.)
+
+An invitation nobody sees isn't one. The moment it has to actually land
+for every phase after the first is roadmap exhaustion, below.
 
 ## When the agent must stop and wait for a human
 
@@ -295,6 +329,10 @@ Stop and wait when:
   — an invitation to check the built work actually matches what was
   wanted, not only proof that it runs — then ask for either confirmation
   or the next phase's goal and exit condition.
+- **This is the first phase to ever produce something a human can look
+  at.** See "Human acceptance" above — the check runs once per project,
+  not once per phase, and only when a "Try It Yourself" section is
+  actually real.
 - **A chat instruction needs a human decision** — it proposes a new phase,
   a danger-based reordering, or a direction change the written docs can't
   settle.

@@ -98,6 +98,15 @@ unblocks. Rules:
   **what language should the filled-in docs be written in**, and **what
   must this system never do** — the dump almost never states guardrails,
   and they're the highest-authority content in the repo.
+- If the dump describes anything Phase 1 will make visible — UI, tone,
+  output format — using subjective or aesthetic language ("modern,"
+  "clean," "friendly," "intuitive"), ask for one concrete anchor: a
+  reference app/site, an example, or a "more X than Y" comparison. Left
+  unanchored, that word defaults to whatever the agent picks, and a wrong
+  pick isn't caught until a human looks at the running result — cheaper to
+  anchor now than to rebuild after Phase 1. This still counts against the
+  ~10-question cap; it doesn't loosen it, and most dumps won't trigger it
+  at all.
 - Chat is transport, files are truth: answers get translated directly into
   the Stage 3 drafts. Do **not** create an interview-notes file — the
   filled-in docs are the record of the answers.
