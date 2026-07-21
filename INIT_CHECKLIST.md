@@ -87,9 +87,9 @@ the framework itself gives you something to report.
 - [ ] **11. Do one real loop.** Take the first `PRIORITIES.md` item through
       the full task loop in `LOOP_ENGINEERING.md` — implement, verify via
       the task gate from `docs/status.md`, update status docs, retire the
-      priority item, log the changelog entry. Drop a small note in
-      `INBOX.md` mid-loop and confirm the agent translates and clears it
-      per protocol. This surfaces any gap in the docs above (missing
+      priority item, log the changelog entry. Give the agent a small
+      correction in chat mid-loop and confirm it folds the change in per
+      protocol. This surfaces any gap in the docs above (missing
       context, an undefined gate, an ambiguous blocker definition) while
       it's cheap to fix, before relying on the framework for real
       autonomous work.
@@ -97,5 +97,5 @@ the framework itself gives you something to report.
 Once step 11 is done, an agent working in this repo should be able to start
 a fresh session, read `AGENTS.md`/`CLAUDE.md`, and correctly identify what to
 work on next without you re-explaining anything from this conversation — and
-you should be able to steer it mid-run by writing to `INBOX.md` instead of
-interrupting it in chat.
+you should be able to steer it mid-run just by telling it in chat, with
+every instruction that mattered still landing in a canonical file.

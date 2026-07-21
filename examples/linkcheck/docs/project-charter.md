@@ -69,8 +69,6 @@ memory of a past session as the record of what was decided.
   evidence.
 - [`../ROADMAP.md`](../ROADMAP.md): the pre-authorized phase queue.
 - [`../PRIORITIES.md`](../PRIORITIES.md): active engineering priorities.
-- [`../INBOX.md`](../INBOX.md): pending human input (transient — items are
-  translated into the docs above, then cleared).
 
 If a decision isn't answered by any doc listed here, that's a signal to stop
 and ask a human rather than infer — see `../../../LOOP_ENGINEERING.md`.

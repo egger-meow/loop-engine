@@ -47,12 +47,6 @@ If a fact doesn't fit one of these four, it probably doesn't need to be
 written down — or it belongs in a code comment at the point of the actual
 constraint.
 
-There is one more file that is deliberately **not** a kind of truth:
-[`INBOX.md`](INBOX.md), the human-input channel. It holds a pending human
-instruction only until the agent translates it into one of the four homes
-above, then that item is deleted. It is a mailbox, not a document — see
-"The inbox" below.
-
 ## Reading discipline: write often, read on demand
 
 Not every file gets read every loop, and that split is deliberate, not an
@@ -102,7 +96,7 @@ writing, in `ROADMAP.md`.
 
 ```
 PHASE LOOP
-  1. process INBOX.md
+  1. fold in chat input
   2. goal + roadmap check ───────────── roadmap exhausted → WAIT FOR HUMAN
   3. active phase's exit condition met?
        yes → run PHASE GATE → write audit → remove phase from ROADMAP.md
@@ -111,7 +105,7 @@ PHASE LOOP
   6. ↑ back to 1
 
 TASK LOOP  (inside step 5, repeats while the queue has items)
-  a. check INBOX.md ──────────────── direction-level input → exit to phase loop
+  a. fold in chat input ──────────── direction-level input → exit to phase loop
   b. take the top PRIORITIES.md item
   c. do the work
   d. prove it: TASK GATE
@@ -128,10 +122,11 @@ This is the inner procedure, one iteration per task:
    [`docs/project-charter.md`](docs/project-charter.md) and
    [`docs/domain-model.md`](docs/domain-model.md) if this is a new session or
    direction may have changed.
-2. **Check the inbox.** Open [`INBOX.md`](INBOX.md). If it has items, process
-   them per that file's protocol *before* taking new work: task-level input
-   gets translated into `PRIORITIES.md` edits or direct fixes and you
-   continue; direction-level input means exit to the phase loop now.
+2. **Fold in chat input.** If the human has said something since your last
+   turn that hasn't been acted on yet, classify it *before* taking new
+   work (see "Human steering" below): task-level input gets translated
+   into `PRIORITIES.md` edits or direct fixes and you continue;
+   direction-level input means exit to the phase loop now.
 3. **Check current truth.** Read [`docs/status.md`](docs/status.md) and
    [`docs/build-status.md`](docs/build-status.md) to know what already exists
    — don't re-derive this from chat memory, and don't trust a stale mental
@@ -156,7 +151,7 @@ This is the inner procedure, one iteration per task:
 The task loop exits to the phase loop when **any** of these happens:
 
 1. **The queue is empty** — the normal path: the phase may be done.
-2. **The inbox contains direction-level input** — a goal change, a strategy
+2. **Chat contains direction-level input** — a goal change, a strategy
    shift, "this is the wrong approach." Don't patch the current task around
    it; re-plan at the phase level.
 3. **The current task contradicts a direction doc** — the work can't be
@@ -164,7 +159,7 @@ The task loop exits to the phase loop when **any** of these happens:
    direction. The phase loop re-evaluates; if it can't resolve the conflict
    from the written docs either, that's a human question.
 
-A small human note in the inbox ("also fix the off-by-one in the pager") is
+A small human note in chat ("also fix the off-by-one in the pager") is
 **not** a reason to exit — translate it into the queue and keep looping.
 Bouncing every minor comment up to a full re-plan would make leaving feedback
 expensive, which is exactly the failure mode this repo exists to avoid.
@@ -173,8 +168,8 @@ expensive, which is exactly the failure mode this repo exists to avoid.
 
 This is the outer procedure:
 
-1. **Process the inbox first.** Direction-level items land here — apply them
-   to `ROADMAP.md`, `docs/project-charter.md`, or
+1. **Fold in chat input first.** Direction-level items land here — apply
+   them to `ROADMAP.md`, `docs/project-charter.md`, or
    `docs/system-direction.md` (or stop and ask, if they need a decision only
    a human can make) before planning anything else on top of stale direction.
 2. **Check the overall goal.** Read the charter and [`ROADMAP.md`](ROADMAP.md).
@@ -196,37 +191,41 @@ This is the outer procedure:
 5. **Run the task loop** until an exit trigger fires.
 6. **Return to step 1.**
 
-## The inbox: the human checkpoint
+## Human steering
 
-[`INBOX.md`](INBOX.md) is how a human steers a running loop without sitting
-next to it. Drop a note in the file at any time; the agent checks it at every
-task-loop boundary and at the start of every phase loop. The full protocol
-lives in the file itself; the load-bearing rules are:
+There's no mailbox file for human input — a human steers a running loop by
+talking to it, in the same chat the agent is already working in. Whatever
+the human says gets classified the same way a written note would be, and
+folded in before the loop continues:
 
-- **One-shot semantics.** An item lives in the inbox only until it's
-  processed. This keeps the file near-empty at rest — no accumulating
-  history to re-read every loop, no index needed, no token bloat.
-- **Translate, then clear, in the same commit.** The commit that deletes an
-  item must contain the edits that item turned into (a `PRIORITIES.md` entry,
-  a charter change, a status fix). The diff is the receipt — the human
-  reviews it to catch misreadings *before* the instruction is gone. Never
-  "read and clear" without the translation in the same change.
-- **Delete only what you processed.** Never truncate the whole file — the
-  human may have appended a new item while the agent was mid-loop.
-- **Git is the archive.** The file stays tracked in git (do not gitignore
-  it); its commit history is the permanent record of what came through and
-  what each item became.
+- **Task-level** (a bug, a tweak, a small addition) → translate into a
+  `PRIORITIES.md` edit or a direct fix; stay in the task loop.
+- **Direction-level** (a goal change, a strategy shift, "wrong approach")
+  → exit to the phase loop; apply to `ROADMAP.md`,
+  `docs/project-charter.md`, or `docs/system-direction.md`, or stop and
+  ask if it needs a decision only a human can make.
+- **A factual correction** → fix `docs/status.md` or the affected doc.
+- **A question** → answer directly; no doc edit needed.
+
+The commit that results from acting on an instruction is the receipt — the
+same translate-it-into-a-canonical-file discipline as everywhere else in
+this repo, just without a physical mailbox to clear. This is a deliberate
+trade: it assumes a human is actually present in the conversation. An
+agent running unattended — scheduled, backgrounded, or picking up after a
+gap with nobody watching — has no live chat to read from, so this scaffold
+doesn't provide a channel for that case; if you need one, that's a
+project-specific addition, not something here.
 
 ## Framework feedback: the flight recorder
 
-[`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) is the inbox's mirror
-image: the inbox carries human input *into* the project; this file carries
-defect reports *out of* it, back to the scaffold the project was copied
-from. When the framework itself fails you mid-loop — you got lost despite
-the docs, a rule forced token waste, two rules contradicted each other, a
-gate didn't fit, the human had to step in where autonomy was promised —
-append a short entry (the file's header gives the format and a ~6-line
-cap) and keep working.
+[`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) is the mirror image of
+human steering: chat carries human input *into* the project; this file
+carries defect reports *out of* it, back to the scaffold the project was
+copied from. When the framework itself fails you mid-loop — you got lost
+despite the docs, a rule forced token waste, two rules contradicted each
+other, a gate didn't fit, the human had to step in where autonomy was
+promised — append a short entry (the file's header gives the format and a
+~6-line cap) and keep working.
 
 Three rules keep it near-free, all inherited from patterns above:
 
@@ -268,8 +267,8 @@ Stop and wait when:
 - **The roadmap is exhausted.** No active phase, nothing under "Authorized
   Phases" in `ROADMAP.md`. (An empty *task queue* alone is not this — that
   just returns to the phase loop.)
-- **An inbox item needs a human decision** — it proposes a new phase, a
-  danger-based reordering, or a direction change the written docs can't
+- **A chat instruction needs a human decision** — it proposes a new phase,
+  a danger-based reordering, or a direction change the written docs can't
   settle.
 - **Authorizing new phase-sized work.** The agent may *propose* a phase under
   "Proposed — Not Yet Authorized" in `ROADMAP.md`, with a suggested goal and
@@ -300,11 +299,10 @@ bottleneck that makes the agent slower than doing it by hand. Because
 direction, state, priority, and history live in specific files with specific
 shapes instead of in conversation, a fresh agent session (or a different
 agent entirely) can pick up exactly where the last one left off by reading a
-bounded set of files — not by reading the whole project history. And because
-steering happens through `INBOX.md` instead of live chat, the human can
-drop a correction at 9am and review the receipt-diff at noon — the loop
-doesn't block on their presence, and their input doesn't get lost in a
-scrollback. That's the actual point of this repo: make "the agent forgot the
+bounded set of files — not by reading the whole project history, and not by
+re-reading old chat scrollback either, since every instruction that
+mattered was already translated into one of those files the moment it was
+acted on. That's the actual point of this repo: make "the agent forgot the
 context" a non-event, because the context was never only in its head.
 
 ## What's in this repo
@@ -323,9 +321,6 @@ context" a non-event, because the context was never only in its head.
 - [`ROADMAP.md`](ROADMAP.md) — the pre-authorized phase queue the phase loop
   plans from.
 - [`PRIORITIES.md`](PRIORITIES.md) — the task-level priority queue contract.
-- [`INBOX.md`](INBOX.md) — the human checkpoint mailbox. Ships ready to use
-  (no `TEMPLATE:` markers); just leave it empty until you have something to
-  say to a running loop.
 - [`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) — append-only flight
   recorder for defects in the framework itself, harvested upstream to
   loop-engine at phase close. Ships ready to use; empty is its normal

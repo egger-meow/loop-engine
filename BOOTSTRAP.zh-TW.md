@@ -27,12 +27,12 @@
    phase 和它的退場條件、護欄、關卡指令。這是你唯一真的必須讀的東西。把不對
    的地方改掉,然後明確地說:**「我授權這份內容。」** 在你說之前,什麼迴圈都
    不會開始。
-5. **看著第一圈跑完(建議)。** Agent 執行第一個真實任務時,往 `INBOX.md` 丟
-   一句小備註,確認它被翻譯並清空——之後你就是靠這個檔案轉向的。
+5. **看著第一圈跑完(建議)。** Agent 執行第一個真實任務時,在聊天裡給它一
+   個小修正,確認它有正確折進去——之後你就是這樣轉向的。
 
 整個過程你只在兩個時刻被需要:第 3 步和第 4 步。其他都是 agent 的工作。之後
 就由 [`LOOP_ENGINEERING.zh-TW.md`](LOOP_ENGINEERING.zh-TW.md) 的兩層迴圈接
-手:`ROADMAP.md` 是你花授權的地方,`INBOX.md` 是你轉向的地方。
+手:`ROADMAP.md` 是你花授權的地方,聊天是你轉向的地方。
 
 ## Agent 程序
 
@@ -129,7 +129,8 @@ README。
 
 批准之後:把 `ROADMAP.md` 裡的標記刪掉,並讓這個刪除單獨成為一個 commit,
 例如 `bootstrap: authorized by <name>, <date>`。**那個 diff 就是授權回執**
-——跟 `INBOX.md` 一樣的「回執進 git」模式。
+——跟這個 repo 對任何聊天指令用的「回執進 git」模式一樣(見
+`LOOP_ENGINEERING.md` 的「人類轉向」)。
 
 **退場條件:** check-templates 以 0 結束;回執 commit 存在。
 
@@ -137,8 +138,8 @@ README。
 
 執行清單第 11 步:把 `PRIORITIES.md` 第一項帶著走完
 `LOOP_ENGINEERING.md` 裡完整的一圈 task loop——實作、task gate、更新現況、
-移除項目、記 changelog。邀請人類在中途往 `INBOX.md` 丟一句話,並照協議處理
-它,讓轉向通道在被依賴之前先被證明有效。
+移除項目、記 changelog。邀請人類在中途於聊天裡丟一句小修正,並照協議把它折
+進去,讓轉向通道在被依賴之前先被證明有效。
 
 至此 bootstrap 結束,這份檔案再無話可說——之後由 `LOOP_ENGINEERING.md` 治
 理,專案隨時可以刪掉 `BOOTSTRAP.md`(和 `BOOTSTRAP.zh-TW.md`)。

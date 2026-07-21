@@ -50,8 +50,9 @@ said about their project in chat as the intake. If a bootstrap was
 already underway, use that file's "Locating yourself" table. The notes
 below apply once init is complete.
 
-Before changing behavior, read [`INBOX.md`](INBOX.md) (process pending human
-input per its protocol first), [`PRIORITIES.md`](PRIORITIES.md),
+There's no mailbox file for human input — instructions arrive in chat; fold
+in whatever the human said most recently before changing behavior (see
+"Human steering" below). Then read [`PRIORITIES.md`](PRIORITIES.md),
 [`ROADMAP.md`](ROADMAP.md),
 [`docs/project-charter.md`](docs/project-charter.md),
 [`docs/domain-model.md`](docs/domain-model.md),
@@ -77,10 +78,19 @@ shrinking-queue rule applies to completed phases in [`ROADMAP.md`](ROADMAP.md)
 — close them per the phase-loop procedure in `LOOP_ENGINEERING.md` (phase
 gate, then audit, then removal), never by annotation.
 
-Check [`INBOX.md`](INBOX.md) at every loop boundary. Translate each item
-into its canonical home and delete it **in the same commit** — the diff is
-the human's receipt. Never truncate the whole file; delete only what you
-processed.
+## Human steering
+
+There's no mailbox file for human input — instructions arrive in chat.
+Classify each one the same way you would a written note: task-level (a
+bug, a tweak, a small addition) → translate into a `PRIORITIES.md` edit
+or a direct fix; direction-level (a goal change, "wrong approach") →
+apply to `ROADMAP.md` / `docs/project-charter.md` /
+`docs/system-direction.md`, or stop and ask if it needs a decision only a
+human can make; a factual correction → fix the affected status doc; a
+question → just answer, no doc edit needed. The commit that results from
+acting on an instruction is the receipt — the same translate-it-into-a-
+canonical-file discipline as everywhere else in this repo, just without a
+physical mailbox to clear.
 
 <!-- TEMPLATE: Add any project-specific standing rule here, in the same
 spirit as this example from a prior project:

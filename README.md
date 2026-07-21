@@ -18,8 +18,9 @@ operating procedure — that turns "agent proposes, human types *ok*, repeat"
 into "human authorizes in writing once, agent loops until the roadmap runs
 out." Direction, current state, priority, and history each get exactly one
 canonical file with a defined shape and update cadence. The agent reads
-those files instead of asking; you steer a running loop by dropping a note
-in a mailbox file instead of babysitting a chat window.
+those files instead of asking; steering a running loop is just talking to
+it — the loop folds what you say into those same canonical files instead
+of letting it evaporate into scrollback.
 
 No CLI, no runtime, no lock-in to one agent tool: it's files and discipline.
 Copy it into any repo — Python daemon, TypeScript CLI, Rust service — and
@@ -60,10 +61,6 @@ and ask for what was already decided.
 | **Priority** | What is the agent authorized to work on next? | `ROADMAP.md` (phase-sized), `PRIORITIES.md` (task-sized) | Every loop — items removed when done |
 | **History** | What happened, when, with what evidence? | `CHANGELOG.md`, `docs/audits/`, git | Append-only |
 
-Plus one file that is deliberately *not* truth: [`INBOX.md`](INBOX.md), the
-human-input mailbox — items live there only until translated into one of the
-four homes above.
-
 Append-only doesn't mean read-every-loop: History files are written to
 constantly but read on demand only, unlike the current-truth files above,
 which are re-read at every loop boundary and therefore have to stay small.
@@ -80,13 +77,13 @@ it's just the signal to go back up one level.
 ```mermaid
 flowchart TB
     subgraph P["PHASE LOOP — plans within authorization"]
-        P1["1 · Process INBOX.md"] --> P2{"2 · ROADMAP.md<br>exhausted?"}
+        P1["1 · Fold in chat input"] --> P2{"2 · ROADMAP.md<br>exhausted?"}
         P2 -- yes --> P3(["Wait for human"])
         P2 -- no --> P4["3 · Close finished phase:<br>phase gate → audit → retire"]
         P4 --> P5["4 · Activate next authorized phase,<br>decompose into PRIORITIES.md"]
     end
     subgraph T["TASK LOOP — executes what's authorized"]
-        T1["a · Check INBOX.md"] --> T2["b · Take top PRIORITIES.md item"]
+        T1["a · Fold in chat input"] --> T2["b · Take top PRIORITIES.md item"]
         T2 --> T3["c · Do the work"]
         T3 --> T4["d · Prove it — task gate"]
         T4 --> T5["e · Update status docs,<br>retire item, record history"]
@@ -102,20 +99,21 @@ flowchart TB
 decompose it into tasks. It may never invent a phase, reorder phases, or
 promote a proposal to authorized. Those are human moves, made in writing.
 
-### The human checkpoint: `INBOX.md`
+### Human steering: chat
 
-Steer a running loop without interrupting it. Drop a note — a correction, a
-new requirement, "wrong approach" — into `INBOX.md` at any time. The agent
-checks it at every loop boundary and:
+There's no separate mailbox file — you steer a running loop by talking to
+it. Say a correction, a new requirement, "wrong approach," at any time; the
+agent:
 
-1. classifies each item (task-level → queue edit; direction-level → back to
-   the phase loop; factual correction → fix the status docs);
-2. **translates it into its canonical home and deletes it in the same
-   commit** — the diff is your receipt for how your note was understood;
-3. deletes only what it processed, never the whole file.
+1. classifies it (task-level → queue edit; direction-level → back to the
+   phase loop; factual correction → fix the status docs; a question → just
+   answers it);
+2. **translates it into its canonical home in the same turn** — the commit
+   is your receipt for how it was understood.
 
-The file stays tracked in git and empty at rest: git history is the archive,
-so the mailbox never accumulates token-burning backlog.
+This assumes a human is actually present in the chat. An agent running
+unattended has no channel for that here — see `LOOP_ENGINEERING.md`,
+"Human steering," for the tradeoff.
 
 ### Two verification gates
 
@@ -190,13 +188,14 @@ don't auto-read either file.
    ./scripts/check-templates.sh        # or scripts/check-templates.ps1
    ```
 3. **Do one real loop end to end** (checklist step 11) before trusting the
-   framework with unsupervised work — including dropping a note in
-   `INBOX.md` mid-loop to confirm the steering channel works.
+   framework with unsupervised work — including giving the agent a small
+   correction mid-loop in chat and confirming it folds the change in
+   correctly.
 
 ### Either way, from then on
 
-The agent loops, `ROADMAP.md` is where you spend authorization, `INBOX.md`
-is how you steer, and commit diffs are how you audit.
+The agent loops, `ROADMAP.md` is where you spend authorization, chat is how
+you steer, and commit diffs are how you audit.
 
 ## File map
 
@@ -207,7 +206,6 @@ BOOTSTRAP.md           the same checklist run as an agent-led interview — past
 CLAUDE.md / AGENTS.md  agent entry points (keep in sync; different tools read different files)
 ROADMAP.md             pre-authorized phase queue — the phase loop plans from this
 PRIORITIES.md          ordered, rule-governed task queue — the task loop executes from this
-INBOX.md               human checkpoint mailbox — empty at rest, ships ready to use
 CHANGELOG.md           history
 FRAMEWORK_FEEDBACK.md  append-only flight recorder for defects in the framework itself — harvested upstream to loop-engine
 CONTRIBUTING.md        how to propose changes to this scaffold itself
@@ -237,7 +235,6 @@ examples/
 | `docs/system-direction.md` | Target architecture vs. current fit | Human + agent | Occasionally |
 | `ROADMAP.md` | Pre-authorized phase queue | **Human authorizes**; agent activates & retires | Per phase |
 | `PRIORITIES.md` | Ordered task queue | Agent decomposes; human can insert | Every loop |
-| `INBOX.md` | Human → running loop channel | Human writes; agent translates & clears | Any time; empty at rest |
 | `docs/status.md` | Exact current behavior + gates | Agent | Every loop |
 | `docs/build-status.md` | Coarse status + dated proof log | Agent | At milestones |
 | `docs/audits/*` | Evidence a phase is actually done | Agent, at phase close | Once per phase, append-only |
@@ -255,9 +252,10 @@ examples/
   ordered so "what's next" never needs to be asked.
 - **Plans within authorization, never creates it.** The agent's planning
   power is bounded by what a human already wrote into `ROADMAP.md`.
-- **Steering is a file, not a conversation.** `INBOX.md` decouples the
-  human's availability from the loop's progress — and the
-  translate-then-clear-in-one-commit rule makes every instruction auditable.
+- **Steering is whatever the human already said.** Chat instructions get
+  the same classify-and-translate discipline as anything else — folded into
+  a canonical file the moment they're acted on — so the diff, not the
+  scrollback, is what's auditable later.
 - **Stack-agnostic by design.** Every template describes a *shape*, not
   framework-specific content.
 
@@ -275,10 +273,10 @@ and waits for you when `ROADMAP.md` itself is exhausted — that's the real
 "wait for human" condition, and it's a success state, not a failure.
 
 **How do I redirect the agent mid-run?**
-Write to `INBOX.md`. Task-level notes get folded into the queue without
+Just tell it in chat. Task-level notes get folded into the queue without
 breaking stride; direction-level notes bounce the agent back to the phase
-loop to re-plan. Either way the commit that clears your note contains the
-edits it turned into, so you can verify it was understood.
+loop to re-plan. Either way the commit that results contains the edits your
+note turned into, so you can verify it was understood.
 
 **What stops the agent from authorizing its own work?**
 The write rules on `ROADMAP.md`: the agent may activate the next phase and
@@ -307,7 +305,7 @@ Only five purely-reference docs — `LOOP_ENGINEERING.md`,
 `examples/README.md` — have
 `.zh-TW.md` siblings, because they never get filled in with project-specific
 content, so they can safely stay bilingual forever. `CLAUDE.md`/`AGENTS.md`/
-`PRIORITIES.md`/`ROADMAP.md`/`INBOX.md`/`docs/*.md` deliberately do **not**
+`PRIORITIES.md`/`ROADMAP.md`/`docs/*.md` deliberately do **not**
 — their filenames are functionally load-bearing (Claude Code looks for the
 exact name `CLAUDE.md`, the loop procedure reads `PRIORITIES.md` by exact
 path) and they get filled with real, live-mutating content once a project

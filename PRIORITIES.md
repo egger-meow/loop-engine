@@ -20,8 +20,8 @@ item, until a human explicitly reorders them.
 
 Items land under "Current Priorities" two ways: the phase loop decomposes
 the active [`ROADMAP.md`](ROADMAP.md) phase into tasks, or a human adds one
-directly (often via [`INBOX.md`](INBOX.md)). Either way, being written here
-is what authorizes the work.
+directly (often in chat). Either way, being written here is what
+authorizes the work.
 
 ## What Counts as a Blocker
 

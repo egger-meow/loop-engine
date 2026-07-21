@@ -5,8 +5,8 @@ picks the **first** item under "Current Priorities" as its next unit of
 work — not the most interesting one, not the easiest one.
 
 The items below are the decomposition of the active `ROADMAP.md` phase
-(Validation Hardening); a human can also insert items directly (usually via
-`INBOX.md`). Either way, being written here is what authorizes the work.
+(Validation Hardening); a human can also insert items directly (usually in
+chat). Either way, being written here is what authorizes the work.
 
 ## What Counts as a Blocker
 

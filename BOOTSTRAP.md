@@ -32,14 +32,13 @@ job — you never need to read past it. **Agents:** your procedure starts at
    must actually read. Fix anything wrong, then say explicitly:
    **"I authorize this."** Nothing loops before you do.
 5. **Watch the first loop (recommended).** While the agent runs its first
-   real task, drop a small note into `INBOX.md` and confirm it gets
-   translated and cleared — that file is how you'll steer from now on.
+   real task, give it a small correction in chat and confirm it gets
+   folded in — that's how you'll steer from now on.
 
 You're needed at exactly two moments: step 3 and step 4. Everything else
 is the agent's work. Afterward,
 [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)'s loops take over:
-`ROADMAP.md` is where you spend authorization, `INBOX.md` is how you
-steer.
+`ROADMAP.md` is where you spend authorization, chat is how you steer.
 
 ## Agent procedure
 
@@ -151,8 +150,9 @@ edit and re-present the changed lines.
 
 On approval: delete the marker from `ROADMAP.md` and commit that deletion
 by itself, e.g. `bootstrap: authorized by <name>, <date>`. **That diff is
-the authorization receipt** — the same receipt-in-git pattern as
-`INBOX.md`.
+the authorization receipt** — the same receipt-in-git pattern this repo
+uses for any chat instruction (see `LOOP_ENGINEERING.md`, "Human
+steering").
 
 **Exit:** check-templates exits 0; the receipt commit exists.
 
@@ -160,8 +160,8 @@ the authorization receipt** — the same receipt-in-git pattern as
 
 Run checklist step 11: take the top `PRIORITIES.md` item through one full
 task loop from `LOOP_ENGINEERING.md` — implement, task gate, status
-update, retire the item, changelog entry. Invite the human to drop a note
-into `INBOX.md` mid-loop and process it per protocol, so the steering
+update, retire the item, changelog entry. Invite the human to give a small
+correction in chat mid-loop and fold it in per protocol, so the steering
 channel is proven before it's relied on.
 
 Bootstrap is then over and this file has nothing further to say —
