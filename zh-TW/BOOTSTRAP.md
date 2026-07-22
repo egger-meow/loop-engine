@@ -1,7 +1,7 @@
 # Bootstrap:從一段貼上的想法,到跑起來的迴圈
 
 這是進入 loop-engine 的訪談路線。你不用親手填完
-[`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md) 的十一個步驟,而是把你
+[`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) 的十一個步驟,而是把你
 的專案想法貼給 agent;agent 會問你它推斷不出來的東西、起草每一份正典檔案,
 然後在任何迴圈開始之前,停下來等你一次明確的書面批准。清單仍然是規格——這份
 檔案是它前面的一層介面,不是繞過它的捷徑:清單要求的每樣東西都還是會被寫出
@@ -31,7 +31,7 @@
    個小修正,確認它有正確折進去——之後你就是這樣轉向的。
 
 整個過程你只在兩個時刻被需要:第 3 步和第 4 步。其他都是 agent 的工作。之後
-就由 [`LOOP_ENGINEERING.zh-TW.md`](LOOP_ENGINEERING.zh-TW.md) 的兩層迴圈接
+就由 [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md) 的兩層迴圈接
 手:`ROADMAP.md` 是你花授權的地方,聊天是你轉向的地方。
 
 ## Agent 程序
@@ -47,9 +47,9 @@
 
 ### Stage 0 — 定向
 
-完整讀完 [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md),再讀
-[`INIT_CHECKLIST.md`](INIT_CHECKLIST.md);把
-[`examples/linkcheck/`](examples/linkcheck/) 當填好的範本掃過一遍。清單是
+完整讀完 [`LOOP_ENGINEERING.md`](../LOOP_ENGINEERING.md),再讀
+[`INIT_CHECKLIST.md`](../INIT_CHECKLIST.md);把
+[`examples/linkcheck/`](../examples/linkcheck/) 當填好的範本掃過一遍。清單是
 「迴圈能安全運轉之前,哪些資訊必須存在」的規格;這套程序只改變由誰來打字。
 不要為了顯得快而跳過這一階段——你在 Stage 2 問的每一個問題,都必須有某個清
 單步驟需要那項資訊來背書。
@@ -98,7 +98,7 @@
 依清單順序填寫檔案,第 1–9 步(charter → domain model → system direction →
 roadmap → status → build-status → release → agent 入口 → priorities),每一
 份都完全照清單的描述來。也要遵守它的「在第 1 步之前」備註:把 loop-engine
-自己的 `README.md` / `README.zh-TW.md` 換成這個專案自己的、簡短而真實的
+自己的 `README.md` / `zh-TW/README.md` 換成這個專案自己的、簡短而真實的
 README。
 
 標記規則:
@@ -112,8 +112,9 @@ README。
   ```
 
 執行 `./scripts/check-templates.sh`(或 `.ps1`):**唯一**剩下的命中必須就
-是那個標記。(這份檔案自己引用的標記不算——`BOOTSTRAP.md` 和它的 `.zh-TW`
-版本依設計被排除在掃描之外,就像 `docs/audits/TEMPLATE.md` 一樣。)把整份
+是那個標記。(這份檔案自己引用的標記不算——`BOOTSTRAP.md` 和
+`zh-TW/BOOTSTRAP.md` 依設計被排除在掃描之外,就像 `docs/audits/TEMPLATE.md`
+一樣。)把整份
 草稿做成一個 commit,例如
 `bootstrap: draft all canonical docs, awaiting authorization`。
 
@@ -148,7 +149,7 @@ README。
 進去,讓轉向通道在被依賴之前先被證明有效。
 
 至此 bootstrap 結束,這份檔案再無話可說——之後由 `LOOP_ENGINEERING.md` 治
-理,專案隨時可以刪掉 `BOOTSTRAP.md`(和 `BOOTSTRAP.zh-TW.md`)。
+理,專案隨時可以刪掉 `BOOTSTRAP.md`(和 `zh-TW/BOOTSTRAP.md`)。
 
 ## 定位自己
 
@@ -174,5 +175,5 @@ README。
 - **標記還在,就沒有任何迴圈開始。** 連「先做一個小任務」都不行——什麼都不
   行。
 
-（本檔案是 [`BOOTSTRAP.md`](BOOTSTRAP.md) 的繁體中文版,兩者應保持內容一
+（本檔案是 [`BOOTSTRAP.md`](../BOOTSTRAP.md) 的繁體中文版,兩者應保持內容一
 致;若有出入,以英文版為準。）

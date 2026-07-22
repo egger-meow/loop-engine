@@ -22,7 +22,7 @@ you to write, so you have a concrete model for each step instead of just the
 abstract template.
 
 **Before step 1:** if you copied loop-engine's own `README.md` (or
-`README.zh-TW.md`) into your project, replace them with your project's
+`zh-TW/README.md`) into your project, replace them with your project's
 actual README — they describe loop-engine, not your project, and don't get
 templated like the files below. A real README needs, at minimum: a
 one-line description of what the project does, the tech stack, and a
@@ -82,7 +82,7 @@ the framework itself gives you something to report.
       treat it as "not written" until the comment is gone. (`docs/audits/
       TEMPLATE.md` is excluded from the scan on purpose — it's meant to
       stay a blank template forever; see `docs/audits/README.md`. So are
-      `BOOTSTRAP.md` and its `.zh-TW` sibling, which quote the bootstrap
+      `BOOTSTRAP.md` and `zh-TW/BOOTSTRAP.md`, which quote the bootstrap
       authorization marker verbatim as an instruction.)
 - [ ] **11. Do one real loop.** Take the first `PRIORITIES.md` item through
       the full task loop in `LOOP_ENGINEERING.md` — implement, verify via

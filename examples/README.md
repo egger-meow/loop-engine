@@ -1,5 +1,7 @@
 # Examples
 
+[English](README.md) · [繁體中文](zh-TW/README.md)
+
 [`linkcheck/`](linkcheck/) is a complete, fully-filled-in instance of the
 loop-engine scaffold for a small hypothetical CLI tool. Every `TEMPLATE:`
 comment from the root scaffold has been replaced with real content — no
@@ -8,8 +10,9 @@ reports clean).
 
 It exists to answer "what does a *filled-in* version of this actually look
 like," which is hard to picture from templates alone. Read it alongside
-[`../INIT_CHECKLIST.md`](../INIT_CHECKLIST.md): each file in `linkcheck/`
-corresponds 1:1 to a step in that checklist.
+[`../INIT_CHECKLIST.md`](../INIT_CHECKLIST.md) (or its Chinese translation,
+[`../zh-TW/INIT_CHECKLIST.md`](../zh-TW/INIT_CHECKLIST.md)): each file in
+`linkcheck/` corresponds 1:1 to a step in that checklist.
 
 linkcheck itself isn't a real, working tool — it's a plausible small CLI
 (scans a docs tree for broken markdown links, with an opt-in autofix mode)

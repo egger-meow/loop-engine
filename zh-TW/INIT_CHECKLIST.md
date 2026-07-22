@@ -2,10 +2,10 @@
 
 順序在這裡很重要:每一步都需要前面幾步是真的(不是模板佔位符),才能誠實地
 填寫。如果還沒讀過,先讀
-[`LOOP_ENGINEERING.zh-TW.md`](LOOP_ENGINEERING.zh-TW.md)——這份清單只是機械
+[`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)——這份清單只是機械
 式的執行順序;那份文件解釋了為什麼順序要這樣排。
 
-**不想手動走完這份清單?** [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md) 把同
+**不想手動走完這份清單?** [`BOOTSTRAP.md`](BOOTSTRAP.md) 把同
 一份清單變成 agent 主導的訪談:你貼上專案想法、一批回答完問題、讀一份簡短的
 授權摘要——其他全部由 agent 打字。無論走哪條路,這份清單都仍然是規格;
 bootstrap 是一步一步照著它走,不是繞過它。
@@ -13,13 +13,13 @@ bootstrap 是一步一步照著它走,不是繞過它。
 跟擁有這個專案的人類一起走完這份清單——步驟 1-4 需要他們的判斷,不是 agent
 的猜測。Agent 可以起草,但要由人類確認過後,才能被當作已授權。
 
-過程中把 [`examples/linkcheck/`](examples/linkcheck/) 開在另一個分頁——它是
+過程中把 [`examples/linkcheck/`](../examples/linkcheck/) 開在另一個分頁——它是
 這份清單要你寫的每一個檔案的完整填寫實例,讓你有一個具體的模型可以參考,而不
 只是抽象的模板。（這個範例本身只有英文版,沒有繁中版——它是「填好長什麼樣
 子」的示範,不是要逐字翻譯的說明文件。）
 
 **在第 1 步之前:** 如果你把 loop-engine 自己的 `README.md`(或
-`README.zh-TW.md`)複製進了你的專案,把它們換成你專案自己的 README——它們
+`zh-TW/README.md`)複製進了你的專案,把它們換成你專案自己的 README——它們
 描述的是 loop-engine,不是你的專案,而且不像下面的檔案那樣需要被模板化。
 一份像樣的 README 至少要有:一句話說明這個專案做什麼、技術棧,以及一個帶
 著真實安裝/執行指令的 Getting Started 段落——*然後*才是連到下面正典文件
@@ -68,10 +68,10 @@ bootstrap 是一步一步照著它走,不是繞過它。
       `TEMPLATE:` 註解,就代表它還不是正典來源——在註解消失之前,把它當成
       「還沒寫」。(`docs/audits/TEMPLATE.md` 本身故意被排除在掃描之外——它
       本來就該永遠是一份空白模板;見 `docs/audits/README.md`。`BOOTSTRAP.md`
-      和它的 `.zh-TW` 版本也被排除,因為它們以指令的形式逐字引用了
+      和 `zh-TW/BOOTSTRAP.md` 也被排除,因為它們以指令的形式逐字引用了
       bootstrap 授權標記。)
 - [ ] **11. 真的跑一次迴圈。** 挑 `PRIORITIES.md` 的第一項,走完
-      `LOOP_ENGINEERING.zh-TW.md` 裡完整的 task loop——實作、用
+      `LOOP_ENGINEERING.md` 裡完整的 task loop——實作、用
       `docs/status.md` 的 task gate 驗證、更新現況文件、移除該優先項目、記
       錄 changelog 條目。過程中在聊天裡給 agent 一句小修正,確認它有照協議
       折進去。這一步會在成本還低的時候,浮現出上面文件的任何缺口(缺
@@ -83,5 +83,5 @@ session、讀 `AGENTS.md`/`CLAUDE.md`,就正確判斷出接下來該做什麼,�
 這次對話裡重新解釋任何東西——而且你也應該能單純在聊天裡跟它說話就中途轉向
 它,每一條重要的指令仍然會落進正典檔案。
 
-（本檔案是 [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) 的繁體中文版，兩者應保持
+（本檔案是 [`INIT_CHECKLIST.md`](../INIT_CHECKLIST.md) 的繁體中文版，兩者應保持
 內容一致；若有出入，以英文版為準。）

@@ -373,12 +373,13 @@ context" a non-event, because the context was never only in its head.
 
 ## What's in this repo
 
-- [`README.md`](README.md) / [`README.zh-TW.md`](README.zh-TW.md) — what this
+- [`README.md`](README.md) / [`zh-TW/README.md`](zh-TW/README.md) — what this
   repo is and how to adopt it into a new project (English / 繁體中文).
 - [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) /
-  [`INIT_CHECKLIST.zh-TW.md`](INIT_CHECKLIST.zh-TW.md) — the order to fill in
+  [`zh-TW/INIT_CHECKLIST.md`](zh-TW/INIT_CHECKLIST.md) — the order to fill in
   the templates when bootstrapping a new project from this scaffold.
-- [`BOOTSTRAP.md`](BOOTSTRAP.md) / [`BOOTSTRAP.zh-TW.md`](BOOTSTRAP.zh-TW.md)
+- [`BOOTSTRAP.md`](BOOTSTRAP.md) /
+  [`zh-TW/BOOTSTRAP.md`](zh-TW/BOOTSTRAP.md)
   — the interview alternative to the checklist: an agent asks what it can't
   infer from your pasted idea, drafts every canonical file, and waits for
   one explicit written authorization before any loop starts.

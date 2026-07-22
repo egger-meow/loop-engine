@@ -120,7 +120,7 @@ Fill the files in checklist order, steps 1–9 (charter → domain model →
 system direction → roadmap → status → build-status → release → agent
 entry points → priorities), exactly as the checklist describes each. Also
 honor its "Before step 1" note: replace loop-engine's own `README.md` /
-`README.zh-TW.md` with a short, real README for this project.
+`zh-TW/README.md` with a short, real README for this project.
 
 Marker rules:
 
@@ -135,7 +135,7 @@ Marker rules:
 
 Run `./scripts/check-templates.sh` (or `.ps1`): the **only** remaining hit
 must be that marker. (This file's own quotation of the marker doesn't
-count — `BOOTSTRAP.md` and its `.zh-TW` sibling are excluded from the scan
+count — `BOOTSTRAP.md` and `zh-TW/BOOTSTRAP.md` are excluded from the scan
 by design, like `docs/audits/TEMPLATE.md`.) Commit the whole draft as one
 commit, e.g. `bootstrap: draft all canonical docs, awaiting authorization`.
 
@@ -175,7 +175,7 @@ channel is proven before it's relied on.
 
 Bootstrap is then over and this file has nothing further to say —
 `LOOP_ENGINEERING.md` governs from here, and the project may delete
-`BOOTSTRAP.md` (and `BOOTSTRAP.zh-TW.md`) whenever it likes.
+`BOOTSTRAP.md` (and `zh-TW/BOOTSTRAP.md`) whenever it likes.
 
 ## Locating yourself
 

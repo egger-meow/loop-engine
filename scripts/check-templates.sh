@@ -18,9 +18,11 @@
 # own instructions) don't flag forever.
 #
 # Excluded by design: docs/audits/TEMPLATE.md (meant to stay a blank template
-# forever) and BOOTSTRAP.md/.zh-TW.md (they quote the bootstrap
-# awaiting-authorization marker verbatim as an instruction, and would
-# otherwise flag forever — their exit-0 state detection depends on this).
+# forever) and BOOTSTRAP.md, wherever it appears (root and zh-TW/BOOTSTRAP.md
+# both quote the bootstrap awaiting-authorization marker verbatim as an
+# instruction, and would otherwise flag forever — their exit-0 state
+# detection depends on this). --exclude matches on basename, so one
+# '--exclude=BOOTSTRAP.md' catches both locations without listing each path.
 
 set -euo pipefail
 
@@ -30,7 +32,7 @@ matches=$(grep -rnE --include='*.md' \
     --exclude-dir=.git --exclude-dir=node_modules \
     --exclude-dir=.venv --exclude-dir=venv --exclude-dir=__pycache__ \
     --exclude='TEMPLATE.md' \
-    --exclude='BOOTSTRAP.md' --exclude='BOOTSTRAP.zh-TW.md' \
+    --exclude='BOOTSTRAP.md' \
     '<!-- TEMPLATE:|`TEMPLATE: ' "$scan_path" || true)
 
 if [ -z "$matches" ]; then

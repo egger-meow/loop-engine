@@ -4,7 +4,7 @@
 
 **Build reliable AI loops, not prompt spaghetti.**
 
-[English](README.md) · [繁體中文](README.zh-TW.md)
+[English](README.md) · [繁體中文](zh-TW/README.md)
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
@@ -160,9 +160,9 @@ built for.
 ## Quick start
 
 Step one is the same either way: **copy the repo's contents into your
-project root** — except `README.md` and `README.zh-TW.md`, which describe
-loop-engine, not your project. `examples/`, `CONTRIBUTING.md`, and every
-`.zh-TW.md` sibling are optional to keep.
+project root** — except `README.md` and `zh-TW/README.md`, which describe
+loop-engine, not your project. `examples/`, `CONTRIBUTING.md`, and the
+`zh-TW/` directory are optional to keep.
 
 ### Interview path — paste your idea, answer questions, authorize once
 
@@ -218,6 +218,9 @@ CHANGELOG.md           history
 FRAMEWORK_FEEDBACK.md  append-only flight recorder for defects in the framework itself — harvested upstream to loop-engine
 CONTRIBUTING.md        how to propose changes to this scaffold itself
 LICENSE                MIT
+
+zh-TW/                 Traditional Chinese translations — README.md, LOOP_ENGINEERING.md,
+                        INIT_CHECKLIST.md, BOOTSTRAP.md, CONTRIBUTING.md
 
 docs/
   README.md            index of the docs below
@@ -310,9 +313,11 @@ calls, not just its task list.
 **Why do only some files have a Traditional Chinese version?**
 Only five purely-reference docs — `LOOP_ENGINEERING.md`,
 `INIT_CHECKLIST.md`, `BOOTSTRAP.md`, `CONTRIBUTING.md`,
-`examples/README.md` — have
-`.zh-TW.md` siblings, because they never get filled in with project-specific
-content, so they can safely stay bilingual forever. `CLAUDE.md`/`AGENTS.md`/
+`examples/README.md` — are mirrored in Chinese, because they never get
+filled in with project-specific content, so they can safely stay bilingual
+forever. Translations live under `zh-TW/` (`examples/zh-TW/` for the
+worked example's README), same basename as the English original.
+`CLAUDE.md`/`AGENTS.md`/
 `PRIORITIES.md`/`ROADMAP.md`/`docs/*.md` deliberately do **not**
 — their filenames are functionally load-bearing (Claude Code looks for the
 exact name `CLAUDE.md`, the loop procedure reads `PRIORITIES.md` by exact
