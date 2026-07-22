@@ -43,9 +43,10 @@ data is sensitive enough to require extra care when touched. -->
 ## Agent Operating Notes
 
 **Not initialized yet?** If this repo's files still carry `TEMPLATE:`
-markers (`./scripts/check-templates.sh` lists them), don't improvise and
+markers (`./.loop-engine/scripts/check-templates.sh` lists them), don't
+improvise and
 don't try to loop — follow the agent procedure in
-[`BOOTSTRAP.md`](BOOTSTRAP.md), treating anything the human has already
+[`.loop-engine/BOOTSTRAP.md`](.loop-engine/BOOTSTRAP.md), treating anything the human has already
 said about their project in chat as the intake. If a bootstrap was
 already underway, use that file's "Locating yourself" table. The notes
 below apply once init is complete.
@@ -62,12 +63,13 @@ in whatever the human said most recently before changing behavior (see
 <!-- TEMPLATE: add any subsystem-specific docs an agent must read before
 touching that subsystem, e.g. "also read docs/api-spec.md for API work." -->
 
-Do **not** add `CHANGELOG.md`, `docs/audits/`, or `FRAMEWORK_FEEDBACK.md`
+Do **not** add `CHANGELOG.md`, `docs/audits/`, or
+`.loop-engine/FRAMEWORK_FEEDBACK.md`
 to that routine read. They're append-only history — open one only for a
 specific reason (adding an entry, preparing a release, checking a specific
 past claim), and read narrowly even then (the relevant audit via its
-index, not the whole folder). See `LOOP_ENGINEERING.md`, "Reading
-discipline." `FRAMEWORK_FEEDBACK.md` is write-only during loops: when the
+index, not the whole folder). See `.loop-engine/LOOP_ENGINEERING.md`, "Reading
+discipline." `.loop-engine/FRAMEWORK_FEEDBACK.md` is write-only during loops: when the
 framework itself misleads you or wastes tokens, append a short entry per
 that file's header and move on — nothing in it licenses work.
 
@@ -75,7 +77,7 @@ Keep [`PRIORITIES.md`](PRIORITIES.md) current per its own internal rules.
 When you complete or deprioritize an item, follow that file's removal rule
 instead of leaving it struck through or annotated in place. The same
 shrinking-queue rule applies to completed phases in [`ROADMAP.md`](ROADMAP.md)
-— close them per the phase-loop procedure in `LOOP_ENGINEERING.md` (phase
+— close them per the phase-loop procedure in `.loop-engine/LOOP_ENGINEERING.md` (phase
 gate, then audit, then removal), never by annotation.
 
 ## Human steering
@@ -104,4 +106,4 @@ rather than growing this file indefinitely. Reference it from here.
 
 Full procedure for how priority, current-state, and direction docs relate to
 each other, and when to stop and ask a human instead of proceeding: see
-[`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md).
+[`.loop-engine/LOOP_ENGINEERING.md`](.loop-engine/LOOP_ENGINEERING.md).

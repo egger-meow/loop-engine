@@ -6,7 +6,7 @@ phase gate (see `../status.md`) and is completely finished. The audit is
 what licenses removing the phase from `../../ROADMAP.md`.
 
 This folder is append-only history, not routine reading — see
-`../../LOOP_ENGINEERING.md`, "Reading discipline." When you need evidence
+`../../../../LOOP_ENGINEERING.md`, "Reading discipline." When you need evidence
 for a specific phase, open only that phase's file via the Index below;
 don't read every audit in this folder to "get context."
 

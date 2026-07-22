@@ -3,7 +3,7 @@ populate "Current Priorities" with the actual first items. The "Priority
 Rules" section below is meant to be adopted as-is — it's the mechanism that
 makes this file work as an authorization contract instead of a wishlist.
 Change it only if you have a specific reason to; if you do, make sure the
-change still satisfies the goal in LOOP_ENGINEERING.md ("What is the agent
+change still satisfies the goal in .loop-engine/LOOP_ENGINEERING.md ("What is the agent
 authorized to work on next?" must always have an unambiguous answer). Delete
 this comment once the file is live. -->
 
@@ -60,7 +60,8 @@ Everything else that's real work but doesn't meet this bar belongs under
    nice-to-have work here — that goes under "Non-Blocking / Later."
 3. If a new item is more dangerous/urgent than an existing item, explicitly
    reorder the list instead of appending it casually. Reordering on a real
-   danger judgment call is a human decision (see `LOOP_ENGINEERING.md`,
+   danger judgment call is a human decision (see
+   `.loop-engine/LOOP_ENGINEERING.md`,
    "When the agent must stop and ask a human") — an agent should flag the
    conflict and propose an order, not silently resequence the file.
 4. Keep priority items in strict order from most urgent to least urgent.
@@ -88,7 +89,7 @@ definition above, and (once work starts) what "done" looks like. Delete this
 placeholder once real items exist. An empty list here is a valid state — it
 means the current phase's queue has drained and the agent should return to
 the phase loop (close the phase, or activate the next authorized one from
-ROADMAP.md), not invent work. See LOOP_ENGINEERING.md. -->
+ROADMAP.md), not invent work. See .loop-engine/LOOP_ENGINEERING.md. -->
 
 _(none yet — fill in during project init, or leave empty and let the human
 supply the first item)_

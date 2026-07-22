@@ -98,7 +98,7 @@
 依清單順序填寫檔案,第 1–9 步(charter → domain model → system direction →
 roadmap → status → build-status → release → agent 入口 → priorities),每一
 份都完全照清單的描述來。也要遵守它的「在第 1 步之前」備註:把 loop-engine
-自己的 `README.md` / `zh-TW/README.md` 換成這個專案自己的、簡短而真實的
+自己的 `../../README.md` / `../../zh-TW/README.md` 換成這個專案自己的、簡短而真實的
 README。
 
 標記規則:
@@ -111,7 +111,7 @@ README。
   No phase in this file licenses any work while this marker exists. -->
   ```
 
-執行 `./scripts/check-templates.sh`(或 `.ps1`):**唯一**剩下的命中必須就
+執行 `./.loop-engine/scripts/check-templates.sh`(或 `.ps1`):**唯一**剩下的命中必須就
 是那個標記。(這份檔案自己引用的標記不算——`BOOTSTRAP.md` 和
 `zh-TW/BOOTSTRAP.md` 依設計被排除在掃描之外,就像 `docs/audits/TEMPLATE.md`
 一樣。)把整份
@@ -154,7 +154,7 @@ README。
 ## 定位自己
 
 單憑 repo 的狀態,任何 agent——新 session、不同工具、幾個月後——都能準確
-知道 bootstrap 走到哪裡。執行 `./scripts/check-templates.sh`,再看
+知道 bootstrap 走到哪裡。執行 `./.loop-engine/scripts/check-templates.sh`,再看
 `ROADMAP.md`:
 
 | Repo 狀態 | 階段 | 動作 |

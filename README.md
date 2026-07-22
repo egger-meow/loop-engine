@@ -26,10 +26,12 @@ No CLI, no runtime, no lock-in to one agent tool: it's files and discipline.
 Copy it into any repo — Python daemon, TypeScript CLI, Rust service — and
 fill in the blanks.
 
-- **New here?** Read [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md) — the full
-  concept, in depth. This README is the practical companion, not a
+- **New here?** Read
+  [`.loop-engine/LOOP_ENGINEERING.md`](.loop-engine/LOOP_ENGINEERING.md) —
+  the full concept, in depth. This README is the practical companion, not a
   replacement.
-- **Want to see it filled in?** [`examples/linkcheck/`](examples/linkcheck/)
+- **Want to see it filled in?**
+  [`.loop-engine/examples/linkcheck/`](.loop-engine/examples/linkcheck/)
   is a complete worked example — every template, filled in for real.
 - **Ready to adopt it?** Jump to [Quick start](#quick-start) — there's an
   interview path (an agent fills everything in) and a manual path.
@@ -64,7 +66,8 @@ and ask for what was already decided.
 Append-only doesn't mean read-every-loop: History files are written to
 constantly but read on demand only, unlike the current-truth files above,
 which are re-read at every loop boundary and therefore have to stay small.
-See `LOOP_ENGINEERING.md`, "Reading discipline," for the full split.
+See `.loop-engine/LOOP_ENGINEERING.md`, "Reading discipline," for the full
+split.
 
 ### Two nested loops
 
@@ -112,8 +115,8 @@ agent:
    is your receipt for how it was understood.
 
 This assumes a human is actually present in the chat. An agent running
-unattended has no channel for that here — see `LOOP_ENGINEERING.md`,
-"Human steering," for the tradeoff.
+unattended has no channel for that here — see
+`.loop-engine/LOOP_ENGINEERING.md`, "Human steering," for the tradeoff.
 
 ### Two verification gates
 
@@ -131,17 +134,19 @@ built — it doesn't prove a human actually likes the result. Every audit
 also closes with a "Try It Yourself" section (concrete steps, or an
 explicit "N/A") and roadmap exhaustion surfaces those as an invitation to
 check fit, not just a report that the queue is empty. See
-`LOOP_ENGINEERING.md`, "Human acceptance." This never blocks the loop —
-it's an invitation, not a second gate.
+`.loop-engine/LOOP_ENGINEERING.md`, "Human acceptance." This never blocks
+the loop — it's an invitation, not a second gate.
 
 ## What it costs
 
 The overhead is a fixed orientation read at the start of each agent
 session: the entry point plus the current-truth files — roughly **8k
 tokens** on a realistically filled-in project (measured on
-`examples/linkcheck/`), plus ~5k more the first time a session opens
-`LOOP_ENGINEERING.md`. That cost is capped by design: history files
-(`CHANGELOG.md`, `docs/audits/`, `FRAMEWORK_FEEDBACK.md`) are excluded
+`.loop-engine/examples/linkcheck/`), plus ~5k more the first time a
+session opens `.loop-engine/LOOP_ENGINEERING.md`. That cost is capped by
+design: history files
+(`CHANGELOG.md`, `docs/audits/`, `.loop-engine/FRAMEWORK_FEEDBACK.md`) are
+excluded
 from routine reads no matter how large they grow, and the current-truth
 files have to stay small precisely because they're re-read every loop.
 
@@ -161,39 +166,51 @@ built for.
 
 Step one is the same either way: **copy the repo's contents into your
 project root** — except `README.md` and `zh-TW/README.md`, which describe
-loop-engine, not your project. `examples/`, `CONTRIBUTING.md`, and the
-`zh-TW/` directory are optional to keep.
+loop-engine, not your project. Everything else the scaffold needs lives
+under `.loop-engine/`, so your project's own root stays free of framework
+clutter. Once you've finished setup, `.loop-engine/examples/`,
+`.loop-engine/CONTRIBUTING.md`, `.loop-engine/INIT_CHECKLIST.md`,
+`.loop-engine/BOOTSTRAP.md`, and `.loop-engine/scripts/` are safe to
+delete — keep `.loop-engine/LOOP_ENGINEERING.md` (and
+`.loop-engine/FRAMEWORK_FEEDBACK.md`, if you want the friction-reporting
+channel) since the agent refers back to those during ongoing work, not
+just setup.
 
 ### Interview path — paste your idea, answer questions, authorize once
 
 Open your agent inside the new repo and paste:
 
-> Read `BOOTSTRAP.md` and follow its agent procedure. My project idea:
+> Read `.loop-engine/BOOTSTRAP.md` and follow its agent procedure. My
+> project idea:
 > *(a paragraph or a page — messy is fine, any language)*
 
 The agent asks one batch of questions, drafts every file below, and stops
 for exactly one approval: you read a five-sentence summary and say "I
 authorize this" before anything loops. Full protocol, including how an
 interrupted bootstrap resumes without getting lost:
-[`BOOTSTRAP.md`](BOOTSTRAP.md).
+[`.loop-engine/BOOTSTRAP.md`](.loop-engine/BOOTSTRAP.md).
 
 Skipped the paste and just described your project in chat? Also fine: the
 copied `CLAUDE.md`/`AGENTS.md` route any agent that auto-reads them (Claude
-Code, Codex, Cursor, …) to `BOOTSTRAP.md` whenever the repo still carries
+Code, Codex, Cursor, …) to `.loop-engine/BOOTSTRAP.md` whenever the repo
+still carries
 `TEMPLATE:` markers. The paste is just the guaranteed route on tools that
 don't auto-read either file.
 
 ### Manual path — fill the files yourself
 
-1. **Work through [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) in order** —
+1. **Work through
+   [`.loop-engine/INIT_CHECKLIST.md`](.loop-engine/INIT_CHECKLIST.md) in
+   order** —
    charter → domain model → system direction → roadmap → status docs →
    agent entry points → priorities. Order matters; later files assume
-   earlier ones are real. Keep `examples/linkcheck/` open as a filled-in
+   earlier ones are real. Keep `.loop-engine/examples/linkcheck/` open as
+   a filled-in
    model for every step.
 2. **Delete `TEMPLATE:` markers as you fill things in**, and let the checker
    tell you what's left:
    ```bash
-   ./scripts/check-templates.sh        # or scripts/check-templates.ps1
+   ./.loop-engine/scripts/check-templates.sh        # or .loop-engine/scripts/check-templates.ps1
    ```
 3. **Do one real loop end to end** (checklist step 11) before trusting the
    framework with unsupervised work — including giving the agent a small
@@ -208,19 +225,13 @@ you steer, and commit diffs are how you audit.
 ## File map
 
 ```
-LOOP_ENGINEERING.md    concept guide — read this first
-INIT_CHECKLIST.md      fill-in order for a new project
-BOOTSTRAP.md           the same checklist run as an agent-led interview — paste your idea, answer one batch of questions, authorize once
-CLAUDE.md / AGENTS.md  agent entry points (keep in sync; different tools read different files)
-ROADMAP.md             pre-authorized phase queue — the phase loop plans from this
-PRIORITIES.md          ordered, rule-governed task queue — the task loop executes from this
-CHANGELOG.md           history
-FRAMEWORK_FEEDBACK.md  append-only flight recorder for defects in the framework itself — harvested upstream to loop-engine
-CONTRIBUTING.md        how to propose changes to this scaffold itself
-LICENSE                MIT
-
-zh-TW/                 Traditional Chinese translations — README.md, LOOP_ENGINEERING.md,
-                        INIT_CHECKLIST.md, BOOTSTRAP.md, CONTRIBUTING.md
+README.md               what this repo is, and how to adopt it (this file)
+zh-TW/README.md         Traditional Chinese translation
+CLAUDE.md / AGENTS.md   agent entry points (keep in sync; different tools read different files)
+ROADMAP.md              pre-authorized phase queue — the phase loop plans from this
+PRIORITIES.md           ordered, rule-governed task queue — the task loop executes from this
+CHANGELOG.md            history
+LICENSE                 MIT
 
 docs/
   README.md            index of the docs below
@@ -232,11 +243,23 @@ docs/
   release.md           versioning scheme and release checklist
   audits/              phase-completion evidence; TEMPLATE.md stays blank forever
 
-scripts/
-  check-templates.sh|.ps1  finds leftover TEMPLATE: markers; exit 1 if any remain
-
-examples/
-  linkcheck/           a complete, fully-filled-in instance of every template above
+.loop-engine/           framework scaffolding, kept out of your project's root — see
+                        Quick start above for what's safe to delete after setup
+  LOOP_ENGINEERING.md    concept guide — read this first; the agent keeps referring
+                        back to it, not just during setup
+  INIT_CHECKLIST.md      fill-in order for a new project — done once, then removable
+  BOOTSTRAP.md           the same checklist as an agent-led interview — done once,
+                        then removable
+  CONTRIBUTING.md        how to propose changes to this scaffold itself — removable
+  FRAMEWORK_FEEDBACK.md  append-only flight recorder for defects in the framework
+                        itself — harvested upstream to loop-engine
+  zh-TW/                 Traditional Chinese translations of the four files above
+  scripts/
+    check-templates.sh|.ps1  finds leftover TEMPLATE: markers — removable once
+                        every marker is gone for good
+  examples/
+    linkcheck/           a complete, fully-filled-in instance of every template
+                        above — removable
 ```
 
 | File | Purpose | Who writes it | Cadence |
@@ -250,7 +273,7 @@ examples/
 | `docs/build-status.md` | Coarse status + dated proof log | Agent | At milestones |
 | `docs/audits/*` | Evidence a phase is actually done | Agent, at phase close | Once per phase, append-only |
 | `CHANGELOG.md` | Release-visible history | Agent; human at release | Every loop / release |
-| `FRAMEWORK_FEEDBACK.md` | Defects found in the framework itself | Agent appends; human harvests upstream | On friction; append-only |
+| `.loop-engine/FRAMEWORK_FEEDBACK.md` | Defects found in the framework itself | Agent appends; human harvests upstream | On friction; append-only |
 
 ## Design principles
 
@@ -311,12 +334,16 @@ asking first* — the charter and domain model pre-authorize its judgment
 calls, not just its task list.
 
 **Why do only some files have a Traditional Chinese version?**
-Only five purely-reference docs — `LOOP_ENGINEERING.md`,
-`INIT_CHECKLIST.md`, `BOOTSTRAP.md`, `CONTRIBUTING.md`,
-`examples/README.md` — are mirrored in Chinese, because they never get
+Only five purely-reference docs — `.loop-engine/LOOP_ENGINEERING.md`,
+`.loop-engine/INIT_CHECKLIST.md`, `.loop-engine/BOOTSTRAP.md`,
+`.loop-engine/CONTRIBUTING.md`,
+`.loop-engine/examples/README.md` — are mirrored in Chinese, because they
+never get
 filled in with project-specific content, so they can safely stay bilingual
-forever. Translations live under `zh-TW/` (`examples/zh-TW/` for the
-worked example's README), same basename as the English original.
+forever. Translations live next to the English original under the nearest
+`zh-TW/` (root `zh-TW/README.md`; `.loop-engine/zh-TW/` for the other
+four; `.loop-engine/examples/zh-TW/` for the worked example's README),
+same basename as the original.
 `CLAUDE.md`/`AGENTS.md`/
 `PRIORITIES.md`/`ROADMAP.md`/`docs/*.md` deliberately do **not**
 — their filenames are functionally load-bearing (Claude Code looks for the
@@ -330,8 +357,10 @@ content in is entirely your call; the scaffold doesn't prescribe it.
 ## Non-goals
 
 - **Not a project generator or CLI.** There's no `loop-engine init`. Copy
-  the files, then fill them in — by hand (`INIT_CHECKLIST.md`) or via the
-  agent-led interview (`BOOTSTRAP.md`); either way it's files and
+  the files, then fill them in — by hand
+  (`.loop-engine/INIT_CHECKLIST.md`) or via the
+  agent-led interview (`.loop-engine/BOOTSTRAP.md`); either way it's files
+  and
   discipline, not tooling.
 - **Not a substitute for tests, CI, or code review.** The gates are how an
   agent proves work is done; they don't replace your quality bar.
@@ -341,8 +370,10 @@ content in is entirely your call; the scaffold doesn't prescribe it.
 ## Contributing
 
 Improvements to the scaffold itself are welcome — see
-[`CONTRIBUTING.md`](CONTRIBUTING.md). The bar: a change must keep the four
-kinds of truth separable, keep `examples/linkcheck/` in sync, and keep every
+[`.loop-engine/CONTRIBUTING.md`](.loop-engine/CONTRIBUTING.md). The bar: a
+change must keep the four
+kinds of truth separable, keep `.loop-engine/examples/linkcheck/` in sync,
+and keep every
 bilingual file pair in agreement.
 
 ## License

@@ -18,7 +18,7 @@ later.
 
 <!-- TEMPLATE: Define the single fast command (or short sequence) that runs
 on EVERY task-loop iteration and proves a change didn't break anything
-observable — the thing referenced by LOOP_ENGINEERING.md's task loop
+observable — the thing referenced by ../.loop-engine/LOOP_ENGINEERING.md's task loop
 ("prove it, don't just claim it"). Model:
 
 ```bash
@@ -39,7 +39,7 @@ phase closes — integration/end-to-end tests, a written manual walkthrough
 script, real-data runs; whatever proves a whole phase's exit condition
 rather than a single change. Results are recorded as evidence in the phase
 audit (docs/audits/). Keep it heavier than the task gate on purpose — see
-LOOP_ENGINEERING.md, "Two verification gates." -->
+../.loop-engine/LOOP_ENGINEERING.md, "Two verification gates." -->
 
 ## Current Behavior
 

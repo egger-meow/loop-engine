@@ -21,8 +21,8 @@ go — it's a complete filled-in instance of every file this checklist asks
 you to write, so you have a concrete model for each step instead of just the
 abstract template.
 
-**Before step 1:** if you copied loop-engine's own `README.md` (or
-`zh-TW/README.md`) into your project, replace them with your project's
+**Before step 1:** if you copied loop-engine's own `../README.md` (or
+`../zh-TW/README.md`) into your project, replace them with your project's
 actual README — they describe loop-engine, not your project, and don't get
 templated like the files below. A real README needs, at minimum: a
 one-line description of what the project does, the tech stack, and a
@@ -75,13 +75,13 @@ the framework itself gives you something to report.
       first phase and decompose it into "Current Priorities" — real items,
       most urgent first, each with a stated "done means."
 - [ ] **10. Delete every remaining `TEMPLATE:` comment.** Run
-      `./scripts/check-templates.sh` (or `check-templates.ps1` on Windows)
+      `./.loop-engine/scripts/check-templates.sh` (or `check-templates.ps1` on Windows)
       instead of grepping by hand — it lists every file and line still
       carrying a `TEMPLATE:` marker and exits nonzero if any remain. A doc
       with a `TEMPLATE:` comment still in it is not yet a source of truth —
       treat it as "not written" until the comment is gone. (`docs/audits/
       TEMPLATE.md` is excluded from the scan on purpose — it's meant to
-      stay a blank template forever; see `docs/audits/README.md`. So are
+      stay a blank template forever; see `../docs/audits/README.md`. So are
       `BOOTSTRAP.md` and `zh-TW/BOOTSTRAP.md`, which quote the bootstrap
       authorization marker verbatim as an instruction.)
 - [ ] **11. Do one real loop.** Take the first `PRIORITIES.md` item through

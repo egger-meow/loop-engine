@@ -18,8 +18,8 @@ bootstrap 是一步一步照著它走,不是繞過它。
 只是抽象的模板。（這個範例本身只有英文版,沒有繁中版——它是「填好長什麼樣
 子」的示範,不是要逐字翻譯的說明文件。）
 
-**在第 1 步之前:** 如果你把 loop-engine 自己的 `README.md`(或
-`zh-TW/README.md`)複製進了你的專案,把它們換成你專案自己的 README——它們
+**在第 1 步之前:** 如果你把 loop-engine 自己的 `../../README.md`(或
+`../../zh-TW/README.md`)複製進了你的專案,把它們換成你專案自己的 README——它們
 描述的是 loop-engine,不是你的專案,而且不像下面的檔案那樣需要被模板化。
 一份像樣的 README 至少要有:一句話說明這個專案做什麼、技術棧,以及一個帶
 著真實安裝/執行指令的 Getting Started 段落——*然後*才是連到下面正典文件
@@ -62,12 +62,12 @@ bootstrap 是一步一步照著它走,不是繞過它。
       的第一個 phase,把它拆解進「Current Priorities」——真實的項目,最急迫
       的排最前面,每一項都要寫清楚「done means」是什麼。
 - [ ] **10. 刪掉所有殘留的 `TEMPLATE:` 註解。** 執行
-      `./scripts/check-templates.sh`(Windows 上用
+      `./.loop-engine/scripts/check-templates.sh`(Windows 上用
       `check-templates.ps1`),不要用肉眼一個一個找——它會列出每一個還帶著
       `TEMPLATE:` 標記的檔案和行號,有殘留就非零結束。一份文件裡還留著
       `TEMPLATE:` 註解,就代表它還不是正典來源——在註解消失之前,把它當成
       「還沒寫」。(`docs/audits/TEMPLATE.md` 本身故意被排除在掃描之外——它
-      本來就該永遠是一份空白模板;見 `docs/audits/README.md`。`BOOTSTRAP.md`
+      本來就該永遠是一份空白模板;見 `../../docs/audits/README.md`。`BOOTSTRAP.md`
       和 `zh-TW/BOOTSTRAP.md` 也被排除,因為它們以指令的形式逐字引用了
       bootstrap 授權標記。)
 - [ ] **11. 真的跑一次迴圈。** 挑 `PRIORITIES.md` 的第一項,走完

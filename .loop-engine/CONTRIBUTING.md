@@ -42,7 +42,7 @@ adding a new file or section, check:
    [`examples/linkcheck/`](examples/linkcheck/) so it stays a faithful,
    fully-filled-in instance of the current templates — a drifted example is
    actively misleading.
-4. If the change affects `README.md`, mirror it in `zh-TW/README.md` — the
+4. If the change affects `../README.md`, mirror it in `../zh-TW/README.md` — the
    two are translations of each other and must make the same claims. The
    same applies to the other four files with a Chinese translation —
    `LOOP_ENGINEERING.md`, `INIT_CHECKLIST.md`, `BOOTSTRAP.md`, and
@@ -50,7 +50,7 @@ adding a new file or section, check:
    file, `CONTRIBUTING.md`, is itself one of the five; its translation is
    `zh-TW/CONTRIBUTING.md`, and `examples/README.md`'s is
    `examples/zh-TW/README.md`). Everything else deliberately does **not**
-   get a translation — see README.md's FAQ "Why do only some files have a
+   get a translation — see ../README.md's FAQ "Why do only some files have a
    Traditional Chinese version?" for why (functionally load-bearing
    filenames + mutable live content don't mix with permanent bilingual
    twins).
@@ -60,7 +60,7 @@ adding a new file or section, check:
    everything still templated, since the root scaffold is meant to stay
    unfilled):
    ```bash
-   ./scripts/check-templates.sh examples/linkcheck
+   ./.loop-engine/scripts/check-templates.sh .loop-engine/examples/linkcheck
    ```
 6. Update `CHANGELOG.md` under `[Unreleased]`.
 

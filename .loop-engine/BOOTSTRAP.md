@@ -119,8 +119,8 @@ default-plus-flag.
 Fill the files in checklist order, steps 1–9 (charter → domain model →
 system direction → roadmap → status → build-status → release → agent
 entry points → priorities), exactly as the checklist describes each. Also
-honor its "Before step 1" note: replace loop-engine's own `README.md` /
-`zh-TW/README.md` with a short, real README for this project.
+honor its "Before step 1" note: replace loop-engine's own `../README.md` /
+`../zh-TW/README.md` with a short, real README for this project.
 
 Marker rules:
 
@@ -133,7 +133,7 @@ Marker rules:
   No phase in this file licenses any work while this marker exists. -->
   ```
 
-Run `./scripts/check-templates.sh` (or `.ps1`): the **only** remaining hit
+Run `./.loop-engine/scripts/check-templates.sh` (or `.ps1`): the **only** remaining hit
 must be that marker. (This file's own quotation of the marker doesn't
 count — `BOOTSTRAP.md` and `zh-TW/BOOTSTRAP.md` are excluded from the scan
 by design, like `docs/audits/TEMPLATE.md`.) Commit the whole draft as one
@@ -181,7 +181,7 @@ Bootstrap is then over and this file has nothing further to say —
 
 Repo state alone tells any agent — fresh session, different tool, months
 later — exactly where bootstrap stands. Run
-`./scripts/check-templates.sh`, then check `ROADMAP.md`:
+`./.loop-engine/scripts/check-templates.sh`, then check `ROADMAP.md`:
 
 | Repo state | Stage | Do |
 | --- | --- | --- |

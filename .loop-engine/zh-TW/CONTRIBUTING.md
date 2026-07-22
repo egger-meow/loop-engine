@@ -35,7 +35,7 @@ loop-engine,想知道怎麼填寫*你自己的*模板,請改看
 3. 如果這個改動影響了填好範例的形狀,更新
    [`examples/linkcheck/`](../examples/linkcheck/),讓它保持忠實、完整填寫的當
    前模板實例——一個跟模板脫節的範例,只會誤導人。
-4. 如果這個改動影響了 `README.md`,把它同步到 `zh-TW/README.md`——兩者互為
+4. 如果這個改動影響了 `../../README.md`,把它同步到 `../../zh-TW/README.md`——兩者互為
    翻譯,必須傳達相同的內容。同樣地,如果改動影響了
    [`LOOP_ENGINEERING.md`](../LOOP_ENGINEERING.md)、
    [`INIT_CHECKLIST.md`](../INIT_CHECKLIST.md)、
@@ -48,7 +48,7 @@ loop-engine,想知道怎麼填寫*你自己的*模板,請改看
    `TEMPLATE:` 標記)以及根目錄腳手架(應回報一切仍是模板狀態,因為根目錄腳
    手架本來就該保持未填寫)執行模板完整性檢查:
    ```bash
-   ./scripts/check-templates.sh examples/linkcheck
+   ./.loop-engine/scripts/check-templates.sh .loop-engine/examples/linkcheck
    ```
 6. 在 `CHANGELOG.md` 的 `[Unreleased]` 底下更新。
 

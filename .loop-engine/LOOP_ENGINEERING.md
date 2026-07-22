@@ -37,10 +37,10 @@ four separate, single-purpose places:
 
 | Kind of truth | Question it answers | Lives in | Changes how often |
 | --- | --- | --- | --- |
-| **Direction** | Where is this going, and what must never break? | [`docs/project-charter.md`](docs/project-charter.md), [`docs/domain-model.md`](docs/domain-model.md), [`docs/system-direction.md`](docs/system-direction.md) | Rarely — only when the human decides the goal itself changes |
-| **Current state** | What actually exists and works right now? | [`docs/status.md`](docs/status.md), [`docs/build-status.md`](docs/build-status.md) | Every loop that changes behavior |
-| **Priority** | What is the agent authorized to work on next? | [`ROADMAP.md`](ROADMAP.md) (phase-sized), [`PRIORITIES.md`](PRIORITIES.md) (task-sized) | Every loop — items are removed when done, reordered when danger/priority changes |
-| **History** | What happened, and when, with what evidence? | [`CHANGELOG.md`](CHANGELOG.md), `docs/audits/`, git commits | Append-only |
+| **Direction** | Where is this going, and what must never break? | [`docs/project-charter.md`](../docs/project-charter.md), [`docs/domain-model.md`](../docs/domain-model.md), [`docs/system-direction.md`](../docs/system-direction.md) | Rarely — only when the human decides the goal itself changes |
+| **Current state** | What actually exists and works right now? | [`docs/status.md`](../docs/status.md), [`docs/build-status.md`](../docs/build-status.md) | Every loop that changes behavior |
+| **Priority** | What is the agent authorized to work on next? | [`ROADMAP.md`](../ROADMAP.md) (phase-sized), [`PRIORITIES.md`](../PRIORITIES.md) (task-sized) | Every loop — items are removed when done, reordered when danger/priority changes |
+| **History** | What happened, and when, with what evidence? | [`CHANGELOG.md`](../CHANGELOG.md), `docs/audits/`, git commits | Append-only |
 
 Every one of these has an owner and a shape. None of them is "just notes."
 If a fact doesn't fit one of these four, it probably doesn't need to be
@@ -65,7 +65,7 @@ Open one only for a specific reason — adding a new entry (a write, not a
 full read), preparing a release, or checking whether a specific past claim
 still holds — and even then, read narrowly: the `[Unreleased]` section of
 `CHANGELOG.md`, not its full history; the one audit file
-[`docs/audits/README.md`](docs/audits/README.md)'s index points you to, not
+[`docs/audits/README.md`](../docs/audits/README.md)'s index points you to, not
 every file in that folder. "Let me read the whole CHANGELOG for context" or
 "let me skim all the audits" is a mistake, not thoroughness — it's exactly
 the token cost append-only history exists to avoid paying every loop.
@@ -118,21 +118,21 @@ TASK LOOP  (inside step 5, repeats while the queue has items)
 
 This is the inner procedure, one iteration per task:
 
-1. **Orient.** Read [`AGENTS.md`](AGENTS.md) / [`CLAUDE.md`](CLAUDE.md) —
+1. **Orient.** Read [`AGENTS.md`](../AGENTS.md) / [`CLAUDE.md`](../CLAUDE.md) —
    these point at the canonical docs. Read
-   [`docs/project-charter.md`](docs/project-charter.md) and
-   [`docs/domain-model.md`](docs/domain-model.md) if this is a new session or
+   [`docs/project-charter.md`](../docs/project-charter.md) and
+   [`docs/domain-model.md`](../docs/domain-model.md) if this is a new session or
    direction may have changed.
 2. **Fold in chat input.** If the human has said something since your last
    turn that hasn't been acted on yet, classify it *before* taking new
    work (see "Human steering" below): task-level input gets translated
    into `PRIORITIES.md` edits or direct fixes and you continue;
    direction-level input means exit to the phase loop now.
-3. **Check current truth.** Read [`docs/status.md`](docs/status.md) and
-   [`docs/build-status.md`](docs/build-status.md) to know what already exists
+3. **Check current truth.** Read [`docs/status.md`](../docs/status.md) and
+   [`docs/build-status.md`](../docs/build-status.md) to know what already exists
    — don't re-derive this from chat memory, and don't trust a stale mental
    model from a previous session.
-4. **Take the top item.** Open [`PRIORITIES.md`](PRIORITIES.md). The first
+4. **Take the top item.** Open [`PRIORITIES.md`](../PRIORITIES.md). The first
    item under "Current Priorities" is the authorized next unit of work. Do
    not skip down the list to something more interesting — order is a safety
    decision, not a suggestion (see the rules inside that file).
@@ -173,7 +173,7 @@ This is the outer procedure:
    them to `ROADMAP.md`, `docs/project-charter.md`, or
    `docs/system-direction.md` (or stop and ask, if they need a decision only
    a human can make) before planning anything else on top of stale direction.
-2. **Check the overall goal.** Read the charter and [`ROADMAP.md`](ROADMAP.md).
+2. **Check the overall goal.** Read the charter and [`ROADMAP.md`](../ROADMAP.md).
    If there is no active phase and no authorized phase remaining, everything
    pre-authorized is done: **stop and wait for a human** — see "Human
    acceptance" below for what that stop actually needs to say, not just
@@ -182,7 +182,7 @@ This is the outer procedure:
 3. **Close out a finished phase.** If the active phase's exit condition
    appears met: run the **phase gate** (see "Two verification gates" below),
    write the audit in `docs/audits/` per
-   [`docs/audits/README.md`](docs/audits/README.md), add the `CHANGELOG.md`
+   [`docs/audits/README.md`](../docs/audits/README.md), add the `CHANGELOG.md`
    entry, and remove the phase from `ROADMAP.md` per that file's rules. If
    the phase gate fails, the gap goes into `PRIORITIES.md` and the phase
    stays active.
@@ -252,7 +252,7 @@ Three rules keep it near-free, all inherited from patterns above:
 
 ## Two verification gates
 
-Both are defined per-project in [`docs/status.md`](docs/status.md):
+Both are defined per-project in [`docs/status.md`](../docs/status.md):
 
 - The **task gate** is fast and runs every task-loop iteration — typically
   lint + typecheck + unit tests + build, bundled as one command. It proves
@@ -276,7 +276,7 @@ tests and an agent-driven walkthrough alone, with no human ever having
 touched the running system — technically verified, never actually seen.
 
 Every phase audit closes with a "Try It Yourself" section (see
-[`docs/audits/TEMPLATE.md`](docs/audits/TEMPLATE.md)): concrete steps for
+[`docs/audits/TEMPLATE.md`](../docs/audits/TEMPLATE.md)): concrete steps for
 a human to try, or an explicit "N/A" when the phase has no
 user-observable surface. Writing it is part of closing the phase, same as
 the rest of the audit — it does **not** block the phase gate or delay
@@ -373,8 +373,22 @@ context" a non-event, because the context was never only in its head.
 
 ## What's in this repo
 
-- [`README.md`](README.md) / [`zh-TW/README.md`](zh-TW/README.md) — what this
+- [`README.md`](../README.md) / [`zh-TW/README.md`](../zh-TW/README.md) —
+  what this
   repo is and how to adopt it into a new project (English / 繁體中文).
+- [`CLAUDE.md`](../CLAUDE.md) / [`AGENTS.md`](../AGENTS.md) — agent entry points.
+  Keep both in sync; different tools read different files.
+- [`ROADMAP.md`](../ROADMAP.md) — the pre-authorized phase queue the phase loop
+  plans from.
+- [`PRIORITIES.md`](../PRIORITIES.md) — the task-level priority queue contract.
+- [`CHANGELOG.md`](../CHANGELOG.md) — history.
+- [`docs/`](../docs/README.md) — canonical direction and current-state docs, plus
+  `docs/audits/` for phase-completion evidence.
+
+This file's own directory, `.loop-engine/` — framework scaffolding kept out
+of your project's root; see the README's Quick start for what's safe to
+delete once setup is done:
+
 - [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) /
   [`zh-TW/INIT_CHECKLIST.md`](zh-TW/INIT_CHECKLIST.md) — the order to fill in
   the templates when bootstrapping a new project from this scaffold.
@@ -383,18 +397,10 @@ context" a non-event, because the context was never only in its head.
   — the interview alternative to the checklist: an agent asks what it can't
   infer from your pasted idea, drafts every canonical file, and waits for
   one explicit written authorization before any loop starts.
-- [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — agent entry points.
-  Keep both in sync; different tools read different files.
-- [`ROADMAP.md`](ROADMAP.md) — the pre-authorized phase queue the phase loop
-  plans from.
-- [`PRIORITIES.md`](PRIORITIES.md) — the task-level priority queue contract.
 - [`FRAMEWORK_FEEDBACK.md`](FRAMEWORK_FEEDBACK.md) — append-only flight
   recorder for defects in the framework itself, harvested upstream to
   loop-engine at phase close. Ships ready to use; empty is its normal
   state.
-- [`CHANGELOG.md`](CHANGELOG.md) — history.
-- [`docs/`](docs/README.md) — canonical direction and current-state docs, plus
-  `docs/audits/` for phase-completion evidence.
 - [`scripts/check-templates.sh`](scripts/check-templates.sh) /
   [`.ps1`](scripts/check-templates.ps1) — finds leftover `TEMPLATE:` markers
   so you can tell what's actually been filled in.
@@ -406,5 +412,6 @@ Every template file below contains `TEMPLATE:` comments marking what to fill
 in and what to delete once filled in. Delete the `TEMPLATE:` comments
 themselves as you go — a template comment left in a doc that's supposedly
 "the source of truth" is a sign the doc hasn't actually been filled in yet.
-Run `scripts/check-templates.sh` to find every remaining one at once instead
+Run `.loop-engine/scripts/check-templates.sh` (from your project root) to
+find every remaining one at once instead
 of hunting by eye.

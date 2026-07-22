@@ -29,10 +29,10 @@ agent 能機械式地判斷「下一步是什麼」和「這件事是不是真�
 
 | 真相種類 | 回答的問題 | 住在哪 | 更新頻率 |
 | --- | --- | --- | --- |
-| **方向** | 要去哪裡、什麼絕對不能壞? | [`docs/project-charter.md`](../docs/project-charter.md)、[`docs/domain-model.md`](../docs/domain-model.md)、[`docs/system-direction.md`](../docs/system-direction.md) | 極少——只在人類決定改變目標本身時 |
-| **現況** | 現在到底有什麼、什麼能動? | [`docs/status.md`](../docs/status.md)、[`docs/build-status.md`](../docs/build-status.md) | 每個改變行為的迭代 |
-| **優先序** | agent 下一步被授權做什麼? | [`ROADMAP.md`](../ROADMAP.md)(phase 級)、[`PRIORITIES.md`](../PRIORITIES.md)(task 級) | 每個迭代——完成即移除,危險程度改變時重排 |
-| **歷史** | 發生過什麼、何時、證據是什麼? | [`CHANGELOG.md`](../CHANGELOG.md)、`docs/audits/`、git commits | 只增不改 |
+| **方向** | 要去哪裡、什麼絕對不能壞? | [`docs/project-charter.md`](../../docs/project-charter.md)、[`docs/domain-model.md`](../../docs/domain-model.md)、[`docs/system-direction.md`](../../docs/system-direction.md) | 極少——只在人類決定改變目標本身時 |
+| **現況** | 現在到底有什麼、什麼能動? | [`docs/status.md`](../../docs/status.md)、[`docs/build-status.md`](../../docs/build-status.md) | 每個改變行為的迭代 |
+| **優先序** | agent 下一步被授權做什麼? | [`ROADMAP.md`](../../ROADMAP.md)(phase 級)、[`PRIORITIES.md`](../../PRIORITIES.md)(task 級) | 每個迭代——完成即移除,危險程度改變時重排 |
+| **歷史** | 發生過什麼、何時、證據是什麼? | [`CHANGELOG.md`](../../CHANGELOG.md)、`docs/audits/`、git commits | 只增不改 |
 
 上面每一項都有明確的擁有者與形狀。沒有一項是「隨手記記」。如果一個事實不屬於
 這四種之一,它大概根本不需要被寫下來——或者它該放進真正產生那個限制的地方,
@@ -51,7 +51,7 @@ git——恰恰相反:持續被寫入(只增不改),但很少被讀,而且是按
 進例行的定位程序裡。只有在有具體理由時才打開它們——加一筆新條目(是寫入,不是
 整份讀取)、準備發版,或是查證某個過去的主張是否仍然成立——而且就算要讀,也要
 讀得窄:`CHANGELOG.md` 的 `[Unreleased]` 那一段,不是整份歷史;
-[`docs/audits/README.md`](../docs/audits/README.md) 的索引指向的那一個 audit
+[`docs/audits/README.md`](../../docs/audits/README.md) 的索引指向的那一個 audit
 檔案,不是資料夾裡的每一個檔案。「讓我把整份 CHANGELOG 讀一遍當脈絡」或「讓我
 把所有 audit 都掃一遍」不是仔細,是失誤——這正是「只增不改」這個設計本來就想
 避免每輪迴圈都要付的 token 成本。
@@ -101,18 +101,18 @@ TASK LOOP(小迴圈,在步驟 5 內部,佇列還有項目就持續重複)
 
 這是內層程序,每個任務跑一輪:
 
-1. **定位。** 讀 [`AGENTS.md`](../AGENTS.md) / [`CLAUDE.md`](../CLAUDE.md)——這兩
+1. **定位。** 讀 [`AGENTS.md`](../../AGENTS.md) / [`CLAUDE.md`](../../CLAUDE.md)——這兩
    個檔案會指向正典文件。如果這是新的 session,或方向可能已經改變,再讀一次
-   [`docs/project-charter.md`](../docs/project-charter.md) 和
-   [`docs/domain-model.md`](../docs/domain-model.md)。
+   [`docs/project-charter.md`](../../docs/project-charter.md) 和
+   [`docs/domain-model.md`](../../docs/domain-model.md)。
 2. **把聊天輸入折進來。** 如果人類在你上一輪之後說了什麼還沒處理的話,先分
    類它(見下方「人類轉向」),**再**接新工作:task 級的輸入會被翻譯成
    `PRIORITIES.md` 的修改或直接修正,然後繼續;方向級的輸入代表現在就要退出
    到 phase loop。
-3. **檢查當前真相。** 讀 [`docs/status.md`](../docs/status.md) 和
-   [`docs/build-status.md`](../docs/build-status.md),了解現在到底存在什麼——
+3. **檢查當前真相。** 讀 [`docs/status.md`](../../docs/status.md) 和
+   [`docs/build-status.md`](../../docs/build-status.md),了解現在到底存在什麼——
    不要靠聊天記憶去反推,也不要相信上一個 session 可能已經過期的心智模型。
-4. **取第一項。** 打開 [`PRIORITIES.md`](../PRIORITIES.md)。「Current
+4. **取第一項。** 打開 [`PRIORITIES.md`](../../PRIORITIES.md)。「Current
    Priorities」下的第一項就是被授權的下一個工作單位。不要跳過去做更有趣的那
    項——順序是安全決策,不是建議(見該檔案內的規則)。
 5. **執行。**
@@ -149,14 +149,14 @@ Task loop 在以下**任一**情況發生時,會退出到 phase loop:
    `ROADMAP.md`、`docs/project-charter.md` 或 `docs/system-direction.md`
    (或者,如果需要只有人類能做的決定,就停下來問),再開始規劃任何建立在過
    期方向之上的東西。
-2. **檢查整體目標。** 讀 charter 和 [`ROADMAP.md`](../ROADMAP.md)。如果沒有啟
+2. **檢查整體目標。** 讀 charter 和 [`ROADMAP.md`](../../ROADMAP.md)。如果沒有啟
    用中的 phase,也沒有剩下的已授權 phase,代表所有預先授權的工作都做完了:
    **停下來等待人類**——這個停下來實際上要說什麼、而不只是「佇列空了」,
    見下方「人類驗收」。這——而不是任務佇列清空——才是真正的「等待人類」條
    件。
 3. **收尾一個做完的 phase。** 如果啟用中的 phase 的退場條件看起來已經達成:
    跑**phase gate**(見下方「兩層驗證關卡」)、依照
-   [`docs/audits/README.md`](../docs/audits/README.md) 在 `docs/audits/` 寫
+   [`docs/audits/README.md`](../../docs/audits/README.md) 在 `docs/audits/` 寫
    audit、加上 `CHANGELOG.md` 條目、依照該檔案的規則把這個 phase 從
    `ROADMAP.md` 移除。如果 phase gate 沒過,缺口進 `PRIORITIES.md`,這個
    phase 保持啟用中。
@@ -214,7 +214,7 @@ Task loop 在以下**任一**情況發生時,會退出到 phase loop:
 
 ## 兩層驗證關卡
 
-兩者都在各專案自己的 [`docs/status.md`](../docs/status.md) 裡定義:
+兩者都在各專案自己的 [`docs/status.md`](../../docs/status.md) 裡定義:
 
 - **task gate** 又快又輕,每個 task-loop 迭代都跑——通常是
   lint + typecheck + 單元測試 + build,包成一個指令。它證明*這次改動*沒有破
@@ -235,7 +235,7 @@ Phase gate 證明的是 agent 沒有謊報自己做了什麼——不證明人�
 真的碰過那個正在跑的系統——技術上驗證過了,卻沒人真的看過。
 
 每一份 phase audit 都以「Try It Yourself」這個段落收尾(見
-[`docs/audits/TEMPLATE.md`](../docs/audits/TEMPLATE.md)):給人類的具體步
+[`docs/audits/TEMPLATE.md`](../../docs/audits/TEMPLATE.md)):給人類的具體步
 驟,或者在這個 phase 沒有人類可觀察的表面時,明確寫「N/A」。寫這個段落是
 收尾這個 phase 的一部分,跟 audit 的其他部分一樣——它**不會**卡住 phase
 gate,也不會延後啟用下一個 phase。這是刻意設計成一則邀請,不是一個 agent
@@ -311,25 +311,30 @@ Yourself」不是「N/A」的 phase,是「書面核准」跟「真正想要的�
 
 ## 這個 repo 裡有什麼
 
-- [`README.md`](../README.md) / [`README.md`](README.md) ——這個
+- [`README.md`](../../README.md) / [`README.md`](../../zh-TW/README.md)
+  ——這個
   repo 是什麼、怎麼把它套用到新專案裡(英文 / 繁體中文)。
+- [`CLAUDE.md`](../../CLAUDE.md) / [`AGENTS.md`](../../AGENTS.md) —— agent 入口點。保持
+  兩者同步;不同工具讀不同檔案。
+- [`ROADMAP.md`](../../ROADMAP.md) —— phase loop 據以規劃的、預先授權的 phase 佇
+  列。
+- [`PRIORITIES.md`](../../PRIORITIES.md) —— task 級的有序優先佇列契約。
+- [`CHANGELOG.md`](../../CHANGELOG.md) —— 歷史。
+- [`docs/`](../../docs/README.md) —— 正典的方向文件與現況文件,加上
+  `docs/audits/` 存放 phase 完成的證據。
+
+本檔案自己所在的目錄 `.loop-engine/`——框架的腳手架,放在你專案根目錄之
+外;設定完之後哪些可以刪,見 README 的「快速開始」:
+
 - [`INIT_CHECKLIST.md`](../INIT_CHECKLIST.md) /
   [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md) ——從這套腳手架啟動
   新專案時,填寫模板的順序。
 - [`BOOTSTRAP.md`](../BOOTSTRAP.md) / [`BOOTSTRAP.md`](BOOTSTRAP.md)
   ——清單的訪談版替代路線:agent 問出它從你貼上的想法推斷不出的東西、起草
   每一份正典檔案,並在任何迴圈開始前,等待一次明確的書面授權。
-- [`CLAUDE.md`](../CLAUDE.md) / [`AGENTS.md`](../AGENTS.md) —— agent 入口點。保持
-  兩者同步;不同工具讀不同檔案。
-- [`ROADMAP.md`](../ROADMAP.md) —— phase loop 據以規劃的、預先授權的 phase 佇
-  列。
-- [`PRIORITIES.md`](../PRIORITIES.md) —— task 級的有序優先佇列契約。
 - [`FRAMEWORK_FEEDBACK.md`](../FRAMEWORK_FEEDBACK.md) ——框架本身缺陷的飛行
   記錄器,只增不改,phase 收尾時回收到上游 loop-engine。開箱即用;空著就是
   它的正常狀態。
-- [`CHANGELOG.md`](../CHANGELOG.md) —— 歷史。
-- [`docs/`](../docs/README.md) —— 正典的方向文件與現況文件,加上
-  `docs/audits/` 存放 phase 完成的證據。
 - [`scripts/check-templates.sh`](../scripts/check-templates.sh) /
   [`.ps1`](../scripts/check-templates.ps1) ——找出殘留的 `TEMPLATE:` 標記,讓
   你知道實際上已經填了什麼。
@@ -339,7 +344,8 @@ Yourself」不是「N/A」的 phase,是「書面核准」跟「真正想要的�
 
 下面每一個模板檔案都包含 `TEMPLATE:` 註解,標出要填什麼、填完後要刪什麼。邊
 填邊刪掉這些 `TEMPLATE:` 註解——一份號稱「正典來源」的文件裡還留著模板註解,
-就代表它其實還沒有真的被填寫完成。用 `scripts/check-templates.sh` 一次找出
+就代表它其實還沒有真的被填寫完成。用 `.loop-engine/scripts/check-templates.sh`
+(從你的專案根目錄執行)一次找出
 所有殘留的標記,不要用肉眼一個一個找。
 
 （本檔案是 [`LOOP_ENGINEERING.md`](../LOOP_ENGINEERING.md) 的繁體中文版,兩者應

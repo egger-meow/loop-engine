@@ -23,9 +23,11 @@ scrollback 裡。
 沒有 CLI、沒有 runtime、不綁定任何一家 agent 工具:它就是檔案加紀律。複製進
 任何 repo——Python daemon、TypeScript CLI、Rust service——把空格填上即可。
 
-- **第一次來?** 先讀 [`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)
+- **第一次來?** 先讀
+  [`LOOP_ENGINEERING.md`](../.loop-engine/zh-TW/LOOP_ENGINEERING.md)
   ——完整的概念說明。這份 README 是實作指南,不是它的替代品。
-- **想看填好的樣子?** [`examples/linkcheck/`](../examples/linkcheck/) 是一份
+- **想看填好的樣子?**
+  [`examples/linkcheck/`](../.loop-engine/examples/linkcheck/) 是一份
   完整的實例——每個模板都真實填寫完畢。
 - **準備採用?** 直接跳到 [快速開始](#快速開始)——有訪談路線(agent 幫你
   填完一切)和手動路線兩條路。
@@ -56,7 +58,7 @@ scrollback 裡。
 
 「只增不改」不等於「每輪都要讀」:歷史檔案持續被寫入,但只按需讀取,跟上面那
 些每個迴圈邊界都會被重讀、因此必須保持精簡的當前真相檔案不一樣。完整說明見
-`LOOP_ENGINEERING.md` 的「讀取紀律」。
+`.loop-engine/zh-TW/LOOP_ENGINEERING.md` 的「讀取紀律」。
 
 ### 兩層嵌套迴圈
 
@@ -100,7 +102,8 @@ phase、或把提案升格為已授權。那些是人類的動作,以書面完�
    的回執。
 
 這個設計假設聊天裡真的有一個人在。無人監督運行的 agent 在這裡沒有對應的
-通道——這個取捨見 `LOOP_ENGINEERING.md` 的「人類轉向」一節。
+通道——這個取捨見 `.loop-engine/zh-TW/LOOP_ENGINEERING.md` 的「人類轉向」
+一節。
 
 ### 兩層驗證關卡
 
@@ -115,17 +118,19 @@ phase、或把提案升格為已授權。那些是人類的動作,以書面完�
 通過 phase gate 證明的是 agent 沒有謊報自己做了什麼——不證明人類真的喜歡
 這個結果。每份 audit 也都以「Try It Yourself」段落收尾(具體步驟,或明確
 寫「N/A」),roadmap 用完時會把這些段落呈現出來,當成邀請人類確認成果是否
-符合預期,而不只是回報佇列空了。見 `LOOP_ENGINEERING.md` 的「人類驗收」。
+符合預期,而不只是回報佇列空了。見
+`.loop-engine/zh-TW/LOOP_ENGINEERING.md` 的「人類驗收」。
 這永遠不會卡住迴圈——它是一則邀請,不是第二層關卡。
 
 ## 這要花多少 token
 
 框架的開銷是每個 agent session 開頭一次固定的定向閱讀:入口檔加上「當前
 真相」檔案——在一個實際填好的專案上約 **8k token**(以
-`examples/linkcheck/` 實測),session 第一次打開 `LOOP_ENGINEERING.md`
+`.loop-engine/examples/linkcheck/` 實測),session 第一次打開
+`.loop-engine/zh-TW/LOOP_ENGINEERING.md`
 再多約 5k。這個成本被設計成有上限:歷史檔案(`CHANGELOG.md`、
-`docs/audits/`、`FRAMEWORK_FEEDBACK.md`)不管長到多大都排除在例行閱讀之
-外,而當前真相檔案正因為每圈都要重讀,必須保持精簡。
+`docs/audits/`、`.loop-engine/FRAMEWORK_FEEDBACK.md`)不管長到多大都排除
+在例行閱讀之外,而當前真相檔案正因為每圈都要重讀,必須保持精簡。
 
 空目錄的替代方案並不是免費的——它只是把成本從一次固定、有上限的閱讀,搬
 成一筆沒有上限的支出。每個 session,agent 都得從 `git log` 和程式碼重新
@@ -140,35 +145,44 @@ phase、或把提案升格為已授權。那些是人類的動作,以書面完�
 
 無論走哪條路,第一步都一樣:**把整個 repo 的內容複製進你的專案根目錄**——
 除了 `README.md` 和 `zh-TW/README.md`(它們描述的是 loop-engine,不是你的
-專案)。`examples/`、`CONTRIBUTING.md`,以及 `zh-TW/` 整個目錄都可留可刪。
+專案)。腳手架其他所有東西都放在 `.loop-engine/` 底下,讓你專案自己的根目
+錄不會被框架雜物塞滿。設定做完之後,`.loop-engine/examples/`、
+`.loop-engine/CONTRIBUTING.md`、`.loop-engine/INIT_CHECKLIST.md`、
+`.loop-engine/BOOTSTRAP.md`、`.loop-engine/scripts/` 都可以安心刪掉——留著
+`.loop-engine/LOOP_ENGINEERING.md`(如果你想保留回報摩擦的管道,也留著
+`.loop-engine/FRAMEWORK_FEEDBACK.md`),因為 agent 之後還會持續回頭參考它
+們,不只是設定期間用得到。
 
 ### 訪談路線——貼上想法、回答問題、授權一次
 
 在新 repo 裡開啟你的 agent,貼上:
 
-> 讀 `BOOTSTRAP.md` 並照它的 agent 程序執行。我的專案想法:
+> 讀 `.loop-engine/zh-TW/BOOTSTRAP.md` 並照它的 agent 程序執行。我的專案想
+> 法:
 > *(一段話或一整頁——寫得亂沒關係,任何語言都可以)*
 
 Agent 會一批問完問題、起草下面的每一份檔案,然後只為一件事停下來:你讀完一
 份五句話的摘要,說「我授權這份內容」,任何迴圈才會開始。完整協議(包括
 bootstrap 被中斷後怎麼不迷路地接續)見
-[`BOOTSTRAP.md`](BOOTSTRAP.md)。
+[`BOOTSTRAP.md`](../.loop-engine/zh-TW/BOOTSTRAP.md)。
 
 沒貼提示、只是直接在聊天裡描述了你的專案?也可以:複製進來的
 `CLAUDE.md`/`AGENTS.md` 會在 repo 還帶著 `TEMPLATE:` 標記時,把任何會自動讀
-這兩個檔案的 agent(Claude Code、Codex、Cursor……)導向 `BOOTSTRAP.md`。
+這兩個檔案的 agent(Claude Code、Codex、Cursor……)導向
+`.loop-engine/BOOTSTRAP.md`。
 貼提示只是在「不會自動讀這兩個檔案的工具」上也保證有效的那條路。
 
 ### 手動路線——自己填檔案
 
-1. **照順序走完 [`INIT_CHECKLIST.md`](INIT_CHECKLIST.md)**——
+1. **照順序走完
+   [`INIT_CHECKLIST.md`](../.loop-engine/zh-TW/INIT_CHECKLIST.md)**——
    charter → domain model → system direction → roadmap → 現況文件 →
    agent 入口 → priorities。順序有意義:後面的檔案假設前面的已經是真的。過
-   程中把 `examples/linkcheck/` 開在旁邊當每一步的填寫範本(這個範例只有英
-   文版)。
+   程中把 `.loop-engine/examples/linkcheck/` 開在旁邊當每一步的填寫範本
+   (這個範例只有英文版)。
 2. **邊填邊刪 `TEMPLATE:` 標記**,用檢查腳本找漏網之魚:
    ```bash
-   ./scripts/check-templates.sh        # Windows 用 scripts/check-templates.ps1
+   ./.loop-engine/scripts/check-templates.sh        # Windows 用 .loop-engine/scripts/check-templates.ps1
    ```
 3. **完整跑一次真實迴圈**(checklist 第 11 步)再把無人監督的工作交給它——
    包括中途在聊天裡丟一句小修正,確認它有正確折進去。
@@ -181,19 +195,13 @@ commit diff 是你稽核的地方。
 ## 檔案地圖
 
 ```
-LOOP_ENGINEERING.md    概念指南——先讀這個
-INIT_CHECKLIST.md      新專案的填寫順序
-BOOTSTRAP.md           同一份清單的訪談版——貼上想法、一批回答、授權一次
-CLAUDE.md / AGENTS.md  agent 入口(保持同步;不同工具讀不同檔名)
-ROADMAP.md             預先授權的 phase 佇列——phase loop 據此規劃
-PRIORITIES.md          有序、有規則的任務佇列——task loop 據此執行
-CHANGELOG.md           歷史
-FRAMEWORK_FEEDBACK.md  框架本身缺陷的飛行記錄器——只增不改,回收到上游 loop-engine
-CONTRIBUTING.md        如何對腳手架本身提出修改
-LICENSE                MIT
-
-zh-TW/                 繁體中文翻譯——README.md、LOOP_ENGINEERING.md、
-                        INIT_CHECKLIST.md、BOOTSTRAP.md、CONTRIBUTING.md
+README.md               這個 repo 是什麼、怎麼採用它(本檔案)
+zh-TW/README.md         繁體中文翻譯
+CLAUDE.md / AGENTS.md   agent 入口(保持同步;不同工具讀不同檔名)
+ROADMAP.md              預先授權的 phase 佇列——phase loop 據此規劃
+PRIORITIES.md           有序、有規則的任務佇列——task loop 據此執行
+CHANGELOG.md            歷史
+LICENSE                 MIT
 
 docs/
   README.md            下列文件的索引
@@ -205,11 +213,21 @@ docs/
   release.md           版本規則與發佈清單
   audits/              phase 完成證據;TEMPLATE.md 永遠保持空白模板
 
-scripts/
-  check-templates.sh|.ps1  找出殘留的 TEMPLATE: 標記;有殘留就 exit 1
-
-examples/
-  linkcheck/           上述所有模板的完整填寫實例
+.loop-engine/           框架的腳手架,放在你專案根目錄之外——設定完之後哪些
+                        可以刪,見上面的「快速開始」
+  LOOP_ENGINEERING.md    概念指南——先讀這個;agent 之後會持續回頭參考,不只
+                        是設定期間
+  INIT_CHECKLIST.md      新專案的填寫順序——做完這次就可以刪
+  BOOTSTRAP.md           同一份清單的訪談版——做完這次就可以刪
+  CONTRIBUTING.md        如何對腳手架本身提出修改——可以刪
+  FRAMEWORK_FEEDBACK.md  框架本身缺陷的飛行記錄器——只增不改,回收到上游
+                        loop-engine
+  zh-TW/                 上面四份檔案的繁體中文翻譯
+  scripts/
+    check-templates.sh|.ps1  找出殘留的 TEMPLATE: 標記——標記永遠清空之後
+                        就可以刪
+  examples/
+    linkcheck/           上述所有模板的完整填寫實例——可以刪
 ```
 
 | 檔案 | 用途 | 誰來寫 | 節奏 |
@@ -223,7 +241,7 @@ examples/
 | `docs/build-status.md` | 粗粒度狀態 + 有日期的證據 | agent | 每個里程碑 |
 | `docs/audits/*` | phase 真的完成的證據 | agent,phase 收尾時 | 每 phase 一次,只增不改 |
 | `CHANGELOG.md` | 對外可見的歷史 | agent;發佈時人類 | 每迭代/每發佈 |
-| `FRAMEWORK_FEEDBACK.md` | 框架本身的缺陷紀錄 | agent 追加;人類回收到上游 | 遇到摩擦時;只增不改 |
+| `.loop-engine/FRAMEWORK_FEEDBACK.md` | 框架本身的缺陷紀錄 | agent 追加;人類回收到上游 | 遇到摩擦時;只增不改 |
 
 ## 設計原則
 
@@ -274,10 +292,14 @@ Backlog 工具追蹤*要做什麼*。這裡解決的是*為什麼 agent 可以�
 charter 和 domain model 預先授權的是它的判斷,不只是它的任務清單。
 
 **為什麼只有部分檔案有繁體中文版?**
-只有五份純參考文件——`LOOP_ENGINEERING.md`、`INIT_CHECKLIST.md`、
-`BOOTSTRAP.md`、`CONTRIBUTING.md`、`examples/README.md`——有中文版本,
-因為它們永遠不會被填入專案專屬內容,可以安全地永久保持雙語。翻譯都放在
-`zh-TW/`(範例的 README 則在 `examples/zh-TW/`),檔名跟英文原檔一樣。
+只有五份純參考文件——`.loop-engine/LOOP_ENGINEERING.md`、
+`.loop-engine/INIT_CHECKLIST.md`、
+`.loop-engine/BOOTSTRAP.md`、`.loop-engine/CONTRIBUTING.md`、
+`.loop-engine/examples/README.md`——有中文版本,
+因為它們永遠不會被填入專案專屬內容,可以安全地永久保持雙語。翻譯放在離英
+文原檔最近的 `zh-TW/`(根目錄的 `zh-TW/README.md`;另外四份在
+`.loop-engine/zh-TW/`;範例的 README 則在
+`.loop-engine/examples/zh-TW/`),檔名跟英文原檔一樣。
 `CLAUDE.md`/`AGENTS.md`/
 `PRIORITIES.md`/`ROADMAP.md`/`docs/*.md` 這些**沒有**繁中版
 ——它們的檔名本身是功能性的(Claude Code 認 `CLAUDE.md`、loop 程序寫死要讀
@@ -289,8 +311,8 @@ charter 和 domain model 預先授權的是它的判斷,不只是它的任務清
 ## 非目標
 
 - **不是產生器也不是 CLI。** 沒有 `loop-engine init`。複製檔案,然後填進去
-  ——自己填(`INIT_CHECKLIST.md`)或讓 agent 訪談你之後幫你填
-  (`BOOTSTRAP.md`);無論哪種,都是檔案加紀律,不是工具鏈。
+  ——自己填(`.loop-engine/INIT_CHECKLIST.md`)或讓 agent 訪談你之後幫你填
+  (`.loop-engine/BOOTSTRAP.md`);無論哪種,都是檔案加紀律,不是工具鏈。
 - **不取代測試、CI 或 code review。** 關卡是 agent 舉證的方式,不是你品質
   標準的替代品。
 - **不是把人類移出迴圈。** 是把人類的判斷搬到真正需要它的地方:方向、授權、
@@ -298,9 +320,12 @@ charter 和 domain model 預先授權的是它的判斷,不只是它的任務清
 
 ## 貢獻
 
-歡迎改進腳手架本身——見 [`CONTRIBUTING.md`](CONTRIBUTING.md)
-(或英文版 [`CONTRIBUTING.md`](../CONTRIBUTING.md))。門檻:修改必須維持四種真
-相可分離、讓 `examples/linkcheck/` 保持同步、讓每一組雙語文件內容一致。
+歡迎改進腳手架本身——見
+[`CONTRIBUTING.md`](../.loop-engine/zh-TW/CONTRIBUTING.md)
+(或英文版 [`CONTRIBUTING.md`](../.loop-engine/CONTRIBUTING.md))。門檻:修
+改必須維持四種真
+相可分離、讓 `.loop-engine/examples/linkcheck/` 保持同步、讓每一組雙語文件
+內容一致。
 
 ## 授權條款
 

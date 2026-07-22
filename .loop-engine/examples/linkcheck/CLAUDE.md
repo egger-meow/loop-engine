@@ -15,7 +15,7 @@ guardrails.
 ## Before you change anything
 
 **Not initialized yet?** If the files below still carry `TEMPLATE:`
-markers (`./scripts/check-templates.sh` lists them), there is nothing to
+markers (`./.loop-engine/scripts/check-templates.sh` lists them), there is nothing to
 loop on — follow the agent procedure in `../../BOOTSTRAP.md` instead.
 (Inert here: linkcheck finished init long ago; the paragraph stays as
 part of the standard entry-point shape.)
